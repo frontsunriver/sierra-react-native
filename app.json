@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sierra-connect",
-    "slug": "sierra-connect",
+    "name": "RN JobFinder",
+    "slug": "rn-rc-jobFinder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,9 +13,13 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.render.rnjobfinder",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false
     },
     "android": {
+      "package": "com.render.rnjobfinder",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
