@@ -1,13 +1,13 @@
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Colors, Fonts, Sizes } from "../constants/styles";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import { View, StyleSheet, Text, BackHandler, Platform } from "react-native";
-import HomeScreen from "../screens/home/homeScreen";
-import SavedScreen from "../screens/saved/savedScreen";
-import ChatScreen from "../screens/chat/chatScreen";
-import ProfileScreen from "../screens/profile/profileScreen";
-import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import { BackHandler, Platform, StyleSheet, Text, View } from "react-native";
+import { Colors, Fonts, Sizes } from "../constants/styles";
+import ChatScreen from "../screens/chat/chatScreen";
+import HomeScreen from "../screens/home/homeScreen";
+import ProfileScreen from "../screens/profile/profileScreen";
+import SavedScreen from "../screens/saved/savedScreen";
 import MyStatusBar from "./myStatusBar";
 
 const Tab = createBottomTabNavigator();
@@ -45,7 +45,7 @@ const BottomTabBarScreen = ({ navigation }) => {
   const [backClickCount, setBackClickCount] = useState(0);
 
   return (
-    <View style={{flex:1}}>
+    <View className="flex-1">
       <MyStatusBar />
       <Tab.Navigator
         screenOptions={{
@@ -58,7 +58,7 @@ const BottomTabBarScreen = ({ navigation }) => {
             backgroundColor: Colors.whiteColor,
             height: 60.0,
           },
-          tabBarItemStyle:{height:60}
+          tabBarItemStyle: { height: 60 },
         }}
       >
         <Tab.Screen

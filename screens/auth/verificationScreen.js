@@ -1,18 +1,24 @@
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  ActivityIndicator,
-  Platform,
-  Modal,
-} from "react-native";
-import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Colors, CommonStyles, Fonts, Sizes, screenWidth } from "../../constants/styles";
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { OtpInput } from "react-native-otp-entry";
 import { Text } from "../../components/commonText";
-import { OtpInput } from 'react-native-otp-entry';
 import MyStatusBar from "../../components/myStatusBar";
+import {
+  Colors,
+  CommonStyles,
+  Fonts,
+  Sizes,
+  screenWidth,
+} from "../../constants/styles";
 
 const VerificationScreen = ({ navigation }) => {
   const [otpInput, setotpInput] = useState("");
@@ -38,11 +44,7 @@ const VerificationScreen = ({ navigation }) => {
 
   function loadingDialog() {
     return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isLoading}
-      >
+      <Modal animationType="slide" transparent={true} visible={isLoading}>
         <TouchableOpacity
           activeOpacity={1}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
@@ -50,7 +52,7 @@ const VerificationScreen = ({ navigation }) => {
           <View style={{ justifyContent: "center", flex: 1 }}>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => { }}
+              onPress={() => {}}
               style={{ ...styles.dialogStyle }}
             >
               <ActivityIndicator
@@ -79,29 +81,27 @@ const VerificationScreen = ({ navigation }) => {
 
   function otpFields() {
     return (
-      <OtpInput
-        numberOfDigits={4}
-        focusColor={Colors.primaryColor}
-        onTextChange={text => {
-          if (text.length == 4) {
-            setotpInput(text);
-            setisLoading(true);
-            setTimeout(() => {
-              setisLoading(false);
-              navigation.push("BottomTabBar");
-            }, 2000);
-          }
-        }}
-        theme={{
-          containerStyle: { marginHorizontal: Sizes.fixPadding * 2.0, marginVertical: Sizes.fixPadding, },
-          inputsContainerStyle: {
-            justifyContent: 'flex-start',
-          },
-          pinCodeContainerStyle: { ...styles.textFieldStyle },
-          pinCodeTextStyle: { ...Fonts.blackColor16Medium },
-          focusedPinCodeContainerStyle: { borderWidth: 1.5 }
-        }}
-      />
+      <View className="px-[20px] mt-5">
+        <OtpInput
+          numberOfDigits={6}
+          focusColor={Colors.primaryColor}
+          onTextChange={(text) => {
+            if (text.length == 6) {
+              setotpInput(text);
+              setisLoading(true);
+              setTimeout(() => {
+                setisLoading(false);
+                navigation.push("BottomTabBar");
+              }, 2000);
+            }
+          }}
+          theme={{
+            pinCodeContainerStyle: { ...styles.textFieldStyle },
+            pinCodeTextStyle: { ...Fonts.blackColor16Medium },
+            focusedPinCodeContainerStyle: { borderWidth: 1.5 },
+          }}
+        />
+      </View>
     );
   }
 
@@ -117,6 +117,7 @@ const VerificationScreen = ({ navigation }) => {
           }, 2000);
         }}
         style={{ ...CommonStyles.buttonStyle, margin: Sizes.fixPadding * 2.0 }}
+        className="mt-10"
       >
         <Text style={{ ...Fonts.whiteColor18SemiBold }}>Continue</Text>
       </TouchableOpacity>
@@ -167,9 +168,8 @@ const styles = StyleSheet.create({
     borderRadius: Sizes.fixPadding - 5.0,
     backgroundColor: Colors.extraLightGrayColor,
     borderWidth: 0,
-    marginRight: Sizes.fixPadding * 2.0,
     width: screenWidth / 8.5,
-    height: screenWidth / 8.5
+    height: screenWidth / 8.5,
   },
   dialogStyle: {
     width: "85%",
@@ -179,6 +179,6 @@ const styles = StyleSheet.create({
     paddingBottom: Sizes.fixPadding * 2.5,
     paddingTop: Sizes.fixPadding * 3.0,
     elevation: 3.0,
-    alignSelf: 'center'
+    alignSelf: "center",
   },
 });

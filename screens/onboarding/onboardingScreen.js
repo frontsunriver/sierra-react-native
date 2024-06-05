@@ -1,18 +1,18 @@
+import { useFocusEffect } from "@react-navigation/native";
+import React, { createRef, useCallback, useState } from "react";
 import {
   BackHandler,
+  Dimensions,
+  FlatList,
+  Image,
+  ImageBackground,
   Platform,
   StatusBar,
   StyleSheet,
   Text,
   View,
-  FlatList,
-  Image,
-  Dimensions,
-  ImageBackground,
 } from "react-native";
-import React, { useState, useCallback, createRef } from "react";
 import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
-import { useFocusEffect } from "@react-navigation/native";
 
 const dummyText =
   "Lorem ipsum dolor sit amet, consectetur adipiscingelit. Malesuada aliquet ut in ac cursus.";
@@ -81,8 +81,12 @@ const OnboardingScreen = ({ navigation }) => {
   const [currentScreen, setCurrentScreen] = useState(0);
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
-      <StatusBar translucent={true} backgroundColor={"transparent"} barStyle={'light-content'} />
+    <View className="flex-1 bg-white">
+      <StatusBar
+        translucent={true}
+        backgroundColor={"transparent"}
+        barStyle={"light-content"}
+      />
       <View style={{ flex: 1 }}>{onboardingScreenContent()}</View>
       {skipNextAndLoginAithIndicator()}
       {exitInfo()}
