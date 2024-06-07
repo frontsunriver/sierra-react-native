@@ -1,7 +1,7 @@
 import { Dimensions } from "react-native";
 
 export const Colors = {
-  primaryColor: "#0F3460",
+  primaryColor: "green",
   lightPrimaryColor: "rgba(15, 52, 96, 0.05)",
   whiteColor: "#FFFFFF",
   blackColor: "#000000",
@@ -11,7 +11,7 @@ export const Colors = {
   redColor: "#FF0000",
   pinkColor: "#E94560",
   blueColor: "#0047FF",
-  greenColor: '#009D23',
+  greenColor: "#009D23",
 };
 
 const fontFamily = {
@@ -304,4 +304,4 @@ export const CommonStyles = {
 
 export const screenWidth = Dimensions.get("window").width;
 
-export const screnHeight = Dimensions.get('window').height;
+export const screnHeight = Dimensions.get("window").height;
