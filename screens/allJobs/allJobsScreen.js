@@ -1,16 +1,16 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
-  StyleSheet,
   FlatList,
+  Image,
+  StyleSheet,
   TouchableOpacity,
   View,
-  Image,
 } from "react-native";
-import React, { useState } from "react";
-import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
-import { Text } from "../../components/commonText";
 import { Snackbar } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Text } from "../../components/commonText";
 import MyStatusBar from "../../components/myStatusBar";
+import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
 
 const jobList = [
   {
@@ -26,8 +26,8 @@ const jobList = [
   {
     id: "2",
     sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
     city: "California, USA",
     jobTime: "Part time",
     amountPerMonth: 400,
@@ -46,7 +46,7 @@ const jobList = [
   {
     id: "4",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",
@@ -66,8 +66,8 @@ const jobList = [
   {
     id: "6",
     sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
     city: "California, USA",
     jobTime: "Part time",
     amountPerMonth: 400,
@@ -86,7 +86,47 @@ const jobList = [
   {
     id: "8",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
+    sourceName: "Linkedin",
+    city: "California, USA",
+    jobTime: "Part time",
+    amountPerMonth: 550,
+    inBookmark: true,
+  },
+  {
+    id: "9",
+    sourceLogo: require("../../assets/images/jobs/job1.png"),
+    jobType: "UI/UX Designer",
+    sourceName: "Airbnb",
+    city: "California, USA",
+    jobTime: "Full time",
+    amountPerMonth: 450,
+    inBookmark: true,
+  },
+  {
+    id: "10",
+    sourceLogo: require("../../assets/images/jobs/job2.png"),
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
+    city: "California, USA",
+    jobTime: "Part time",
+    amountPerMonth: 400,
+    inBookmark: false,
+  },
+  {
+    id: "11",
+    sourceLogo: require("../../assets/images/jobs/job3.png"),
+    jobType: "Product Manager",
+    sourceName: "Microsoft Crop",
+    city: "California, USA",
+    jobTime: "Part time",
+    amountPerMonth: 550,
+    inBookmark: false,
+  },
+  {
+    id: "12",
+    sourceLogo: require("../../assets/images/jobs/job4.png"),
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",

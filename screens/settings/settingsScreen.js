@@ -1,18 +1,17 @@
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Modal,
-} from "react-native";
-import React, { useState } from "react";
-import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
 import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import {
+  Modal,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Text } from "../../components/commonText";
 import MyStatusBar from "../../components/myStatusBar";
+import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
 
 const SettingsScreen = ({ navigation }) => {
-
   const [showLogoutDialog, setshowLogoutDialog] = useState(false);
 
   return (
@@ -26,8 +25,8 @@ const SettingsScreen = ({ navigation }) => {
         >
           {settingOption({
             iconName: "person",
-            boxColor: "#FFEBEE",
-            iconColor: "#E57373",
+            boxColor: "#d9f3d9",
+            iconColor: Colors.primaryColor,
             option: "Edit Profile",
             onPress: () => {
               navigation.push("EditProfile");
@@ -35,8 +34,8 @@ const SettingsScreen = ({ navigation }) => {
           })}
           {settingOption({
             iconName: "notifications",
-            boxColor: "#EDE7F6",
-            iconColor: "#9575CD",
+            boxColor: "#d9f3d9",
+            iconColor: Colors.primaryColor,
             option: "Notifications",
             onPress: () => {
               navigation.push("Notifications");
@@ -44,8 +43,8 @@ const SettingsScreen = ({ navigation }) => {
           })}
           {settingOption({
             iconName: "article",
-            boxColor: "#E3F2FD",
-            iconColor: "#64B5F6",
+            boxColor: "#d9f3d9",
+            iconColor: Colors.primaryColor,
             option: "Applied Jobs",
             onPress: () => {
               navigation.push("AppliedJobs");
@@ -53,15 +52,15 @@ const SettingsScreen = ({ navigation }) => {
           })}
           {settingOption({
             iconName: "share",
-            boxColor: "#E0F2F1",
-            iconColor: "#4DB6AC",
+            boxColor: "#d9f3d9",
+            iconColor: Colors.primaryColor,
             option: "Share App",
-            onPress: () => { },
+            onPress: () => {},
           })}
           {settingOption({
             iconName: "headset",
-            boxColor: "#FFF8E1",
-            iconColor: "#FFD54F",
+            boxColor: "#d9f3d9",
+            iconColor: Colors.primaryColor,
             option: "Contact Us",
             onPress: () => {
               navigation.push("ContactUs");
@@ -69,8 +68,8 @@ const SettingsScreen = ({ navigation }) => {
           })}
           {settingOption({
             iconName: "insert-drive-file",
-            boxColor: "#FBE9E7",
-            iconColor: "#FF8A65",
+            boxColor: "#d9f3d9",
+            iconColor: Colors.primaryColor,
             option: "Terms & Conditions",
             onPress: () => {
               navigation.push("TermsAndCondition");
@@ -78,8 +77,8 @@ const SettingsScreen = ({ navigation }) => {
           })}
           {settingOption({
             iconName: "logout",
-            boxColor: "#FCE4EC",
-            iconColor: "#F06292",
+            boxColor: "#d9f3d9",
+            iconColor: Colors.primaryColor,
             option: "Logout",
             onPress: () => {
               setshowLogoutDialog(true);
@@ -97,18 +96,22 @@ const SettingsScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showLogoutDialog}
-        onRequestClose={() => { setshowLogoutDialog(false) }}
+        onRequestClose={() => {
+          setshowLogoutDialog(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowLogoutDialog(false) }}
+          onPress={() => {
+            setshowLogoutDialog(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "center", flex: 1 }}>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => { }}
-              style={{ ...styles.dialogStyle, alignSelf: 'center' }}
+              onPress={() => {}}
+              style={{ ...styles.dialogStyle, alignSelf: "center" }}
             >
               <Text
                 style={{

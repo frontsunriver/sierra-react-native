@@ -1,15 +1,19 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
-  StyleSheet,
-  TextInput,
-  View,
   FlatList,
   Image,
-  TouchableOpacity,
-  ScrollView,
   Modal,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
-import React, { useState } from "react";
+import { Snackbar } from "react-native-paper";
+import { Text } from "../../components/commonText";
+import MyStatusBar from "../../components/myStatusBar";
 import {
   Colors,
   CommonStyles,
@@ -18,10 +22,6 @@ import {
   screenWidth,
   screnHeight,
 } from "../../constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Snackbar } from "react-native-paper";
-import { Text } from "../../components/commonText";
-import MyStatusBar from "../../components/myStatusBar";
 
 const searchResultsList = [
   {
@@ -37,8 +37,8 @@ const searchResultsList = [
   {
     id: "2",
     sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
     city: "California, USA",
     jobTime: "Part time",
     amountPerMonth: 400,
@@ -57,7 +57,7 @@ const searchResultsList = [
   {
     id: "4",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",
@@ -118,19 +118,25 @@ const SearchScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showFilterSheet}
-        onRequestClose={() => { setshowFilterSheet(false) }}
+        onRequestClose={() => {
+          setshowFilterSheet(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowFilterSheet(false) }}
+          onPress={() => {
+            setshowFilterSheet(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() => { }}
-            >
-              <View style={{ backgroundColor: Colors.whiteColor, maxHeight: screnHeight - 140 }}>
+            <TouchableOpacity activeOpacity={1} onPress={() => {}}>
+              <View
+                style={{
+                  backgroundColor: Colors.whiteColor,
+                  maxHeight: screnHeight - 140,
+                }}
+              >
                 <Text
                   style={{
                     ...Fonts.blackColor20Bold,
@@ -144,8 +150,12 @@ const SearchScreen = ({ navigation }) => {
                   <TouchableWithoutFeedback>
                     <View>
                       <View style={styles.fieldOfWorkTitleWrapStyle}>
-                        <Text style={{ ...Fonts.blackColor19SemiBold }}>Field of Work</Text>
-                        <Text style={{ ...Fonts.primaryColor16SemiBold }}>See all</Text>
+                        <Text style={{ ...Fonts.blackColor19SemiBold }}>
+                          Field of Work
+                        </Text>
+                        <Text style={{ ...Fonts.primaryColor16SemiBold }}>
+                          See all
+                        </Text>
                       </View>
                       <View
                         style={{

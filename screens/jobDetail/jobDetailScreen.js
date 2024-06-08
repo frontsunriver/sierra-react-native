@@ -1,12 +1,16 @@
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
+  Image,
+  Modal,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  View,
-  Modal,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
-import React, { useState } from "react";
+import { Text } from "../../components/commonText";
+import MyStatusBar from "../../components/myStatusBar";
 import {
   Colors,
   CommonStyles,
@@ -15,10 +19,6 @@ import {
   screenWidth,
   screnHeight,
 } from "../../constants/styles";
-import { Text } from "../../components/commonText";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import { Image } from "react-native";
-import MyStatusBar from "../../components/myStatusBar";
 
 const requirementsList = [
   "Excepteur sint occaecat cupidatat non proident.",
@@ -56,18 +56,22 @@ const JobDetailScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showUploadDialog}
-        onRequestClose={() => { setshowUploadDialog(false) }}
+        onRequestClose={() => {
+          setshowUploadDialog(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowUploadDialog(false) }}
+          onPress={() => {
+            setshowUploadDialog(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "center", flex: 1 }}>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => { }}
-              style={{ ...CommonStyles.dialogStyle, alignSelf: 'center', }}
+              onPress={() => {}}
+              style={{ ...CommonStyles.dialogStyle, alignSelf: "center" }}
             >
               <View style={{ maxHeight: screnHeight / 1.5 }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -82,7 +86,12 @@ const JobDetailScreen = ({ navigation }) => {
                       >
                         Upload Resume/CV
                       </Text>
-                      <Text style={{ ...Fonts.grayColor16Regular, textAlign: "center" }}>
+                      <Text
+                        style={{
+                          ...Fonts.grayColor16Regular,
+                          textAlign: "center",
+                        }}
+                      >
                         Upload your CV or Resume to apply for the job vacancy.
                       </Text>
                       <View style={styles.dragFileBox}>
@@ -107,17 +116,25 @@ const JobDetailScreen = ({ navigation }) => {
                             ...styles.browseFileButton,
                           }}
                         >
-                          <Text style={{ ...Fonts.whiteColor16Medium }}>Browse Files</Text>
+                          <Text style={{ ...Fonts.whiteColor16Medium }}>
+                            Browse Files
+                          </Text>
                         </View>
                       </View>
                       <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => {
-                          setshowUploadDialog(false), navigation.push("UploadSuccess");
+                          setshowUploadDialog(false),
+                            navigation.push("UploadSuccess");
                         }}
-                        style={{ ...CommonStyles.buttonStyle, marginTop: Sizes.fixPadding }}
+                        style={{
+                          ...CommonStyles.buttonStyle,
+                          marginTop: Sizes.fixPadding,
+                        }}
                       >
-                        <Text style={{ ...Fonts.whiteColor18SemiBold }}>Apply</Text>
+                        <Text style={{ ...Fonts.whiteColor18SemiBold }}>
+                          Apply
+                        </Text>
                       </TouchableOpacity>
                     </View>
                   </TouchableWithoutFeedback>
@@ -240,7 +257,7 @@ const JobDetailScreen = ({ navigation }) => {
         />
         <View style={{ flex: 1, marginLeft: Sizes.fixPadding * 2.0 }}>
           <Text numberOfLines={1} style={{ ...Fonts.blackColor20SemiBold }}>
-            Sr. UI/UX Designer
+            Senior Software Engineer
           </Text>
           <Text
             style={{
@@ -248,7 +265,7 @@ const JobDetailScreen = ({ navigation }) => {
               marginTop: Sizes.fixPadding - 5.0,
             }}
           >
-            Aribnb
+            PIEXEC
           </Text>
         </View>
       </View>
@@ -296,7 +313,7 @@ const styles = StyleSheet.create({
     height: 65.0,
     resizeMode: "contain",
     borderRadius: Sizes.fixPadding,
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   serviceProviderWrapper: {
     backgroundColor: Colors.extraLightGrayColor,

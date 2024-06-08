@@ -1,33 +1,32 @@
 import {
-  ImageBackground,
-  StyleSheet,
-  View,
-  ScrollView,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
-import React, { useState } from "react";
-import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
-import { Text } from "../../components/commonText";
-import {
+  Feather,
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
-  Feather,
 } from "@expo/vector-icons";
+import React, { useState } from "react";
+import {
+  FlatList,
+  Image,
+  ImageBackground,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Text } from "../../components/commonText";
+import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
 
 const profileWebsites = [
-  "https://dribble.com/samanthasmith-85r66s4g9",
-  "https://behance.net/samanthasmith",
+  "https://github.com/michaelniemis",
+  "https://linkedin.com/in/michaelniemis",
 ];
 
 const skillsList = [
-  require("../../assets/images/icons/adobeLogo.png"),
-  require("../../assets/images/icons/adobexdLogo.png"),
-  require("../../assets/images/icons/photoshopLogo.png"),
-  require("../../assets/images/icons/figmaLogo.png"),
+  require("../../assets/images/icons/react.png"),
+  require("../../assets/images/icons/php.png"),
+  require("../../assets/images/icons/c-sharp.png"),
 ];
 
 const workExperiencesList = [
@@ -48,9 +47,9 @@ const workExperiencesList = [
 ];
 
 const ProfileScreen = ({ navigation }) => {
-
-  const [readMore, setreadMore] = useState(false);
-  const [showProfilePicChangeSheet, setshowProfilePicChangeSheet] = useState(false);
+  const [readMore, setReadMore] = useState(false);
+  const [showProfilePicChangeSheet, setshowProfilePicChangeSheet] =
+    useState(false);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
@@ -81,17 +80,21 @@ const ProfileScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showProfilePicChangeSheet}
-        onRequestClose={() => { setshowProfilePicChangeSheet(false) }}
+        onRequestClose={() => {
+          setshowProfilePicChangeSheet(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowProfilePicChangeSheet(false) }}
+          onPress={() => {
+            setshowProfilePicChangeSheet(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => { }}
+              onPress={() => {}}
               style={{ backgroundColor: Colors.whiteColor }}
             >
               <View
@@ -100,7 +103,9 @@ const ProfileScreen = ({ navigation }) => {
                   paddingVertical: Sizes.fixPadding * 2.0,
                 }}
               >
-                <Text style={styles.sheetHeaderStyle}>Change Profile Photo</Text>
+                <Text style={styles.sheetHeaderStyle}>
+                  Change Profile Photo
+                </Text>
                 <View style={styles.sheetDivider} />
                 <Text
                   onPress={() => {
@@ -154,7 +159,7 @@ const ProfileScreen = ({ navigation }) => {
           <MaterialCommunityIcons
             name="square-edit-outline"
             size={20}
-            color={Colors.grayColor}
+            color={Colors.greenColor}
             onPress={() => {
               navigation.push("EditEducation");
             }}
@@ -191,7 +196,7 @@ const ProfileScreen = ({ navigation }) => {
           <MaterialCommunityIcons
             name="square-edit-outline"
             size={20}
-            color={Colors.grayColor}
+            color={Colors.greenColor}
             onPress={() => {
               navigation.push("EditExperience");
             }}
@@ -247,7 +252,7 @@ const ProfileScreen = ({ navigation }) => {
           <Feather
             name="plus-square"
             size={20}
-            color={Colors.grayColor}
+            color={Colors.greenColor}
             onPress={() => {
               navigation.push("AddSkills");
             }}
@@ -273,7 +278,7 @@ const ProfileScreen = ({ navigation }) => {
           <MaterialCommunityIcons
             name="square-edit-outline"
             size={20}
-            color={Colors.grayColor}
+            color={Colors.greenColor}
             onPress={() => navigation.push("EditAbout")}
           />
         </View>
@@ -289,14 +294,14 @@ const ProfileScreen = ({ navigation }) => {
             augue. Sit magna vel magna rhoncus
           </Text>
           <Text
-            onPress={() => setreadMore(!readMore)}
+            onPress={() => setReadMore(!readMore)}
             style={{
               ...Fonts.primaryColor16Medium,
               textAlign: "right",
               alignSelf: "flex-end",
             }}
           >
-            {readMore ? "Show less.." : "Read more.."}
+            {readMore ? "Show less..." : "Read more..."}
           </Text>
         </View>
         <View style={{ ...styles.rowSpaceBetween }}>
@@ -366,7 +371,7 @@ const ProfileScreen = ({ navigation }) => {
           <MaterialCommunityIcons
             name="square-edit-outline"
             size={20}
-            color={Colors.grayColor}
+            color={Colors.greenColor}
             onPress={() => {
               navigation.push("EditContactInfo");
             }}
@@ -422,7 +427,7 @@ const ProfileScreen = ({ navigation }) => {
   function profileImage() {
     return (
       <ImageBackground
-        source={require("../../assets/images/users/user1.jpeg")}
+        source={require("../../assets/images/users/user1.jpg")}
         style={{
           width: screenWidth,
           height: screenWidth - 120,
@@ -444,7 +449,7 @@ const ProfileScreen = ({ navigation }) => {
           </View>
           <View>
             <Text style={{ ...Fonts.whiteColor19SemiBold }}>
-              Samantha Smith
+              Michael Niemis
             </Text>
             <Text
               style={{
@@ -452,7 +457,7 @@ const ProfileScreen = ({ navigation }) => {
                 marginTop: Sizes.fixPadding - 8.0,
               }}
             >
-              Sr. UI/UX Designer
+              Sr. Software Engineer
             </Text>
           </View>
         </View>

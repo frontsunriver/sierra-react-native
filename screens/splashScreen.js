@@ -1,15 +1,9 @@
-import {
-  BackHandler,
-  Image,
-  StyleSheet,
-  View,
-  Platform,
-} from "react-native";
-import React, { useCallback } from "react";
-import { Colors, Fonts, Sizes, screenWidth } from "../constants/styles";
-import { Text } from "../components/commonText";
 import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { BackHandler, Image, Platform, StyleSheet, View } from "react-native";
+import { Text } from "../components/commonText";
 import MyStatusBar from "../components/myStatusBar";
+import { Colors, Fonts, Sizes, screenWidth } from "../constants/styles";
 
 const SplashScreen = ({ navigation }) => {
   const backAction = () => {
@@ -35,7 +29,7 @@ const SplashScreen = ({ navigation }) => {
   );
 
   setTimeout(() => {
-    navigation.push("Onboadring");
+    navigation.push("Onboarding");
   }, 2000);
 
   return (
@@ -51,8 +45,8 @@ const SplashScreen = ({ navigation }) => {
           }}
         />
         <Text style={styles.appTitleTextStyle}>
-          Job
-          <Text style={{ ...Fonts.pinkColor20Bold }}> Finder</Text>
+          Sierra
+          <Text style={{ ...Fonts.skyColor20Bold }}> Connect</Text>
         </Text>
       </View>
     </View>

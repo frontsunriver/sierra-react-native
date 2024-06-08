@@ -1,28 +1,28 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
-  StyleSheet,
-  View,
-  Image,
   FlatList,
-  TextInput,
+  Image,
   KeyboardAvoidingView,
   Platform,
+  StyleSheet,
+  TextInput,
+  View,
 } from "react-native";
-import React, { useState } from "react";
 import { Text } from "../../components/commonText";
-import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
 import MyStatusBar from "../../components/myStatusBar";
+import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
 
 const userMessages = [
   {
     id: "1",
     message:
-      "Hello, Samantha Smith!\n\nCongratulations!\nLorem ipsum dolor sit amet, consectetur\nadipiscing elit. Feugiat habitasse morbi elit\nullamcorper ipsum cras. Morbi pharetraeque\npulvinar venenatis potenti id parturient\ntristique.\n\nBest Regards,\nHiring Manager",
+      "Hello, Michael Niemis!\n\nCongratulations!\nLorem ipsum dolor sit amet, consectetur\nadipiscing elit. Feugiat habitasse morbi elit\nullamcorper ipsum cras. Morbi pharetraeque\npulvinar venenatis potenti id parturient\ntristique.\n\nBest Regards,\nHiring Manager",
     isSender: false,
   },
   {
     id: "2",
-    message: "Oky",
+    message: "Okay",
     isSender: true,
   },
 ];
@@ -31,7 +31,7 @@ const MessageScreen = ({ navigation }) => {
   const [messagesList, setMessagesList] = useState(userMessages);
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS == 'ios' ? 'height' : null}
+      behavior={Platform.OS == "ios" ? "height" : null}
       style={{ flex: 1, backgroundColor: Colors.whiteColor }}
     >
       <MyStatusBar />
@@ -61,7 +61,7 @@ const MessageScreen = ({ navigation }) => {
             style={{ width: 46.0, height: 46.0, borderRadius: 23.0 }}
           />
           <View style={{ flex: 1, marginHorizontal: Sizes.fixPadding + 2.0 }}>
-            <Text style={{ ...Fonts.blackColor19SemiBold }}>Airbnb</Text>
+            <Text style={{ ...Fonts.blackColor19SemiBold }}>PIEXEX</Text>
             <Text style={{ ...Fonts.grayColor16Regular }}>Online</Text>
           </View>
         </View>
@@ -80,24 +80,29 @@ const MessageScreen = ({ navigation }) => {
             marginVertical: Sizes.fixPadding - 2.0,
           }}
         >
-          <View
-            style={{
-              ...styles.messageWrapStyle,
-              backgroundColor: item.isSender
-                ? Colors.primaryColor
-                : Colors.extraLightGrayColor,
-            }}
-          >
-            <Text
-              style={
-                item.isSender
-                  ? { ...Fonts.whiteColor16Regular }
-                  : { ...Fonts.grayColor16Regular }
-              }
+          {item.isSender ? (
+            <View
+              style={{
+                ...styles.messageWrapStyle,
+                backgroundColor: Colors.primaryColor,
+              }}
             >
-              {item.message}
-            </Text>
-          </View>
+              <Text style={Fonts.whiteColor16Regular}>{item.message}</Text>
+              <View style={styles.rightArrow}></View>
+              <View style={styles.rightArrowOverlap}></View>
+            </View>
+          ) : (
+            <View
+              style={{
+                ...styles.messageWrapStyle,
+                backgroundColor: Colors.mediumGrayColor,
+              }}
+            >
+              <Text style={Fonts.grayColor16Regular}>{item.message}</Text>
+              <View style={styles.leftArrow}></View>
+              <View style={styles.leftArrowOverlap}></View>
+            </View>
+          )}
         </View>
       );
     };
@@ -114,6 +119,7 @@ const MessageScreen = ({ navigation }) => {
             paddingBottom: Sizes.fixPadding * 2.0,
             paddingTop: Sizes.fixPadding * 2.0,
           }}
+          style={{ backgroundColor: "white" }}
         />
       </View>
     );
@@ -199,5 +205,42 @@ const styles = StyleSheet.create({
     padding: Sizes.fixPadding,
     borderRadius: Sizes.fixPadding,
     maxWidth: screenWidth - 90.0,
+  },
+  // Message bubble style
+  rightArrow: {
+    position: "absolute",
+    backgroundColor: Colors.primaryColor,
+    width: 20,
+    height: 25,
+    bottom: 0,
+    borderBottomLeftRadius: 25,
+    right: -10,
+  },
+  rightArrowOverlap: {
+    position: "absolute",
+    backgroundColor: "white",
+    width: 20,
+    height: 35,
+    bottom: -6,
+    borderBottomLeftRadius: 18,
+    right: -20,
+  },
+  leftArrow: {
+    position: "absolute",
+    backgroundColor: Colors.mediumGrayColor,
+    width: 20,
+    height: 25,
+    bottom: 0,
+    borderBottomRightRadius: 25,
+    left: -10,
+  },
+  leftArrowOverlap: {
+    position: "absolute",
+    backgroundColor: "white",
+    width: 20,
+    height: 35,
+    bottom: -6,
+    borderBottomRightRadius: 18,
+    left: -20,
   },
 });

@@ -5,7 +5,6 @@ import {
   Dimensions,
   FlatList,
   Image,
-  ImageBackground,
   Platform,
   StatusBar,
   StyleSheet,
@@ -143,16 +142,12 @@ const OnboardingScreen = ({ navigation }) => {
     const renderItem = ({ item }) => {
       return (
         <View style={styles.onboardingContentStyle}>
-          <ImageBackground
-            source={require("../../assets/images/onboardingBg.png")}
-            style={styles.onboardingImageWrapStyle}
-            resizeMode="stretch"
-          >
+          <View style={styles.onboardingImageWrapStyle}>
             <Image
               source={item.onboardingImage}
               style={styles.onboardingImageStyle}
             />
-          </ImageBackground>
+          </View>
           <View>
             <View style={{ margin: Sizes.fixPadding * 2.0 }}>
               <Text
@@ -226,6 +221,7 @@ const styles = StyleSheet.create({
     flex: 0.65,
     alignItems: "center",
     justifyContent: "flex-end",
+    backgroundColor: Colors.primaryColor,
   },
   onboardingImageStyle: {
     width: "100%",

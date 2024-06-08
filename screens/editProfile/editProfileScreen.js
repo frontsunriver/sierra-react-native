@@ -1,24 +1,25 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
   Image,
   Modal,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import React, { useState } from "react";
-import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Text } from "../../components/commonText";
 import MyStatusBar from "../../components/myStatusBar";
+import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
 
 const EditProfileScreen = ({ navigation }) => {
-  const [fullName, setfullName] = useState("Samantha Smith");
-  const [email, setemail] = useState("samanthasmith@gmail.com");
-  const [mobileNumber, setmobileNumber] = useState("+(444) 185-8956");
+  const [fullName, setfullName] = useState("Michael Niemis");
+  const [email, setemail] = useState("michael.niemis@gmail.com");
+  const [mobileNumber, setmobileNumber] = useState("+(123) 456-7890");
   const [password, setpassword] = useState("123456678");
-  const [showProfilePicChangeSheet, setshowProfilePicChangeSheet] = useState(false);
+  const [showProfilePicChangeSheet, setshowProfilePicChangeSheet] =
+    useState(false);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
@@ -48,17 +49,21 @@ const EditProfileScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showProfilePicChangeSheet}
-        onRequestClose={() => { setshowProfilePicChangeSheet(false) }}
+        onRequestClose={() => {
+          setshowProfilePicChangeSheet(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowProfilePicChangeSheet(false) }}
+          onPress={() => {
+            setshowProfilePicChangeSheet(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => { }}
+              onPress={() => {}}
               style={{ backgroundColor: Colors.whiteColor }}
             >
               <View
@@ -67,7 +72,9 @@ const EditProfileScreen = ({ navigation }) => {
                   paddingVertical: Sizes.fixPadding * 2.0,
                 }}
               >
-                <Text style={styles.sheetHeaderStyle}>Change Profile Photo</Text>
+                <Text style={styles.sheetHeaderStyle}>
+                  Change Profile Photo
+                </Text>
                 <View style={styles.sheetDivider} />
                 <Text
                   onPress={() => {
@@ -214,7 +221,7 @@ const EditProfileScreen = ({ navigation }) => {
         }}
       >
         <Image
-          source={require("../../assets/images/users/user1.jpeg")}
+          source={require("../../assets/images/users/user1.jpg")}
           style={styles.profilePicStyle}
         />
         <TouchableOpacity

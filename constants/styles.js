@@ -8,10 +8,12 @@ export const Colors = {
   grayColor: "#484848",
   lightGrayColor: "rgba(105, 105, 105, 0.3)",
   extraLightGrayColor: "rgba(105, 105, 105, 0.05)",
+  mediumGrayColor: "#DEDEDE",
   redColor: "#FF0000",
   pinkColor: "#E94560",
   blueColor: "#0047FF",
   greenColor: "#009D23",
+  skyColor: "#51bce7",
 };
 
 const fontFamily = {
@@ -256,8 +258,20 @@ export const Fonts = {
     fontFamily: fontFamily.Bold,
   },
 
+  skyColor16Bold: {
+    color: Colors.skyColor,
+    fontSize: 16.0,
+    fontFamily: fontFamily.Bold,
+  },
+
   pinkColor20Bold: {
     color: Colors.pinkColor,
+    fontSize: 20.0,
+    fontFamily: fontFamily.Bold,
+  },
+
+  skyColor20Bold: {
+    color: Colors.skyColor,
     fontSize: 20.0,
     fontFamily: fontFamily.Bold,
   },

@@ -1,66 +1,66 @@
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  FlatList,
-  TouchableOpacity,
-  Image
-} from "react-native";
-import React from "react";
-import { Text } from "../../components/commonText";
-import { Fonts, Colors, Sizes } from "../../constants/styles";
 import { MaterialIcons } from "@expo/vector-icons";
+import React from "react";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Text } from "../../components/commonText";
+import { Colors, Fonts, Sizes } from "../../constants/styles";
 
 const chatsList = [
   {
     id: "1",
-    sourceImage: require("../../assets/images/jobs/job1.png"),
-    sourceName: "Airbnb",
-    lastMsg: "Hello, Samantha",
-    lastMsgTime: "10:22 am",
-    unreadMsgCount: 5,
+    sourceImage: require("../../assets/images/avatars/1.jpg"),
+    sourceName: "PIEXEC",
+    lastMsg: "Hello, Michael",
+    lastMsgTime: "8:00 am",
+    unreadMsgCount: 2,
   },
   {
     id: "2",
-    sourceImage: require("../../assets/images/jobs/job4.png"),
+    sourceImage: require("../../assets/images/avatars/2.jpg"),
     sourceName: "Linkdin",
-    lastMsg: "Welcome!",
-    lastMsgTime: "10:16 am",
+    lastMsg: "Nice to meet you",
+    lastMsgTime: "9:00 am",
   },
   {
     id: "3",
-    sourceImage: require("../../assets/images/jobs/job3.png"),
-    sourceName: "Microsoft Crop",
-    lastMsg: "Oky...!",
+    sourceImage: require("../../assets/images/avatars/3.jpg"),
+    sourceName: "Upwork",
+    lastMsg: "Agreed",
     lastMsgTime: "10:00 am",
   },
   {
     id: "4",
-    sourceImage: require("../../assets/images/jobs/job5.png"),
-    sourceName: "Android",
-    lastMsg: "Congratulations!",
-    lastMsgTime: "1 days ago",
+    sourceImage: require("../../assets/images/avatars/4.jpg"),
+    sourceName: "Robotflow",
+    lastMsg: "Yeah!, Let's continue",
+    lastMsgTime: "Yesterday",
   },
   {
     id: "5",
-    sourceImage: require("../../assets/images/jobs/job2.png"),
-    sourceName: "Twitter",
+    sourceImage: require("../../assets/images/avatars/5.jpg"),
+    sourceName: "X",
     lastMsg: "Welcome!",
-    lastMsgTime: "1 days ago",
+    lastMsgTime: "2 days ago",
   },
   {
     id: "6",
-    sourceImage: require("../../assets/images/jobs/job6.png"),
-    sourceName: "Infosys Technologies",
-    lastMsg: "Send me your resume samanatha",
-    lastMsgTime: "2 days ago",
+    sourceImage: require("../../assets/images/avatars/6.jpg"),
+    sourceName: "Freelancer",
+    lastMsg: "Will send job detail through email",
+    lastMsgTime: "3 days ago",
   },
   {
     id: "7",
-    sourceImage: require("../../assets/images/jobs/job7.png"),
-    sourceName: "Wipro",
-    lastMsg: "Grate !",
-    lastMsgTime: "2 days ago",
+    sourceImage: require("../../assets/images/avatars/7.jpg"),
+    sourceName: "Google",
+    lastMsg: "Let's discuss about competition",
+    lastMsgTime: "A week ago",
   },
 ];
 

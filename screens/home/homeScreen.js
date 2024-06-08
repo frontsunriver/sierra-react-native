@@ -1,110 +1,113 @@
 import {
-  StyleSheet,
-  View,
-  Image,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import React, { useState } from "react";
-import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
-import {
-  MaterialIcons,
   Feather,
   MaterialCommunityIcons,
+  MaterialIcons,
 } from "@expo/vector-icons";
-import { Text } from "../../components/commonText";
+import React, { useState } from "react";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Snackbar } from "react-native-paper";
+import { Text } from "../../components/commonText";
+import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
 
 const jobsTypesList = [
   "All Job",
-  "Writer",
-  "Design",
-  "Finance",
-  "Product Designer",
-  "Data Engineer",
+  "Full Stack Engineer",
+  "Backend Engineer",
+  "Frontend Engineer",
+  "Project Lead",
+  "Web Developer",
+  "Mobile Developer",
+  "Automation Tester",
+  "Operation Manager",
 ];
 
 const jobList = [
   {
     id: "1",
     sourceLogo: require("../../assets/images/jobs/job1.png"),
-    jobType: "UI/UX Designer",
-    sourceName: "Airbnb",
-    city: "California, USA",
+    jobType: "Backend Engineer",
+    sourceName: "PIEXEX",
+    city: "Fort worth, USA",
     jobTime: "Full time",
-    amountPerMonth: 450,
+    amountPerMonth: 100,
     inBookmark: true,
   },
   {
     id: "2",
     sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
     city: "California, USA",
     jobTime: "Part time",
-    amountPerMonth: 400,
-    inBookmark: false,
+    amountPerMonth: 200,
+    inBookmark: true,
   },
   {
     id: "3",
     sourceLogo: require("../../assets/images/jobs/job3.png"),
-    jobType: "Product Manager",
+    jobType: "Joomla Developer",
     sourceName: "Microsoft Crop",
     city: "California, USA",
-    jobTime: "Part time",
-    amountPerMonth: 550,
-    inBookmark: false,
+    jobTime: "Full time",
+    amountPerMonth: 300,
+    inBookmark: true,
   },
   {
     id: "4",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Operation Manager",
     sourceName: "Linkedin",
     city: "California, USA",
-    jobTime: "Part time",
-    amountPerMonth: 550,
+    jobTime: "Full time",
+    amountPerMonth: 400,
     inBookmark: true,
   },
   {
     id: "5",
-    sourceLogo: require("../../assets/images/jobs/job1.png"),
+    sourceLogo: require("../../assets/images/jobs/job5.png"),
     jobType: "UI/UX Designer",
-    sourceName: "Airbnb",
+    sourceName: "Android",
     city: "California, USA",
     jobTime: "Full time",
-    amountPerMonth: 450,
-    inBookmark: true,
+    amountPerMonth: 500,
+    inBookmark: false,
   },
   {
     id: "6",
-    sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    sourceLogo: require("../../assets/images/jobs/job6.png"),
+    jobType: "Senior Mobile Engineer",
+    sourceName: "Robotflow",
     city: "California, USA",
     jobTime: "Part time",
-    amountPerMonth: 400,
+    amountPerMonth: 600,
     inBookmark: false,
   },
   {
     id: "7",
-    sourceLogo: require("../../assets/images/jobs/job3.png"),
+    sourceLogo: require("../../assets/images/jobs/job7.png"),
     jobType: "Product Manager",
-    sourceName: "Microsoft Crop",
+    sourceName: "Wipro",
     city: "California, USA",
     jobTime: "Part time",
-    amountPerMonth: 550,
+    amountPerMonth: 700,
     inBookmark: false,
   },
   {
     id: "8",
-    sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
-    sourceName: "Linkedin",
+    sourceLogo: require("../../assets/images/jobs/job8.png"),
+    jobType: "Java Backend Engineer",
+    sourceName: "BlownUp",
     city: "California, USA",
     jobTime: "Part time",
-    amountPerMonth: 550,
-    inBookmark: true,
+    amountPerMonth: 800,
+    inBookmark: false,
   },
 ];
 
@@ -332,7 +335,7 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.headerWrapStyle}>
         <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
           <Image
-            source={require("../../assets/images/users/user1.jpeg")}
+            source={require("../../assets/images/users/user1.jpg")}
             style={styles.userCircleImage}
           />
           <View
@@ -343,7 +346,7 @@ const HomeScreen = ({ navigation }) => {
             }}
           >
             <Text numberOfLines={1} style={{ ...Fonts.blackColor20Bold }}>
-              Hello, Samantha !
+              Hello, Michael !
             </Text>
             <Text
               style={{
@@ -407,21 +410,21 @@ const styles = StyleSheet.create({
     top: 2,
   },
   readMoreButtonStyle: {
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.skyColor,
     paddingVertical: Sizes.fixPadding - 2.0,
     paddingHorizontal: Sizes.fixPadding * 2.0,
     borderRadius: Sizes.fixPadding * 5.0,
     marginTop: Sizes.fixPadding * 2.0,
   },
   bannerWrapStyle: {
-    backgroundColor: Colors.pinkColor,
+    backgroundColor: Colors.primaryColor,
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: Sizes.fixPadding,
     marginHorizontal: Sizes.fixPadding * 2.0,
     marginVertical: Sizes.fixPadding * 3.0,
     elevation: 3.0,
-    shadowColor: Colors.pinkColor,
+    shadowColor: Colors.primaryColor,
     shadowOffset: { width: 0, height: 15 },
     shadowOpacity: 0.25,
     shadowRadius: 20,
@@ -434,7 +437,7 @@ const styles = StyleSheet.create({
   },
   bannerImageStyle: {
     height: "100%",
-    width: screenWidth / 3.0,
+    width: screenWidth / 3.5,
     resizeMode: "cover",
     marginRight: Sizes.fixPadding,
     overflow: "hidden",

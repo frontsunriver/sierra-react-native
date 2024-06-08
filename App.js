@@ -66,7 +66,7 @@ function MyApp() {
           }}
         >
           <Stack.Screen name="Splash" component={SplashScreen} />
-          <Stack.Screen name="Onboadring" component={OnboardingScreen} />
+          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Verification" component={VerificationScreen} />

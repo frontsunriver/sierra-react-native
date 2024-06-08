@@ -1,45 +1,45 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
   ScrollView,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
   View,
-  TextInput
 } from "react-native";
-import React, { useState } from "react";
-import { Colors, Fonts, Sizes, CommonStyles } from "../../constants/styles";
 import { Text } from "../../components/commonText";
-import { MaterialIcons } from "@expo/vector-icons";
 import MyStatusBar from "../../components/myStatusBar";
+import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
 
 const recommendedList = [
   {
     id: "1",
-    skill: "Marvel",
-    isSelected: false,
+    skill: "React.js",
+    isSelected: true,
   },
   {
     id: "2",
-    skill: "InVision",
+    skill: "Angular.js",
     isSelected: false,
   },
   {
     id: "3",
-    skill: "Sketch",
+    skill: "Next.js",
     isSelected: false,
   },
   {
     id: "4",
-    skill: "UX Research",
+    skill: "Nuxt.js",
     isSelected: false,
   },
   {
     id: "5",
-    skill: "Adobe XD",
-    isSelected: false,
+    skill: "Laravel",
+    isSelected: true,
   },
   {
     id: "6",
-    skill: "Web Design",
+    skill: "Codeignitor",
     isSelected: false,
   },
   {
@@ -54,48 +54,53 @@ const recommendedList = [
   },
   {
     id: "9",
-    skill: "Digital Media",
+    skill: "Mobile Development",
     isSelected: false,
   },
   {
     id: "10",
-    skill: "Usability Testing",
+    skill: "React Native",
     isSelected: false,
   },
   {
     id: "11",
-    skill: "Marketing",
+    skill: "Flutter",
     isSelected: false,
   },
   {
     id: "12",
-    skill: "Interaction Design",
+    skill: "Xamarin",
     isSelected: false,
   },
   {
     id: "13",
-    skill: "Creative Design",
+    skill: "Project Management",
     isSelected: false,
   },
   {
     id: "14",
-    skill: "Product Design",
+    skill: "Operation Management",
     isSelected: false,
   },
   {
     id: "15",
-    skill: "ui-ux Research Expert",
+    skill: "Project Lead",
     isSelected: false,
   },
   {
     id: "16",
-    skill: "Information Architecture",
+    skill: "Technical Lead",
     isSelected: false,
   },
   {
     id: "17",
-    skill: "Prototype",
+    skill: "Automation Operation Management",
     isSelected: false,
+  },
+  {
+    id: "18",
+    skill: "C#",
+    isSelected: true,
   },
 ];
 
@@ -125,7 +130,11 @@ const AddSkillsScreen = ({ navigation }) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => navigation.pop()}
-        style={{ ...CommonStyles.buttonStyle, marginHorizontal: Sizes.fixPadding * 2.0, marginBottom: Sizes.fixPadding * 2.0 }}
+        style={{
+          ...CommonStyles.buttonStyle,
+          marginHorizontal: Sizes.fixPadding * 2.0,
+          marginBottom: Sizes.fixPadding * 2.0,
+        }}
       >
         <Text style={{ ...Fonts.whiteColor18SemiBold }}>Save</Text>
       </TouchableOpacity>

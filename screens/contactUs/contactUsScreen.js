@@ -1,19 +1,19 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
-  View,
-  TouchableOpacity,
+  Platform,
   ScrollView,
   TextInput,
-  Platform,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import React, { useState } from "react";
-import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Text } from "../../components/commonText";
 import MyStatusBar from "../../components/myStatusBar";
+import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
 
 const ContactUsScreen = ({ navigation }) => {
-  const [fullName, setfullName] = useState("Samantha Smith");
-  const [email, setemail] = useState("samanthasmith@gmail.com");
+  const [fullName, setfullName] = useState("Michael Niemis");
+  const [email, setemail] = useState("michael.niemis@gmail.com");
   const [message, setmessage] = useState("");
 
   return (

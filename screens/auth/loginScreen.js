@@ -1,19 +1,19 @@
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 import {
-  StyleSheet,
-  View,
+  BackHandler,
   Image,
+  Platform,
   ScrollView,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
-  BackHandler,
-  Platform,
+  View,
 } from "react-native";
-import React, { useState, useCallback } from "react";
-import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
-import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
 import { Text } from "../../components/commonText";
-import { useFocusEffect } from "@react-navigation/native";
 import MyStatusBar from "../../components/myStatusBar";
+import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
 
 const LoginScreen = ({ navigation }) => {
   const backAction = () => {
@@ -142,7 +142,9 @@ const LoginScreen = ({ navigation }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => { navigation.push('Register') }}
+        onPress={() => {
+          navigation.push("BottomTabBar");
+        }}
         style={{ ...CommonStyles.buttonStyle, margin: Sizes.fixPadding * 2.0 }}
       >
         <Text style={{ ...Fonts.whiteColor18SemiBold }}>Login</Text>
@@ -238,8 +240,8 @@ const LoginScreen = ({ navigation }) => {
           }}
         />
         <Text style={styles.appNameTextStyle}>
-          Job
-          <Text style={{ ...Fonts.pinkColor16Bold }}> Finder</Text>
+          Sierra
+          <Text style={{ ...Fonts.skyColor16Bold }}> Connect</Text>
         </Text>
       </View>
     );

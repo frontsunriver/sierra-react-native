@@ -1,26 +1,23 @@
-import {
-  StyleSheet,
-  View,
-  Image,
-  Animated,
-  TouchableOpacity,
-} from "react-native";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
-import { Text } from "../../components/commonText";
 import {
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { SwipeListView } from "react-native-swipe-list-view";
+  Animated,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Snackbar } from "react-native-paper";
+import { SwipeListView } from "react-native-swipe-list-view";
+import { Text } from "../../components/commonText";
+import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
 
 const savedJobsList = [
   {
     key: "1",
     sourceLogo: require("../../assets/images/jobs/job1.png"),
-    jobType: "UI/UX Designer",
-    sourceName: "Airbnb",
+    jobType: "Senior Full Stack Engineer",
+    sourceName: "PIEXEX",
     city: "California, USA",
     jobTime: "Full time",
     amountPerMonth: 450,
@@ -29,8 +26,8 @@ const savedJobsList = [
   {
     key: "2",
     sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
     city: "California, USA",
     jobTime: "Part time",
     amountPerMonth: 400,
@@ -49,7 +46,7 @@ const savedJobsList = [
   {
     key: "4",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",
@@ -140,11 +137,7 @@ const SavedScreen = ({ navigation }) => {
             ]}
           >
             <View style={styles.deleteCircleStyle}>
-              <FontAwesome
-                name="trash"
-                size={25}
-                color={Colors.whiteColor}
-              />
+              <FontAwesome name="trash" size={25} color={Colors.whiteColor} />
             </View>
           </Animated.View>
         </TouchableOpacity>
@@ -268,7 +261,7 @@ const styles = StyleSheet.create({
     height: 65.0,
     resizeMode: "contain",
     borderRadius: Sizes.fixPadding,
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   deleteCircleStyle: {
     width: 60.0,

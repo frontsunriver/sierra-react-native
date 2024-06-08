@@ -1,21 +1,21 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React from "react";
 import {
-  StyleSheet,
-  View,
   Image,
   ScrollView,
+  StyleSheet,
   TouchableOpacity,
+  View,
 } from "react-native";
-import React from "react";
 import { Text } from "../../components/commonText";
+import MyStatusBar from "../../components/myStatusBar";
 import {
-  CommonStyles,
   Colors,
+  CommonStyles,
   Fonts,
   Sizes,
   screenWidth,
 } from "../../constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
-import MyStatusBar from "../../components/myStatusBar";
 
 const UploadSuccessScreen = ({ navigation }) => {
   return (
@@ -119,7 +119,7 @@ const UploadSuccessScreen = ({ navigation }) => {
         />
         <View style={{ flex: 1, marginLeft: Sizes.fixPadding * 2.0 }}>
           <Text style={{ ...Fonts.blackColor18Medium }}>
-            Resume - Samantha.pdf
+            Resume - Michael.pdf
           </Text>
           <Text
             style={{
@@ -143,7 +143,7 @@ const UploadSuccessScreen = ({ navigation }) => {
         />
         <View style={{ flex: 1, marginLeft: Sizes.fixPadding * 2.0 }}>
           <Text numberOfLines={1} style={{ ...Fonts.blackColor20SemiBold }}>
-            Sr. UI/UX Designer
+            Sr. Backend Engineer
           </Text>
           <Text
             style={{

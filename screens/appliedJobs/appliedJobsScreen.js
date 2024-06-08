@@ -1,27 +1,27 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
   FlatList,
   Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import React, { useState } from "react";
 import { Text } from "../../components/commonText";
+import MyStatusBar from "../../components/myStatusBar";
 import {
-  Sizes,
-  Fonts,
   Colors,
   CommonStyles,
+  Fonts,
+  Sizes,
   screenWidth,
 } from "../../constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
-import MyStatusBar from "../../components/myStatusBar";
 
 const appliedAllJobsList = [
   {
     id: "1",
     sourceLogo: require("../../assets/images/jobs/job1.png"),
-    jobType: "UI/UX Designer",
+    jobType: "Senior Full Stack Engineer",
     sourceName: "Airbnb",
     city: "California, USA",
     jobTime: "Full time",
@@ -31,8 +31,8 @@ const appliedAllJobsList = [
   {
     id: "2",
     sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
     city: "California, USA",
     jobTime: "Part time",
     amountPerMonth: 400,
@@ -51,7 +51,7 @@ const appliedAllJobsList = [
   {
     id: "4",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",
@@ -71,8 +71,8 @@ const appliedAllJobsList = [
   {
     id: "6",
     sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Financial Planner",
-    sourceName: "Twitter",
+    jobType: "Senior Mobile Engineer",
+    sourceName: "X",
     city: "California, USA",
     jobTime: "Part time",
     amountPerMonth: 400,
@@ -91,7 +91,7 @@ const appliedAllJobsList = [
   {
     id: "8",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",
@@ -114,7 +114,7 @@ const shortlistedJobsList = [
   {
     id: "4",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",
@@ -137,7 +137,7 @@ const interviewsJobList = [
   {
     id: "1",
     sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Automation Trester",
+    jobType: "Automation Tester",
     sourceName: "Linkedin",
     city: "California, USA",
     jobTime: "Part time",
@@ -168,8 +168,8 @@ const AppliedJobsScreen = ({ navigation }) => {
         {selectedJobTypeIndex == 1
           ? AllTypeJobs()
           : selectedJobTypeIndex == 2
-            ? shortlistedJob({ data: shortlistedJobsList })
-            : shortlistedJob({ data: interviewsJobList })}
+          ? shortlistedJob({ data: shortlistedJobsList })
+          : shortlistedJob({ data: interviewsJobList })}
       </View>
     </View>
   );
