@@ -143,7 +143,7 @@ const LoginScreen = ({ navigation }) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
-          navigation.push("BottomTabBar");
+          navigation.push("AppRoot");
         }}
         style={{ ...CommonStyles.buttonStyle, margin: Sizes.fixPadding * 2.0 }}
       >

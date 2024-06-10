@@ -172,7 +172,7 @@ const ProfileScreen = ({ navigation }) => {
           />
           <View style={{ flex: 1, marginLeft: Sizes.fixPadding + 5.0 }}>
             <Text style={{ ...Fonts.blackColor17SemiBold }}>
-              University of South California
+              The University of Sydney
             </Text>
             <Text
               style={{
@@ -180,7 +180,7 @@ const ProfileScreen = ({ navigation }) => {
                 marginTop: Sizes.fixPadding - 7.0,
               }}
             >
-              Bachelor of Information Technology
+              Master of Computer Science
             </Text>
           </View>
         </View>
@@ -336,7 +336,7 @@ const ProfileScreen = ({ navigation }) => {
                 marginLeft: Sizes.fixPadding - 5.0,
               }}
             >
-              California, USA
+              Sydney, Australia
             </Text>
           </View>
         </View>
@@ -491,7 +491,7 @@ const styles = StyleSheet.create({
   },
   universityImageStyle: {
     width: 50.0,
-    height: 50.0,
+    height: 55.0,
     borderRadius: 10.0,
     overflow: "hidden",
   },

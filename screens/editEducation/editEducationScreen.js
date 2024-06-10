@@ -1,26 +1,32 @@
+import { Feather, MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
+  Modal,
   ScrollView,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
-  Modal,
-  TouchableWithoutFeedback
 } from "react-native";
-import React, { useState } from "react";
-import { Colors, CommonStyles, Fonts, Sizes, screnHeight } from "../../constants/styles";
-import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { Text } from "../../components/commonText";
-import { TextInput } from "react-native";
 import MyStatusBar from "../../components/myStatusBar";
+import {
+  Colors,
+  CommonStyles,
+  Fonts,
+  Sizes,
+  screnHeight,
+} from "../../constants/styles";
 
 const degreesList = [
-  "Bachelor’s Degree",
+  "Bachelor's Degree",
   "Professional Certificates",
   "Undergraduate Degree",
   "Transfer Degree",
   "Associate Degree",
   "Graduate Degree",
-  "Master Degree",
+  "Master's Degree",
   "Doctoral Degree",
   "Professional Degree",
   "Specialist Degree",
@@ -28,11 +34,11 @@ const degreesList = [
 
 const EditEducationScreen = ({ navigation }) => {
   const [universityName, setuniversityName] = useState(
-    "University of South California"
+    "The University of Sydney"
   );
   const [graduationYear, setgraduationYear] = useState("2018");
-  const [selectedDegree, setselectedDegree] = useState(degreesList[0]);
-  const [fieldOfStudy, setfieldOfStudy] = useState("Information Technology");
+  const [selectedDegree, setselectedDegree] = useState(degreesList[6]);
+  const [fieldOfStudy, setfieldOfStudy] = useState("Computer Science");
   const [showDegreeSheet, setshowDegreeSheet] = useState(false);
 
   return (
@@ -56,25 +62,33 @@ const EditEducationScreen = ({ navigation }) => {
   );
 
   function degreesSheet() {
-    return (     
+    return (
       <Modal
         animationType="slide"
         transparent={true}
         visible={showDegreeSheet}
-        onRequestClose={() => { setshowDegreeSheet(false) }}
+        onRequestClose={() => {
+          setshowDegreeSheet(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowDegreeSheet(false) }}
-          style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "flex-end", }}
+          onPress={() => {
+            setshowDegreeSheet(false);
+          }}
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            justifyContent: "flex-end",
+          }}
         >
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => { }}
+            onPress={() => {}}
             style={{
               maxHeight: screnHeight - 150,
               paddingBottom: Sizes.fixPadding,
-              backgroundColor: Colors.whiteColor
+              backgroundColor: Colors.whiteColor,
             }}
           >
             <Text

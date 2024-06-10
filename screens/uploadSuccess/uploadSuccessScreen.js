@@ -46,7 +46,7 @@ const UploadSuccessScreen = ({ navigation }) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
-          navigation.push("BottomTabBar");
+          navigation.push("AppRoot");
         }}
         style={styles.borderButtonStyle}
       >

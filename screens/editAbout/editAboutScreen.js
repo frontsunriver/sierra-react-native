@@ -1,32 +1,37 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
+  Modal,
   Platform,
   ScrollView,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
-  View,
-  Modal,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
-import React, { useState } from "react";
-import { Colors, CommonStyles, Fonts, Sizes, screnHeight } from "../../constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Text } from "../../components/commonText";
-import { TextInput } from "react-native";
 import MyStatusBar from "../../components/myStatusBar";
+import {
+  Colors,
+  CommonStyles,
+  Fonts,
+  Sizes,
+  screnHeight,
+} from "../../constants/styles";
 
 const yearsList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 const locationsList = [
-  "California, USA",
-  "Los Angeles, California",
-  "San Francisco, California",
-  "Chicago, Illinois",
-  "Houston, Texas",
-  "Philadelphia, Pennsylvania",
-  "Boston, Massachusetts",
-  "San Diego, California",
-  "Bristol, UK",
-  "Manchester, UK",
-  "Pune, India",
+  "Sydney, Australia",
+  "Abbotsbury, Australia",
+  "Beacon Hill, Australia",
+  "Burwood, Australia",
+  "Camperdown, Australia",
+  "Campsie, Australia",
+  "Hurstville, Australia",
+  "Mascot, Australia",
+  "Northwood, Australia",
+  "Surry Hills, Australia",
 ];
 
 const EditAboutScreen = ({ navigation }) => {
@@ -63,15 +68,24 @@ const EditAboutScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showLocationsSheet}
-        onRequestClose={() => { setshowLocationsSheet(false) }}
+        onRequestClose={() => {
+          setshowLocationsSheet(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowLocationsSheet(false) }}
+          onPress={() => {
+            setshowLocationsSheet(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
-            <View style={{ maxHeight: screnHeight / 1.5, backgroundColor: Colors.whiteColor }}>
+            <View
+              style={{
+                maxHeight: screnHeight / 1.5,
+                backgroundColor: Colors.whiteColor,
+              }}
+            >
               <Text
                 style={{
                   ...Fonts.blackColor20Bold,
@@ -138,15 +152,25 @@ const EditAboutScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showYearsSheet}
-        onRequestClose={() => { setshowYearsSheet(false) }}
+        onRequestClose={() => {
+          setshowYearsSheet(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowYearsSheet(false) }}
+          onPress={() => {
+            setshowYearsSheet(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
-            <View style={{ maxHeight: screnHeight / 1.5, backgroundColor: Colors.whiteColor, paddingBottom: Sizes.fixPadding, }}>
+            <View
+              style={{
+                maxHeight: screnHeight / 1.5,
+                backgroundColor: Colors.whiteColor,
+                paddingBottom: Sizes.fixPadding,
+              }}
+            >
               <Text
                 style={{
                   ...Fonts.blackColor20Bold,

@@ -71,7 +71,7 @@ function MyApp() {
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Verification" component={VerificationScreen} />
           <Stack.Screen
-            name="BottomTabBar"
+            name="AppRoot"
             component={BottomTabBarScreen}
             options={{ ...TransitionPresets.DefaultTransition }}
           />

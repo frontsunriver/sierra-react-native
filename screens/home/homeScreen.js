@@ -199,14 +199,18 @@ const HomeScreen = ({ navigation }) => {
             justifyContent: "space-between",
           }}
         >
-          <MaterialIcons
-            name={item.inBookmark ? "bookmark" : "bookmark-border"}
-            color={Colors.primaryColor}
-            size={24}
+          <TouchableOpacity
             onPress={() => {
               updateJobData({ id: item.id });
             }}
-          />
+            activeOpacity={0.7}
+          >
+            <MaterialIcons
+              name={item.inBookmark ? "bookmark" : "bookmark-border"}
+              color={Colors.primaryColor}
+              size={24}
+            />
+          </TouchableOpacity>
           <Text style={{ ...Fonts.primaryColor16SemiBold }}>
             {`$`}
             {item.amountPerMonth}/Mo
@@ -290,9 +294,12 @@ const HomeScreen = ({ navigation }) => {
           <Text numberOfLines={2} style={{ ...Fonts.whiteColor20SemiBold }}>
             How to find a{`\n`}perfect job for you
           </Text>
-          <View style={styles.readMoreButtonStyle}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.readMoreButtonStyle}
+          >
             <Text style={{ ...Fonts.whiteColor16Medium }}>Read more</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <Image
           source={require("../../assets/images/users/user2.png")}
@@ -334,10 +341,17 @@ const HomeScreen = ({ navigation }) => {
     return (
       <View style={styles.headerWrapStyle}>
         <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
-          <Image
-            source={require("../../assets/images/users/user1.jpg")}
-            style={styles.userCircleImage}
-          />
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              navigation.push("AppRoot", { screen: "Profile" });
+            }}
+          >
+            <Image
+              source={require("../../assets/images/users/user1.jpg")}
+              style={styles.userCircleImage}
+            />
+          </TouchableOpacity>
           <View
             style={{
               marginLeft: Sizes.fixPadding + 5.0,

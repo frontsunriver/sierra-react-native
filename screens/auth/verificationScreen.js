@@ -91,7 +91,7 @@ const VerificationScreen = ({ navigation }) => {
               setisLoading(true);
               setTimeout(() => {
                 setisLoading(false);
-                navigation.push("BottomTabBar");
+                navigation.push("AppRoot");
               }, 2000);
             }
           }}
@@ -113,7 +113,7 @@ const VerificationScreen = ({ navigation }) => {
           setisLoading(true);
           setTimeout(() => {
             setisLoading(false);
-            navigation.push("BottomTabBar");
+            navigation.push("AppRoot");
           }, 2000);
         }}
         style={{ ...CommonStyles.buttonStyle, margin: Sizes.fixPadding * 2.0 }}
