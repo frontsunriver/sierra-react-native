@@ -385,7 +385,7 @@ const ProfileScreen = ({ navigation }) => {
               marginTop: Sizes.fixPadding - 7.0,
             }}
           >
-            samanthasmith@gmail.com
+            michaelniemis@gmail.com
           </Text>
         </View>
         <View style={{ marginVertical: Sizes.fixPadding + 2.0 }}>
@@ -396,7 +396,7 @@ const ProfileScreen = ({ navigation }) => {
               marginTop: Sizes.fixPadding - 7.0,
             }}
           >
-            +(444) 145-8965
+            +1 (386) 868-3720
           </Text>
         </View>
         <View style={{}}>

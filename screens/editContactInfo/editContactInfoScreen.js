@@ -25,19 +25,19 @@ const websiteTypesList = [
 const websitesList = [
   {
     id: "1",
-    websiteUrl: "https://dribble.com/samanthasmith-85r66s4g9",
+    websiteUrl: "https://github.com/devsolution0112",
     websiteType: websiteTypesList[4],
   },
   {
     id: "2",
-    websiteUrl: "https://behance.net/samanthasmith",
+    websiteUrl: "https://porfolio.com/michaelniemis",
     websiteType: websiteTypesList[4],
   },
 ];
 
 const EditContactInfoScreen = ({ navigation }) => {
-  const [email, setemail] = useState("samanthasmith@gmail.com");
-  const [mobileNumber, setmobileNumber] = useState("+(444) 145-8965");
+  const [email, setemail] = useState("michaelniemis@gmail.com");
+  const [mobileNumber, setmobileNumber] = useState("+1 (386) 868-3720");
   const [websites, setwebsites] = useState(websitesList);
   const [showWebsiteTypeSheet, setshowWebsiteTypeSheet] = useState(false);
   const [selectedWebsiteType, setselectedWebsiteType] = useState("");
