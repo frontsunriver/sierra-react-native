@@ -293,7 +293,7 @@ const HomeScreen = ({ navigation }) => {
         source={{ uri: "https://randomuser.me/api/portraits/men/11.jpg" }}
         style={{
           width: screenWidth,
-          height: screenWidth - 100,
+          height: screenWidth - 80,
           marginBottom: Sizes.fixPadding,
         }}
         resizeMode="cover"
@@ -531,7 +531,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5, // Shadow radius for iOS
     elevation: 5, // Elevation for Android
     position: "absolute",
-    top: (screenWidth - 100 - 120) / 2,
+    top: (screenWidth - 80 - 120) / 2,
     left: (screenWidth - 120) / 2,
   },
   avatar: {
@@ -541,13 +541,13 @@ const styles = StyleSheet.create({
   },
   role: {
     position: "absolute",
-    top: (screenWidth - 100) / 2 + 90,
+    top: (screenWidth - 80) / 2 + 90,
     width: "100%",
     alignItems: "center",
   },
   setting: {
     position: "absolute",
-    top: (screenWidth - 100 - 32) / 2,
+    top: (screenWidth - 80 - 32) / 2,
     right: 0,
     padding: 8,
     backgroundColor: "#0c83ff",
