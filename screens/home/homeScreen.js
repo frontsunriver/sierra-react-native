@@ -1,4 +1,5 @@
 import {
+  AntDesign,
   Feather,
   MaterialCommunityIcons,
   MaterialIcons,
@@ -7,13 +8,14 @@ import React, { useState } from "react";
 import {
   FlatList,
   Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import { Snackbar } from "react-native-paper";
-import { Text } from "../../components/commonText";
 import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
 
 const jobsTypesList = [
@@ -121,9 +123,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
       <View style={{ flex: 1 }}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {header()}
-          {searchField()}
-          {banner()}
+          {profileBanner()}
           {jobRecommendationTitle()}
           {jobTypesInfo()}
           {jobsAccordingSelection()}
@@ -287,25 +287,50 @@ const HomeScreen = ({ navigation }) => {
     );
   }
 
-  function banner() {
+  function profileBanner() {
     return (
-      <View style={styles.bannerWrapStyle}>
-        <View style={styles.bannerDetailWrapStyle}>
-          <Text numberOfLines={2} style={{ ...Fonts.whiteColor20SemiBold }}>
-            How to find a{`\n`}perfect job for you
-          </Text>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.readMoreButtonStyle}
-          >
-            <Text style={{ ...Fonts.whiteColor16Medium }}>Read more</Text>
-          </TouchableOpacity>
+      <ImageBackground
+        source={{ uri: "https://randomuser.me/api/portraits/men/11.jpg" }}
+        style={{
+          width: screenWidth,
+          height: screenWidth - 100,
+          marginBottom: Sizes.fixPadding,
+        }}
+        resizeMode="cover"
+      >
+        <View style={styles.outerRing}>
+          <Image
+            source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }}
+            style={styles.avatar}
+          />
         </View>
-        <Image
-          source={require("../../assets/images/users/user2.png")}
-          style={styles.bannerImageStyle}
-        />
-      </View>
+        <View style={styles.role}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 22,
+              color: "white",
+              fontWeight: 500,
+            }}
+          >
+            Hanna Dorman
+          </Text>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              color: "white",
+              fontWeight: 300,
+              marginTop: 3,
+            }}
+          >
+            UX/UI designer
+          </Text>
+        </View>
+        <TouchableOpacity activeOpacity={0.7} style={styles.setting}>
+          <AntDesign name="setting" size={24} color="white" />
+        </TouchableOpacity>
+      </ImageBackground>
     );
   }
 
@@ -451,7 +476,7 @@ const styles = StyleSheet.create({
   },
   bannerImageStyle: {
     height: "100%",
-    width: screenWidth / 3.5,
+    width: screenWidth,
     resizeMode: "cover",
     marginRight: Sizes.fixPadding,
     overflow: "hidden",
@@ -492,5 +517,41 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     borderRadius: Sizes.fixPadding,
     overflow: "hidden",
+  },
+  outerRing: {
+    width: 135, // Adjust size as needed
+    height: 135,
+    borderRadius: 70, // Half of the width/height to make it circular
+    backgroundColor: "#f1f4f9", // Color of the ring
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000", // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowOpacity: 0.8, // Shadow opacity for iOS
+    shadowRadius: 5, // Shadow radius for iOS
+    elevation: 5, // Elevation for Android
+    position: "absolute",
+    top: (screenWidth - 100 - 120) / 2,
+    left: (screenWidth - 120) / 2,
+  },
+  avatar: {
+    width: 120, // Adjust size as needed
+    height: 120,
+    borderRadius: 60, // Half of the width/height to make it circular
+  },
+  role: {
+    position: "absolute",
+    top: (screenWidth - 100) / 2 + 90,
+    width: "100%",
+    alignItems: "center",
+  },
+  setting: {
+    position: "absolute",
+    top: (screenWidth - 100 - 32) / 2,
+    right: 0,
+    padding: 8,
+    backgroundColor: "#0c83ff",
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
   },
 });

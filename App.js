@@ -7,7 +7,7 @@ import { useFonts } from "expo-font";
 import * as ExpoSplashScreen from "expo-splash-screen";
 import React, { useCallback } from "react";
 import { LogBox } from "react-native";
-import BottomTabBarScreen from "./components/bottomTabBarScreen";
+import DrawerScreen from "./components/drawerScreen";
 import AddSkillsScreen from "./screens/addSkills/addSkillsScreen";
 import AllJobsScreen from "./screens/allJobs/allJobsScreen";
 import AppliedJobsScreen from "./screens/appliedJobs/appliedJobsScreen";
@@ -72,7 +72,7 @@ function MyApp() {
           <Stack.Screen name="Verification" component={VerificationScreen} />
           <Stack.Screen
             name="AppRoot"
-            component={BottomTabBarScreen}
+            component={DrawerScreen}
             options={{ ...TransitionPresets.DefaultTransition }}
           />
           <Stack.Screen name="Search" component={SearchScreen} />
