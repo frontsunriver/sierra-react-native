@@ -11,7 +11,10 @@
     "test": "jest --watchAll",
     "lint": "expo lint",
     "build:apk": "eas build --profile development --platform android",
-    "build:bundle": "eas build --platform android"
+    "build:bundle": "eas build --platform android",
+    "build:ios": "eas build --platform ios --auto-submit",
+    "submit:android": "eas submit --platform android",
+    "submit:ios": "eas submit --platform ios"
   },
   "jest": {
     "preset": "jest-expo"
@@ -20,6 +23,7 @@
     "@expo/vector-icons": "^14.0.0",
     "@react-native-community/datetimepicker": "^8.0.1",
     "@react-navigation/bottom-tabs": "^6.5.20",
+    "@react-navigation/drawer": "^6.6.15",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
     "expo": "^51.0.11",
