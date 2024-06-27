@@ -17,7 +17,7 @@ import {
   CommonStyles,
   Fonts,
   Sizes,
-  screnHeight,
+  screenHeight,
 } from "../../constants/styles";
 
 const yearsList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
@@ -82,7 +82,7 @@ const EditAboutScreen = ({ navigation }) => {
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
             <View
               style={{
-                maxHeight: screnHeight / 1.5,
+                maxHeight: screenHeight / 1.5,
                 backgroundColor: Colors.whiteColor,
               }}
             >
@@ -166,7 +166,7 @@ const EditAboutScreen = ({ navigation }) => {
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
             <View
               style={{
-                maxHeight: screnHeight / 1.5,
+                maxHeight: screenHeight / 1.5,
                 backgroundColor: Colors.whiteColor,
                 paddingBottom: Sizes.fixPadding,
               }}

@@ -1,22 +1,36 @@
 import {
   AntDesign,
   Feather,
-  MaterialCommunityIcons,
+  FontAwesome,
+  FontAwesome5,
+  Ionicons,
   MaterialIcons,
+  SimpleLineIcons,
 } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
+  Animated,
   FlatList,
   Image,
   ImageBackground,
+  LayoutAnimation,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
+  UIManager,
   View,
 } from "react-native";
 import { Snackbar } from "react-native-paper";
 import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
+
+// Enable LayoutAnimation on Android
+if (Platform.OS === "android") {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 const jobsTypesList = [
   "All Job",
@@ -119,16 +133,47 @@ const HomeScreen = ({ navigation }) => {
   const [showSnackBar, setshowSnackBar] = useState(false);
   const [snackBarMsg, setsnackBarMsg] = useState("");
 
+  const [actionMenuVisible, setActionMenuVisible] = useState(false);
+  const [rotateAnim] = useState(new Animated.Value(0));
+
+  const toggleMenu = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    if (actionMenuVisible) {
+      setActionMenuVisible(false);
+      Animated.timing(rotateAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      setActionMenuVisible(true);
+      Animated.timing(rotateAnim, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+
+  const rotate = rotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "90deg"],
+  });
+
   return (
     <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
       <View style={{ flex: 1 }}>
         <ScrollView showsVerticalScrollIndicator={false}>
           {profileBanner()}
+          {actionBar()}
           {jobRecommendationTitle()}
           {jobTypesInfo()}
           {jobsAccordingSelection()}
         </ScrollView>
       </View>
+      <TouchableOpacity activeOpacity={0.7} style={styles.setting}>
+        <AntDesign name="setting" size={24} color="white" />
+      </TouchableOpacity>
       {snackBarInfo()}
     </View>
   );
@@ -290,7 +335,7 @@ const HomeScreen = ({ navigation }) => {
   function profileBanner() {
     return (
       <ImageBackground
-        source={{ uri: "https://randomuser.me/api/portraits/men/11.jpg" }}
+        source={{ uri: "http://imagedesign.au/assets/images/demo/cover3.jpg" }}
         style={{
           width: screenWidth,
           height: screenWidth - 80,
@@ -327,86 +372,69 @@ const HomeScreen = ({ navigation }) => {
             UX/UI designer
           </Text>
         </View>
-        <TouchableOpacity activeOpacity={0.7} style={styles.setting}>
-          <AntDesign name="setting" size={24} color="white" />
-        </TouchableOpacity>
       </ImageBackground>
     );
   }
 
-  function searchField() {
+  function actionBar() {
     return (
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={() => {
-          navigation.push("Search");
-        }}
-        style={styles.searchFieldWrapeStyle}
-      >
-        <MaterialIcons name="search" color={Colors.grayColor} size={20} />
-        <Text
-          style={{
-            ...Fonts.grayColor16Regular,
-            marginHorizontal: Sizes.fixPadding,
-            flex: 1,
-          }}
-        >
-          Search here
-        </Text>
-        <MaterialCommunityIcons
-          name="filter-variant"
-          color={Colors.grayColor}
-          size={20}
-        />
-      </TouchableOpacity>
-    );
-  }
-
-  function header() {
-    return (
-      <View style={styles.headerWrapStyle}>
-        <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => {
-              navigation.push("AppRoot", { screen: "Profile" });
-            }}
-          >
-            <Image
-              source={require("../../assets/images/users/user1.jpg")}
-              style={styles.userCircleImage}
+      <View style={{ flex: 1 }}>
+        <View style={styles.actionBar}>
+          <TouchableOpacity style={styles.actionIcon}>
+            <Feather name="activity" size={24} color="#0c83ff" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionIcon}>
+            <Ionicons
+              name="calendar-number-outline"
+              size={24}
+              color="#0c83ff"
             />
           </TouchableOpacity>
-          <View
-            style={{
-              marginLeft: Sizes.fixPadding + 5.0,
-              marginRight: Sizes.fixPadding,
-              flex: 1,
-            }}
-          >
-            <Text numberOfLines={1} style={{ ...Fonts.blackColor20Bold }}>
-              Hello, Michael !
-            </Text>
-            <Text
-              style={{
-                ...Fonts.grayColor16Regular,
-                marginTop: Sizes.fixPadding - 5.0,
-              }}
-            >
-              Good Morning
-            </Text>
-          </View>
+          <TouchableOpacity style={styles.actionIcon}>
+            <AntDesign name="setting" size={24} color="#0c83ff" />
+          </TouchableOpacity>
+          <View style={{ flex: 1 }}></View>
+          <TouchableOpacity style={styles.actionIcon} onPress={toggleMenu}>
+            <Animated.View style={{ transform: [{ rotate }] }}>
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={24}
+                color="#0c83ff"
+              />
+            </Animated.View>
+          </TouchableOpacity>
         </View>
-        <View>
-          <Feather
-            name="bell"
-            size={24}
-            color={Colors.blackColor}
-            onPress={() => {
-              navigation.push("Notifications");
-            }}
-          />
-          <View style={styles.notificationBedgeStyle}></View>
+        <View
+          style={{
+            paddingHorizontal: 15,
+            marginTop: 10,
+            height: actionMenuVisible ? 200 : 0,
+          }}
+        >
+          <TouchableOpacity style={styles.actionMenuContainer}>
+            <View style={{ width: 30 }}>
+              <FontAwesome5 name="sticky-note" size={24} color="black" />
+            </View>
+            <Text style={{ marginLeft: 10 }}>Notes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionMenuContainer}>
+            <View style={{ width: 30 }}>
+              <SimpleLineIcons name="people" size={24} color="black" />
+            </View>
+            <Text style={{ marginLeft: 10 }}>Friends</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionMenuContainer}>
+            <View style={{ width: 30 }}>
+              <FontAwesome name="photo" size={24} color="black" />
+            </View>
+            <Text style={{ marginLeft: 10 }}>Photos</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionMenuContainer}>
+            <View style={{ width: 30 }}>
+              <AntDesign name="setting" size={24} color="black" />
+            </View>
+            <Text style={{ marginLeft: 10 }}>More</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -547,11 +575,32 @@ const styles = StyleSheet.create({
   },
   setting: {
     position: "absolute",
-    top: (screenWidth - 80 - 32) / 2,
+    top: "50%",
+    marginTop: -50,
     right: 0,
     padding: 8,
     backgroundColor: "#0c83ff",
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
+  },
+  actionBar: {
+    flex: 1,
+    flexDirection: "row",
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+  },
+  actionIcon: {
+    backgroundColor: "#e6f2ff",
+    padding: 10,
+    borderRadius: 10,
+    marginHorizontal: 5,
+  },
+  actionMenuContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
   },
 });

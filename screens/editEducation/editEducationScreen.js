@@ -16,7 +16,7 @@ import {
   CommonStyles,
   Fonts,
   Sizes,
-  screnHeight,
+  screenHeight,
 } from "../../constants/styles";
 
 const degreesList = [
@@ -86,7 +86,7 @@ const EditEducationScreen = ({ navigation }) => {
             activeOpacity={1}
             onPress={() => {}}
             style={{
-              maxHeight: screnHeight - 150,
+              maxHeight: screenHeight - 150,
               paddingBottom: Sizes.fixPadding,
               backgroundColor: Colors.whiteColor,
             }}

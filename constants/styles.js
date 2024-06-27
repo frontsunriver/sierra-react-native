@@ -318,4 +318,4 @@ export const CommonStyles = {
 
 export const screenWidth = Dimensions.get("window").width;
 
-export const screnHeight = Dimensions.get("window").height;
+export const screenHeight = Dimensions.get("window").height;

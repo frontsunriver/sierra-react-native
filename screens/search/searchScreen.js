@@ -19,8 +19,8 @@ import {
   CommonStyles,
   Fonts,
   Sizes,
+  screenHeight,
   screenWidth,
-  screnHeight,
 } from "../../constants/styles";
 
 const searchResultsList = [
@@ -134,7 +134,7 @@ const SearchScreen = ({ navigation }) => {
               <View
                 style={{
                   backgroundColor: Colors.whiteColor,
-                  maxHeight: screnHeight - 140,
+                  maxHeight: screenHeight - 140,
                 }}
               >
                 <Text

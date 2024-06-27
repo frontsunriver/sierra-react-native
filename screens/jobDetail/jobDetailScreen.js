@@ -16,8 +16,8 @@ import {
   CommonStyles,
   Fonts,
   Sizes,
+  screenHeight,
   screenWidth,
-  screnHeight,
 } from "../../constants/styles";
 
 const requirementsList = [
@@ -73,7 +73,7 @@ const JobDetailScreen = ({ navigation }) => {
               onPress={() => {}}
               style={{ ...CommonStyles.dialogStyle, alignSelf: "center" }}
             >
-              <View style={{ maxHeight: screnHeight / 1.5 }}>
+              <View style={{ maxHeight: screenHeight / 1.5 }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <TouchableWithoutFeedback>
                     <View style={{ margin: Sizes.fixPadding * 2.0 }}>

@@ -1,17 +1,23 @@
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
+  Modal,
   ScrollView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  View,
-  Modal,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
-import React, { useState } from "react";
-import { Colors, CommonStyles, Sizes, Fonts, screnHeight } from "../../constants/styles";
-import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { Text } from "../../components/commonText";
 import MyStatusBar from "../../components/myStatusBar";
+import {
+  Colors,
+  CommonStyles,
+  Fonts,
+  Sizes,
+  screenHeight,
+} from "../../constants/styles";
 
 const websiteTypesList = [
   "Personal",
@@ -93,20 +99,24 @@ const EditContactInfoScreen = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={showWebsiteTypeSheet}
-        onRequestClose={() => { setshowWebsiteTypeSheet(false) }}
+        onRequestClose={() => {
+          setshowWebsiteTypeSheet(false);
+        }}
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => { setshowWebsiteTypeSheet(false) }}
+          onPress={() => {
+            setshowWebsiteTypeSheet(false);
+          }}
           style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
         >
           <View style={{ justifyContent: "flex-end", flex: 1 }}>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => { }}
+              onPress={() => {}}
               style={{ backgroundColor: Colors.whiteColor }}
             >
-              <View style={{ maxHeight: screnHeight / 1.5 }}>
+              <View style={{ maxHeight: screenHeight / 1.5 }}>
                 <Text
                   style={{
                     ...Fonts.blackColor20Bold,
@@ -118,12 +128,19 @@ const EditContactInfoScreen = ({ navigation }) => {
                 </Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <TouchableWithoutFeedback>
-                    <View style={{ backgroundColor: Colors.whiteColor, maxHeight: screnHeight - 150 }}>
+                    <View
+                      style={{
+                        backgroundColor: Colors.whiteColor,
+                        maxHeight: screenHeight - 150,
+                      }}
+                    >
                       <ScrollView showsVerticalScrollIndicator={false}>
                         {websiteTypesList.map((item, index) => (
                           <TouchableOpacity
                             activeOpacity={0.7}
-                            onPress={() => updateWebsites({ websiteType: item })}
+                            onPress={() =>
+                              updateWebsites({ websiteType: item })
+                            }
                             key={`${index}`}
                             style={{
                               ...styles.rowSpaceBetween,
