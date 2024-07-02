@@ -5,16 +5,25 @@ const AvatarView = ({ uri, size = 50, online = false }) => {
   return (
     <View style={[styles.container, { width: size, height: size }]}>
       <Image
-        source={{ uri }}
+        source={uri}
         style={[
           styles.avatar,
           { width: size, height: size, borderRadius: size / 2 },
         ]}
       />
-      {online && (
+      {online ? (
         <View
           style={[
-            styles.onlineIndicator,
+            styles.statusIndicator,
+            styles.online,
+            { width: size / 4, height: size / 4, borderRadius: size / 8 },
+          ]}
+        />
+      ) : (
+        <View
+          style={[
+            styles.statusIndicator,
+            styles.offline,
             { width: size / 4, height: size / 4, borderRadius: size / 8 },
           ]}
         />
@@ -32,13 +41,21 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#ffffff",
   },
-  onlineIndicator: {
+  statusIndicator: {
     position: "absolute",
     bottom: 3,
     right: 3,
-    backgroundColor: "#4caf50", // Green color for online status
     borderWidth: 2,
     borderColor: "#ffffff",
+  },
+  online: {
+    backgroundColor: "#4caf50", // Green color for online status
+  },
+  offline: {
+    backgroundColor: "gray", // Green color for online status
+  },
+  busy: {
+    backgroundColor: "orange", // Green color for online status
   },
 });
 

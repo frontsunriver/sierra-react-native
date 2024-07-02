@@ -15,6 +15,7 @@ import {
   ImageBackground,
   LayoutAnimation,
   Platform,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -161,21 +162,23 @@ const HomeScreen = ({ navigation }) => {
   });
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
-      <View style={{ flex: 1 }}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {profileBanner()}
-          {actionBar()}
-          {jobRecommendationTitle()}
-          {jobTypesInfo()}
-          {jobsAccordingSelection()}
-        </ScrollView>
+    <SafeAreaView style={{ flex: 1, zIndex: 10 }}>
+      <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
+        <View style={{ flex: 1 }}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {profileBanner()}
+            {actionBar()}
+            {jobRecommendationTitle()}
+            {jobTypesInfo()}
+            {jobsAccordingSelection()}
+          </ScrollView>
+        </View>
+        <TouchableOpacity activeOpacity={0.7} style={styles.setting}>
+          <AntDesign name="setting" size={24} color="white" />
+        </TouchableOpacity>
+        {snackBarInfo()}
       </View>
-      <TouchableOpacity activeOpacity={0.7} style={styles.setting}>
-        <AntDesign name="setting" size={24} color="white" />
-      </TouchableOpacity>
-      {snackBarInfo()}
-    </View>
+    </SafeAreaView>
   );
 
   function snackBarInfo() {
@@ -335,7 +338,7 @@ const HomeScreen = ({ navigation }) => {
   function profileBanner() {
     return (
       <ImageBackground
-        source={{ uri: "http://imagedesign.au/assets/images/demo/cover3.jpg" }}
+        source={require("../../assets/images/users/profile_banner.jpg")}
         style={{
           width: screenWidth,
           height: screenWidth - 80,

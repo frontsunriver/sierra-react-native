@@ -7,6 +7,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
+  FlatList,
   LayoutAnimation,
   Platform,
   StyleSheet,
@@ -16,7 +17,7 @@ import {
   UIManager,
   View,
 } from "react-native";
-import { Colors, Fonts, Sizes } from "../constants/styles";
+import { Colors, Fonts, Sizes, screenWidth } from "../constants/styles";
 import AvatarView from "./avatarView";
 
 // Enable LayoutAnimation on Android
@@ -30,6 +31,56 @@ const CustomHeader = ({ title }) => {
   const navigation = useNavigation();
 
   const [visibleSearchBar, setVisibleSearchBar] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      sender: {
+        profilePhoto: require("../assets/images/avatars/1.jpg"),
+        fullName: "Luis Daniel",
+        isOnline: false,
+      },
+      lastMessage:
+        "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
+      time: "18:30",
+      read: false,
+    },
+    {
+      id: 2,
+      sender: {
+        profilePhoto: require("../assets/images/avatars/1.jpg"),
+        fullName: "James walter",
+        isOnline: true,
+      },
+      lastMessage:
+        "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
+      time: "03:10",
+      read: true,
+    },
+    {
+      id: 3,
+      sender: {
+        profilePhoto: require("../assets/images/avatars/1.jpg"),
+        fullName: "Olagviel Gabriel",
+        isOnline: false,
+      },
+      lastMessage:
+        "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
+      time: "10:00",
+      read: true,
+    },
+    {
+      id: 4,
+      sender: {
+        profilePhoto: require("../assets/images/avatars/1.jpg"),
+        fullName: "Branislav Karan",
+        isOnline: true,
+      },
+      lastMessage:
+        "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
+      time: "15:20",
+      read: false,
+    },
+  ]);
 
   const toggleSearchBar = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -75,11 +126,68 @@ const CustomHeader = ({ title }) => {
     );
   }
 
+  function messagePan() {
+    function renderItem({ item }) {
+      return (
+        <TouchableOpacity
+          style={{ flex: 1, flexDirection: "row", marginBottom: 15 }}
+        >
+          <AvatarView
+            uri={item.sender.profilePhoto}
+            size={50}
+            online={item.sender.isOnline}
+          />
+          <View style={{ marginLeft: 10, flex: 1 }}>
+            <Text style={{ fontWeight: "bold" }}>{item.sender.fullName}</Text>
+            <Text numberOfLines={2} style={{ lineHeight: 20, marginTop: 5 }}>
+              {item.lastMessage}
+            </Text>
+          </View>
+          <Text>{item.time}</Text>
+        </TouchableOpacity>
+      );
+    }
+
+    return (
+      <View style={styles.panelContainer}>
+        <View style={styles.panelTitleContainer}>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Messages</Text>
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity>
+              <MaterialIcons name="filter-list" size={24} />
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginLeft: 10 }}>
+              <AntDesign name="search1" size={23} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <FlatList
+          keyExtractor={(item) => `${item.id}`}
+          renderItem={renderItem}
+          data={messages}
+          showsVerticalScrollIndicator={true}
+          style={styles.panelContentContainer}
+        />
+        <View
+          style={{
+            position: "absolute",
+            backgroundColor: "gray",
+            bottom: 0,
+            left: 0,
+            width: screenWidth - 50,
+            height: 60,
+          }}
+        ></View>
+      </View>
+    );
+  }
+
   return (
     <View
       style={{
         backgroundColor: "#252b36",
         paddingBottom: visibleSearchBar ? 10 : 0,
+        position: "relative",
       }}
     >
       <View style={styles.headerContainer}>
@@ -95,19 +203,12 @@ const CustomHeader = ({ title }) => {
             <AntDesign name="search1" size={24} color="white" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerIcon}>
-            <AntDesign name="appstore-o" size={24} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerIcon}>
             <Feather name="message-square" size={24} color="white" />
-            <BadgeView count={5} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerIcon}>
-            <Ionicons name="notifications-outline" size={24} color="white" />
             <BadgeView count={5} />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.8} style={styles.headerAvatar}>
             <AvatarView
-              uri="https://randomuser.me/api/portraits/men/1.jpg"
+              uri={require("../assets/images/avatars/1.jpg")}
               size={50}
               online={true}
             />
@@ -115,6 +216,7 @@ const CustomHeader = ({ title }) => {
         </View>
       </View>
       {searchField()}
+      {messagePan()}
     </View>
   );
 };
@@ -144,7 +246,7 @@ const styles = StyleSheet.create({
   },
   headerAvatar: {
     paddingVertical: 15,
-    marginLeft: 12,
+    marginLeft: 20,
   },
   badgeIndicator: {
     position: "absolute",
@@ -173,6 +275,31 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: Sizes.fixPadding,
     includeFontPadding: false,
+  },
+  panelContainer: {
+    position: "absolute",
+    bottom: -350,
+    left: 25,
+    width: screenWidth - 50,
+    height: 350,
+    backgroundColor: "white",
+    zIndex: 1000,
+    borderRadius: 10,
+    shadowColor: "#000", // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowOpacity: 0.8, // Shadow opacity for iOS
+    shadowRadius: 5, // Shadow radius for iOS
+    elevation: 5, // Elevation for Android,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    overflow: "hidden",
+  },
+  panelTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  panelContentContainer: {
+    marginTop: 20,
   },
 });
 

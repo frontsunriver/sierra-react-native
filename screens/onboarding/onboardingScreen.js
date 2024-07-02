@@ -9,6 +9,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
@@ -45,6 +46,7 @@ const OnboardingScreen = ({ navigation }) => {
   const scrollToIndex = ({ index }) => {
     listRef.current.scrollToIndex({ animated: true, index: index });
     setCurrentScreen(index);
+    console.log("work");
   };
 
   const backAction = () => {
@@ -124,16 +126,17 @@ const OnboardingScreen = ({ navigation }) => {
             ></View>
           ))}
         </View>
-        <Text
+        <TouchableOpacity
           onPress={() => {
             currentScreen == 2
               ? navigation.push("Login")
               : scrollToIndex({ index: currentScreen + 1 });
           }}
-          style={{ ...Fonts.primaryColor16Medium }}
         >
-          {currentScreen == 2 ? "Login" : "Next"}
-        </Text>
+          <Text style={{ ...Fonts.primaryColor16Medium }}>
+            {currentScreen == 2 ? "Login" : "Next"}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
