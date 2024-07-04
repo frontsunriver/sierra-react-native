@@ -327,7 +327,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         source={require("../../assets/images/users/profile_banner.jpg")}
         style={{
           width: screenWidth,
-          height: screenWidth - 60,
+          height: 380,
           marginBottom: Sizes.fixPadding,
         }}
         resizeMode="cover"

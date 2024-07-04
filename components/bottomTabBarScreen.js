@@ -19,7 +19,6 @@ import ChatScreen from "../screens/chat/chatScreen";
 import HomeScreen from "../screens/home/homeScreen";
 import ProfileScreen from "../screens/profile/profileScreen";
 import SavedScreen from "../screens/saved/savedScreen";
-import MyStatusBar from "./myStatusBar";
 
 const Tab = createBottomTabNavigator();
 
@@ -64,8 +63,7 @@ const BottomTabBarScreen = ({
   const [backClickCount, setBackClickCount] = useState(0);
 
   return (
-    <View className="flex-1">
-      <MyStatusBar />
+    <View style={{ flex: 1 }}>
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: Colors.primaryColor,
