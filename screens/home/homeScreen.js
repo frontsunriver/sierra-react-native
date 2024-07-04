@@ -24,6 +24,7 @@ import {
   View,
 } from "react-native";
 import { Snackbar } from "react-native-paper";
+import AvatarView from "../../components/avatarView";
 import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
 
 // Enable LayoutAnimation on Android
@@ -134,6 +135,8 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
   const [showSnackBar, setshowSnackBar] = useState(false);
   const [snackBarMsg, setsnackBarMsg] = useState("");
 
+  const [coverMenuVisible, setCoverMenuVisible] = useState(false);
+  const [secondCoverMenuVisible, setSecondCoverMenuVisible] = useState(false);
   const [actionMenuVisible, setActionMenuVisible] = useState(false);
 
   const handleTouchStart = () => {
@@ -151,6 +154,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         <View style={{ flex: 1 }}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {profileCover()}
+            {profileSecondCover()}
             {profileBanner()}
             {actionBar()}
             {jobRecommendationTitle()}
@@ -378,21 +382,155 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
   }
 
   function profileCover() {
+    const [rotateAnim] = useState(new Animated.Value(0));
+
+    const rotate = rotateAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "90deg"],
+    });
+
+    const toggleMenu = () => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      if (coverMenuVisible) {
+        setCoverMenuVisible(false);
+        Animated.timing(rotateAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        setCoverMenuVisible(true);
+        Animated.timing(rotateAnim, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
+      }
+    };
+
     return (
-      <View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            padding: 20,
-          }}
-        >
+      <View style={styles.profileCoverContainer}>
+        <View style={styles.profileCoverTitleContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
               User Pages -{" "}
             </Text>
             <Text style={{ fontSize: 20, color: "gray" }}>Profile Cover</Text>
           </View>
+          <TouchableOpacity
+            onPress={toggleMenu}
+            style={styles.profileCoverDropdown}
+          >
+            <Animated.View style={{ transform: [{ rotate }] }}>
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={18}
+                color="#1f2937"
+              />
+            </Animated.View>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            height: coverMenuVisible ? 60 : 0,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 20,
+          }}
+        >
+          {coverMenuVisible && (
+            <TouchableOpacity style={{ flexDirection: "row" }}>
+              <AvatarView
+                uri={require("../../assets/images/icons/tesla.jpg")}
+                size={40}
+              />
+              <View style={{ justifyContent: "center", marginLeft: 10 }}>
+                <Text style={{ color: "gray" }}>Customer</Text>
+                <Text style={{ fontWeight: "bold" }}>Tesla Motors Inc</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+    );
+  }
+
+  function profileSecondCover() {
+    const [rotateAnim] = useState(new Animated.Value(0));
+
+    const rotate = rotateAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "90deg"],
+    });
+
+    const toggleMenu = () => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      if (secondCoverMenuVisible) {
+        setSecondCoverMenuVisible(false);
+        Animated.timing(rotateAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        setSecondCoverMenuVisible(true);
+        Animated.timing(rotateAnim, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
+      }
+    };
+
+    return (
+      <View>
+        <View style={styles.profileSecondCoverTitleContainer}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Ionicons name="home-outline" size={20} color="black" />
+            <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
+            <Text style={styles.profileSecondCoverRoute}>User pages</Text>
+            <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
+            <Text style={styles.profileSecondCoverRoute}>Profile cover</Text>
+          </View>
+          <TouchableOpacity
+            onPress={toggleMenu}
+            style={styles.profileCoverDropdown}
+          >
+            <Animated.View style={{ transform: [{ rotate }] }}>
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={18}
+                color="#1f2937"
+              />
+            </Animated.View>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            height: secondCoverMenuVisible ? 75 : 0,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 20,
+          }}
+        >
+          {secondCoverMenuVisible && (
+            <View>
+              <TouchableOpacity style={styles.secondCoverMenuItem}>
+                <View style={{ width: 30 }}>
+                  <Feather name="life-buoy" size={20} color="black" />
+                </View>
+                <Text>Support</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.secondCoverMenuItem, { marginBottom: 10 }]}
+              >
+                <View style={{ width: 30 }}>
+                  <AntDesign name="setting" size={20} color="black" />
+                </View>
+                <Text>Settings</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     );
@@ -400,6 +538,11 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
 
   function actionBar() {
     const [rotateAnim] = useState(new Animated.Value(0));
+
+    const rotate = rotateAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "90deg"],
+    });
 
     const toggleMenu = () => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -419,11 +562,6 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         }).start();
       }
     };
-
-    const rotate = rotateAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: ["0deg", "90deg"],
-    });
 
     return (
       <View style={{ flex: 1 }}>
@@ -670,5 +808,44 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 5,
+  },
+  secondCoverMenuItem: {
+    flexDirection: "row",
+    paddingVertical: 8,
+    alignItems: "center",
+  },
+  profileCoverContainer: {
+    borderBottomColor: "#ddd",
+    borderBottomWidth: 1,
+  },
+  profileCoverTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    alignItems: "center",
+  },
+  profileCoverDropdown: {
+    padding: 5,
+    borderRadius: 30,
+    backgroundColor: "#ddd",
+    alignItems: "center",
+  },
+  profileSecondCoverTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  profileSecondCoverRouteDevider: {
+    marginLeft: 5,
+    fontSize: 18,
+    color: "#1f2937",
+  },
+  profileSecondCoverRoute: {
+    marginLeft: 5,
+    fontSize: 14,
+    color: "#1f2937",
   },
 });

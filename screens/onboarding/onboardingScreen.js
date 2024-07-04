@@ -96,17 +96,20 @@ const OnboardingScreen = ({ navigation }) => {
   function skipNextAndLoginAithIndicator() {
     return (
       <View style={styles.skipNextLoginWrapStyle}>
-        <Text
+        <TouchableOpacity
           onPress={() => {
             currentScreen !== 2 ? navigation.push("Login") : null;
           }}
-          style={{
-            ...Fonts.grayColor16Medium,
-            color: currentScreen == 2 ? "transparent" : Colors.grayColor,
-          }}
         >
-          Skip
-        </Text>
+          <Text
+            style={{
+              ...Fonts.grayColor16Medium,
+              color: currentScreen == 2 ? "transparent" : Colors.grayColor,
+            }}
+          >
+            Skip
+          </Text>
+        </TouchableOpacity>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           {onboardingScreenList.map((item, index) => (
             <View

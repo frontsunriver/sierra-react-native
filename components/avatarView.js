@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
 
-const AvatarView = ({ uri, size = 50, online = false }) => {
+const AvatarView = ({ uri, size = 50, status = false }) => {
   return (
     <View style={[styles.container, { width: size, height: size }]}>
       <Image
@@ -11,19 +11,13 @@ const AvatarView = ({ uri, size = 50, online = false }) => {
           { width: size, height: size, borderRadius: size / 2 },
         ]}
       />
-      {online ? (
+      {status && (
         <View
           style={[
             styles.statusIndicator,
-            styles.online,
-            { width: size / 4, height: size / 4, borderRadius: size / 8 },
-          ]}
-        />
-      ) : (
-        <View
-          style={[
-            styles.statusIndicator,
-            styles.offline,
+            status == "online" && styles.online,
+            status == "offline" && styles.offline,
+            status == "busy" && styles.busy,
             { width: size / 4, height: size / 4, borderRadius: size / 8 },
           ]}
         />
@@ -47,6 +41,7 @@ const styles = StyleSheet.create({
     right: 3,
     borderWidth: 2,
     borderColor: "#ffffff",
+    opacity: 1,
   },
   online: {
     backgroundColor: "#4caf50", // Green color for online status

@@ -43,7 +43,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
       sender: {
         profilePhoto: require("../assets/images/avatars/1.jpg"),
         fullName: "Luis Daniel",
-        isOnline: false,
+        status: "offline",
       },
       lastMessage:
         "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
@@ -55,7 +55,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
       sender: {
         profilePhoto: require("../assets/images/avatars/1.jpg"),
         fullName: "James walter",
-        isOnline: true,
+        status: "online",
       },
       lastMessage:
         "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
@@ -67,7 +67,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
       sender: {
         profilePhoto: require("../assets/images/avatars/1.jpg"),
         fullName: "Olagviel Gabriel",
-        isOnline: false,
+        status: "busy",
       },
       lastMessage:
         "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
@@ -162,7 +162,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
           <AvatarView
             uri={item.sender.profilePhoto}
             size={50}
-            online={item.sender.isOnline}
+            status={item.sender.status}
           />
           <View style={{ marginLeft: 10, flex: 1 }}>
             <Text style={{ fontWeight: "bold" }}>{item.sender.fullName}</Text>
@@ -236,15 +236,19 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
               </TouchableOpacity>
             </View>
             <View style={styles.panelFooterContainer}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <TouchableOpacity
+                style={{ flexDirection: "row", alignItems: "center" }}
+              >
                 <MaterialCommunityIcons
                   name="check-all"
                   size={24}
                   color="gray"
                 />
                 <Text style={{ marginLeft: 10 }}>Dismiss all</Text>
-              </View>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ flexDirection: "row", alignItems: "center" }}
+              >
                 <Text>View all</Text>
                 <Ionicons
                   name="arrow-forward-circle-outline"
@@ -252,7 +256,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   color="gray"
                   style={{ marginLeft: 10 }}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
           </>
         )}
@@ -357,7 +361,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
             <AvatarView
               uri={require("../assets/images/avatars/1.jpg")}
               size={50}
-              online={true}
+              status={"online"}
             />
           </TouchableOpacity>
         </View>
