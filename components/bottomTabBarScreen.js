@@ -1,8 +1,19 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback, useState } from "react";
-import { BackHandler, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  BackHandler,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Colors, Fonts, Sizes } from "../constants/styles";
 import ChatScreen from "../screens/chat/chatScreen";
 import HomeScreen from "../screens/home/homeScreen";
@@ -12,7 +23,15 @@ import MyStatusBar from "./myStatusBar";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabBarScreen = ({ navigation, setShouldClosePanel }) => {
+const BottomTabBarScreen = ({
+  navigation,
+  setShouldClosePanel,
+  openRightDrawer,
+}) => {
+  const defaultScreenProps = {
+    setShouldClosePanel,
+  };
+
   const backAction = () => {
     if (Platform.OS === "ios") {
       navigation.addListener("beforeRemove", (e) => {
@@ -73,9 +92,7 @@ const BottomTabBarScreen = ({ navigation, setShouldClosePanel }) => {
             ),
           }}
         >
-          {(props) => (
-            <HomeScreen {...props} setShouldClosePanel={setShouldClosePanel} />
-          )}
+          {(props) => <HomeScreen {...props} {...defaultScreenProps} />}
         </Tab.Screen>
         <Tab.Screen
           name="Saved"
@@ -85,9 +102,7 @@ const BottomTabBarScreen = ({ navigation, setShouldClosePanel }) => {
             ),
           }}
         >
-          {(props) => (
-            <SavedScreen {...props} setShouldClosePanel={setShouldClosePanel} />
-          )}
+          {(props) => <SavedScreen {...props} {...defaultScreenProps} />}
         </Tab.Screen>
         <Tab.Screen
           name="Chat"
@@ -97,9 +112,7 @@ const BottomTabBarScreen = ({ navigation, setShouldClosePanel }) => {
             ),
           }}
         >
-          {(props) => (
-            <ChatScreen {...props} setShouldClosePanel={setShouldClosePanel} />
-          )}
+          {(props) => <ChatScreen {...props} {...defaultScreenProps} />}
         </Tab.Screen>
         <Tab.Screen
           name="Profile"
@@ -109,17 +122,25 @@ const BottomTabBarScreen = ({ navigation, setShouldClosePanel }) => {
             ),
           }}
         >
-          {(props) => (
-            <ProfileScreen
-              {...props}
-              setShouldClosePanel={setShouldClosePanel}
-            />
-          )}
+          {(props) => <ProfileScreen {...props} {...defaultScreenProps} />}
         </Tab.Screen>
       </Tab.Navigator>
+      {setting()}
       {exitInfo()}
     </View>
   );
+
+  function setting() {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.setting}
+        onPress={openRightDrawer}
+      >
+        <AntDesign name="setting" size={24} color="white" />
+      </TouchableOpacity>
+    );
+  }
 
   function exitInfo() {
     return backClickCount == 1 ? (
@@ -145,5 +166,16 @@ const styles = StyleSheet.create({
     paddingVertical: Sizes.fixPadding,
     justifyContent: "center",
     alignItems: "center",
+  },
+  setting: {
+    position: "absolute",
+    top: "50%",
+    marginTop: -80,
+    right: 0,
+    padding: 8,
+    backgroundColor: "#0c83ff",
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    zIndex: 999,
   },
 });

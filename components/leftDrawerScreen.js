@@ -1,17 +1,22 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { useState } from "react";
+import React, { useState } from "react";
 import ProfileScreen from "../screens/profile/profileScreen";
 import BottomTabBarScreen from "./bottomTabBarScreen";
 import CustomHeader from "./customHeader";
 
-const Drawer = createDrawerNavigator();
+const LeftDrawer = createDrawerNavigator();
 
-const DrawerScreen = () => {
+const LeftDrawerScreen = ({ rightDrawerContext }) => {
+  const { openRightDrawer } = React.useContext(rightDrawerContext);
+
   const [shouldClosePanel, setShouldClosePanel] = useState(false);
 
   return (
-    <Drawer.Navigator initialRouteName="BottomTabs">
-      <Drawer.Screen
+    <LeftDrawer.Navigator
+      initialRouteName="BottomTabs"
+      screenOptions={{ drawerPosition: "left" }}
+    >
+      <LeftDrawer.Screen
         name="BottomTabs"
         options={{
           title: "Home",
@@ -29,12 +34,13 @@ const DrawerScreen = () => {
           <BottomTabBarScreen
             {...props}
             setShouldClosePanel={setShouldClosePanel}
+            openRightDrawer={openRightDrawer}
           />
         )}
-      </Drawer.Screen>
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
-    </Drawer.Navigator>
+      </LeftDrawer.Screen>
+      <LeftDrawer.Screen name="Profile" component={ProfileScreen} />
+    </LeftDrawer.Navigator>
   );
 };
 
-export default DrawerScreen;
+export default LeftDrawerScreen;

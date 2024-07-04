@@ -7,7 +7,6 @@ import { useFonts } from "expo-font";
 import * as ExpoSplashScreen from "expo-splash-screen";
 import React, { useCallback } from "react";
 import { LogBox } from "react-native";
-import DrawerScreen from "./components/drawerScreen";
 import AddSkillsScreen from "./screens/addSkills/addSkillsScreen";
 import AllJobsScreen from "./screens/allJobs/allJobsScreen";
 import AppliedJobsScreen from "./screens/appliedJobs/appliedJobsScreen";
@@ -30,6 +29,7 @@ import SplashScreen from "./screens/splashScreen";
 import TermsAndConditionScreen from "./screens/termsAndCondition/termsAndConditionScreen";
 import UploadSuccessScreen from "./screens/uploadSuccess/uploadSuccessScreen";
 
+import RightDrawerScreen from "./components/rightDrawerScreen";
 import "./styles.css";
 
 ExpoSplashScreen.preventAutoHideAsync();
@@ -72,7 +72,7 @@ function MyApp() {
           <Stack.Screen name="Verification" component={VerificationScreen} />
           <Stack.Screen
             name="AppRoot"
-            component={DrawerScreen}
+            component={RightDrawerScreen}
             options={{ ...TransitionPresets.DefaultTransition }}
           />
           <Stack.Screen name="Search" component={SearchScreen} />

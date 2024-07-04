@@ -136,8 +136,6 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
 
   const [actionMenuVisible, setActionMenuVisible] = useState(false);
 
-  const toggleDrawer = () => {};
-
   const handleTouchStart = () => {
     setShouldClosePanel(true);
   };
@@ -160,13 +158,6 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             {jobsAccordingSelection()}
           </ScrollView>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.setting}
-          onPress={toggleDrawer}
-        >
-          <AntDesign name="setting" size={24} color="white" />
-        </TouchableOpacity>
         {snackBarInfo()}
       </View>
     </SafeAreaView>

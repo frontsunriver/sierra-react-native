@@ -298,25 +298,12 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 }}
               >
                 <View style={{ flex: 1 }}></View>
-                <View
-                  style={{
-                    paddingVertical: 5,
-                    paddingHorizontal: 10,
-                    borderRadius: 30,
-                    backgroundColor: "#0c83ff",
-                  }}
-                >
+                <View style={styles.messageBadge}>
                   <Text style={{ color: "white" }}>26</Text>
                 </View>
               </View>
             </TouchableOpacity>
-            <View
-              style={{
-                height: 1,
-                backgroundColor: "#ddd",
-                marginVertical: 10,
-              }}
-            ></View>
+            <View style={styles.panelProfileMenuDevider}></View>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
                 <AntDesign name="setting" size={26} color="black" />
@@ -499,6 +486,17 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: "center",
     paddingHorizontal: 30,
+  },
+  panelProfileMenuDevider: {
+    height: 1,
+    backgroundColor: "#ddd",
+    marginVertical: 10,
+  },
+  messageBadge: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 30,
+    backgroundColor: "#0c83ff",
   },
 });
 
