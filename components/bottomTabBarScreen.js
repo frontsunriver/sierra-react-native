@@ -12,7 +12,7 @@ import MyStatusBar from "./myStatusBar";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabBarScreen = ({ navigation }) => {
+const BottomTabBarScreen = ({ navigation, setShouldClosePanel }) => {
   const backAction = () => {
     if (Platform.OS === "ios") {
       navigation.addListener("beforeRemove", (e) => {
@@ -63,7 +63,6 @@ const BottomTabBarScreen = ({ navigation }) => {
       >
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
           options={{
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons
@@ -73,34 +72,50 @@ const BottomTabBarScreen = ({ navigation }) => {
               />
             ),
           }}
-        />
+        >
+          {(props) => (
+            <HomeScreen {...props} setShouldClosePanel={setShouldClosePanel} />
+          )}
+        </Tab.Screen>
         <Tab.Screen
           name="Saved"
-          component={SavedScreen}
           options={{
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="bookmark" size={24} color={color} />
             ),
           }}
-        />
+        >
+          {(props) => (
+            <SavedScreen {...props} setShouldClosePanel={setShouldClosePanel} />
+          )}
+        </Tab.Screen>
         <Tab.Screen
           name="Chat"
-          component={ChatScreen}
           options={{
             tabBarIcon: ({ color }) => (
               <Ionicons name="chatbubble-ellipses" size={22} color={color} />
             ),
           }}
-        />
+        >
+          {(props) => (
+            <ChatScreen {...props} setShouldClosePanel={setShouldClosePanel} />
+          )}
+        </Tab.Screen>
         <Tab.Screen
           name="Profile"
-          component={ProfileScreen}
           options={{
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="account" size={24} color={color} />
             ),
           }}
-        />
+        >
+          {(props) => (
+            <ProfileScreen
+              {...props}
+              setShouldClosePanel={setShouldClosePanel}
+            />
+          )}
+        </Tab.Screen>
       </Tab.Navigator>
       {exitInfo()}
     </View>

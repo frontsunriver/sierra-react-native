@@ -128,44 +128,31 @@ const jobList = [
   },
 ];
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, setShouldClosePanel }) => {
   const [selectedJobTypeIndex, setselectedJobTypeIndex] = useState(0);
   const [jobData, setjobData] = useState(jobList);
   const [showSnackBar, setshowSnackBar] = useState(false);
   const [snackBarMsg, setsnackBarMsg] = useState("");
 
   const [actionMenuVisible, setActionMenuVisible] = useState(false);
-  const [rotateAnim] = useState(new Animated.Value(0));
 
-  const toggleMenu = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    if (actionMenuVisible) {
-      setActionMenuVisible(false);
-      Animated.timing(rotateAnim, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      setActionMenuVisible(true);
-      Animated.timing(rotateAnim, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-      }).start();
-    }
+  const toggleDrawer = () => {};
+
+  const handleTouchStart = () => {
+    setShouldClosePanel(true);
   };
 
-  const rotate = rotateAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "90deg"],
-  });
-
   return (
-    <SafeAreaView style={{ flex: 1, zIndex: 10 }}>
+    <SafeAreaView
+      style={{ flex: 1, zIndex: 10 }}
+      onStartShouldSetResponder={() => true}
+      onMoveShouldSetResponder={() => true}
+      onResponderStart={handleTouchStart}
+    >
       <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
         <View style={{ flex: 1 }}>
           <ScrollView showsVerticalScrollIndicator={false}>
+            {profileCover()}
             {profileBanner()}
             {actionBar()}
             {jobRecommendationTitle()}
@@ -173,7 +160,11 @@ const HomeScreen = ({ navigation }) => {
             {jobsAccordingSelection()}
           </ScrollView>
         </View>
-        <TouchableOpacity activeOpacity={0.7} style={styles.setting}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.setting}
+          onPress={toggleDrawer}
+        >
           <AntDesign name="setting" size={24} color="white" />
         </TouchableOpacity>
         {snackBarInfo()}
@@ -341,7 +332,7 @@ const HomeScreen = ({ navigation }) => {
         source={require("../../assets/images/users/profile_banner.jpg")}
         style={{
           width: screenWidth,
-          height: screenWidth - 80,
+          height: screenWidth - 60,
           marginBottom: Sizes.fixPadding,
         }}
         resizeMode="cover"
@@ -375,11 +366,74 @@ const HomeScreen = ({ navigation }) => {
             UX/UI designer
           </Text>
         </View>
+        <View style={styles.profileBannerActionContainer}>
+          <TouchableOpacity
+            style={styles.profileBannerAction}
+            activeOpacity={0.7}
+          >
+            <FontAwesome name="photo" size={20} color="black" />
+            <Text style={{ marginLeft: 10 }}>Cover image</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={[styles.profileBannerAction, { marginLeft: 20 }]}
+          >
+            <FontAwesome name="photo" size={20} color="black" />
+            <Text style={{ marginLeft: 10 }}>Statistics</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     );
   }
 
+  function profileCover() {
+    return (
+      <View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 20,
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+              User Pages -{" "}
+            </Text>
+            <Text style={{ fontSize: 20, color: "gray" }}>Profile Cover</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   function actionBar() {
+    const [rotateAnim] = useState(new Animated.Value(0));
+
+    const toggleMenu = () => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      if (actionMenuVisible) {
+        setActionMenuVisible(false);
+        Animated.timing(rotateAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        setActionMenuVisible(true);
+        Animated.timing(rotateAnim, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
+      }
+    };
+
+    const rotate = rotateAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "90deg"],
+    });
+
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.actionBar}>
@@ -562,7 +616,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5, // Shadow radius for iOS
     elevation: 5, // Elevation for Android
     position: "absolute",
-    top: (screenWidth - 80 - 120) / 2,
+    top: (screenWidth - 60 - 120) / 2,
     left: (screenWidth - 120) / 2,
   },
   avatar: {
@@ -572,9 +626,28 @@ const styles = StyleSheet.create({
   },
   role: {
     position: "absolute",
-    top: (screenWidth - 80) / 2 + 90,
+    top: (screenWidth - 60) / 2 + 90,
     width: "100%",
     alignItems: "center",
+  },
+  profileBannerActionContainer: {
+    position: "absolute",
+    top: (screenWidth - 60) / 2 + 90 + 70,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  profileBannerAction: {
+    shadowColor: "#000", // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowOpacity: 0.8, // Shadow opacity for iOS
+    shadowRadius: 5, // Shadow radius for iOS
+    elevation: 5, // Elevation for Android
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 8,
   },
   setting: {
     position: "absolute",
@@ -585,6 +658,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0c83ff",
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
+    zIndex: 999,
   },
   actionBar: {
     flex: 1,

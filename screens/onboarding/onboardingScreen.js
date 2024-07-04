@@ -46,7 +46,6 @@ const OnboardingScreen = ({ navigation }) => {
   const scrollToIndex = ({ index }) => {
     listRef.current.scrollToIndex({ animated: true, index: index });
     setCurrentScreen(index);
-    console.log("work");
   };
 
   const backAction = () => {

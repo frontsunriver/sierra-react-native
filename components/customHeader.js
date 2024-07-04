@@ -1,11 +1,13 @@
 import {
   AntDesign,
   Feather,
+  FontAwesome,
   Ionicons,
+  MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   LayoutAnimation,
@@ -17,6 +19,7 @@ import {
   UIManager,
   View,
 } from "react-native";
+import PaginationDot from "react-native-animated-pagination-dot";
 import { Colors, Fonts, Sizes, screenWidth } from "../constants/styles";
 import AvatarView from "./avatarView";
 
@@ -27,10 +30,13 @@ if (Platform.OS === "android") {
   }
 }
 
-const CustomHeader = ({ title }) => {
+const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
   const navigation = useNavigation();
 
   const [visibleSearchBar, setVisibleSearchBar] = useState(false);
+  const [visibleDropdown, setVisibleDropdown] = useState(false);
+  const [showMessagePan, setShowMessagePan] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -68,23 +74,44 @@ const CustomHeader = ({ title }) => {
       time: "10:00",
       read: true,
     },
-    {
-      id: 4,
-      sender: {
-        profilePhoto: require("../assets/images/avatars/1.jpg"),
-        fullName: "Branislav Karan",
-        isOnline: true,
-      },
-      lastMessage:
-        "For the profile pic icon, I need the dropdown. For placement as per below and leave the same text and icons you see in the dropdown",
-      time: "15:20",
-      read: false,
-    },
   ]);
+  const [currentMsgPage, setCurrentMsgPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+
+  useEffect(() => {
+    if (shouldClosePanel) {
+      if (visibleDropdown) {
+        setVisibleDropdown(false);
+      }
+      setShouldClosePanel(false);
+    }
+  }, [shouldClosePanel]);
 
   const toggleSearchBar = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setVisibleSearchBar(!visibleSearchBar);
+  };
+
+  const toggleMessagePanel = () => {
+    if (visibleDropdown && showProfileMenu) {
+      setShowProfileMenu(false);
+      setShowMessagePan(true);
+    } else {
+      setVisibleDropdown(!visibleDropdown);
+      setShowProfileMenu(false);
+      setShowMessagePan(true);
+    }
+  };
+
+  const toggleProfileMenu = () => {
+    if (visibleDropdown && showMessagePan) {
+      setShowProfileMenu(true);
+      setShowMessagePan(false);
+    } else {
+      setVisibleDropdown(!visibleDropdown);
+      setShowProfileMenu(true);
+      setShowMessagePan(false);
+    }
   };
 
   const BadgeView = ({ count }) => {
@@ -126,11 +153,11 @@ const CustomHeader = ({ title }) => {
     );
   }
 
-  function messagePan() {
+  function dropdownPanel() {
     function renderItem({ item }) {
       return (
         <TouchableOpacity
-          style={{ flex: 1, flexDirection: "row", marginBottom: 15 }}
+          style={{ flex: 1, flexDirection: "row", marginVertical: 7 }}
         >
           <AvatarView
             uri={item.sender.profilePhoto}
@@ -139,7 +166,10 @@ const CustomHeader = ({ title }) => {
           />
           <View style={{ marginLeft: 10, flex: 1 }}>
             <Text style={{ fontWeight: "bold" }}>{item.sender.fullName}</Text>
-            <Text numberOfLines={2} style={{ lineHeight: 20, marginTop: 5 }}>
+            <Text
+              numberOfLines={2}
+              style={{ lineHeight: 20, marginTop: 5, color: "#888e95" }}
+            >
               {item.lastMessage}
             </Text>
           </View>
@@ -149,35 +179,158 @@ const CustomHeader = ({ title }) => {
     }
 
     return (
-      <View style={styles.panelContainer}>
-        <View style={styles.panelTitleContainer}>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Messages</Text>
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity>
-              <MaterialIcons name="filter-list" size={24} />
+      <View
+        style={[
+          styles.panelContainer,
+          showMessagePan && styles.panelMessage,
+          showProfileMenu && styles.panelProfileMenu,
+        ]}
+        pointerEvents="box-none"
+      >
+        {showMessagePan && (
+          <>
+            <View style={styles.panelTitleContainer}>
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Messages</Text>
+              <View style={{ flexDirection: "row" }}>
+                <TouchableOpacity>
+                  <Ionicons name="add-circle-outline" size={24} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 10 }}>
+                  <AntDesign name="search1" size={23} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <FlatList
+              keyExtractor={(item) => `${item.id}`}
+              renderItem={renderItem}
+              data={messages}
+              showsVerticalScrollIndicator={false}
+              style={styles.panelContentContainer}
+            />
+            <View style={styles.panelPaginationContainer}>
+              <TouchableOpacity
+                disabled={currentMsgPage == 0}
+                onPress={() => setCurrentMsgPage(currentMsgPage - 1)}
+              >
+                <MaterialIcons
+                  name="arrow-back-ios"
+                  size={20}
+                  color={currentMsgPage == 0 ? "#ddd" : "#252b36"}
+                />
+              </TouchableOpacity>
+              <PaginationDot
+                activeDotColor={"green"}
+                curPage={currentMsgPage}
+                maxPage={pageSize}
+              />
+              <TouchableOpacity
+                style={{ marginLeft: 10 }}
+                disabled={currentMsgPage == pageSize - 1}
+                onPress={() => setCurrentMsgPage(currentMsgPage + 1)}
+              >
+                <MaterialIcons
+                  name="arrow-forward-ios"
+                  size={20}
+                  color={currentMsgPage == pageSize - 1 ? "#ddd" : "#252b36"}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.panelFooterContainer}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <MaterialCommunityIcons
+                  name="check-all"
+                  size={24}
+                  color="gray"
+                />
+                <Text style={{ marginLeft: 10 }}>Dismiss all</Text>
+              </View>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text>View all</Text>
+                <Ionicons
+                  name="arrow-forward-circle-outline"
+                  size={24}
+                  color="gray"
+                  style={{ marginLeft: 10 }}
+                />
+              </View>
+            </View>
+          </>
+        )}
+        {showProfileMenu && (
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity style={styles.panelProfileMenuItem}>
+              <View style={{ width: 30 }}>
+                <FontAwesome name="user-circle-o" size={26} color="black" />
+              </View>
+              <Text style={{ marginLeft: 10, color: "black" }}>My profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ marginLeft: 10 }}>
-              <AntDesign name="search1" size={23} />
+            <TouchableOpacity style={styles.panelProfileMenuItem}>
+              <View
+                style={{
+                  width: 30,
+                  paddingLeft: 5,
+                }}
+              >
+                <FontAwesome name="dollar" size={26} color="black" />
+              </View>
+              <Text style={{ marginLeft: 10 }}>My subscription</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.panelProfileMenuItem}>
+              <View style={{ width: 30 }}>
+                <AntDesign name="shoppingcart" size={26} color="black" />
+              </View>
+              <Text style={{ marginLeft: 10 }}>My orders</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.panelProfileMenuItem}>
+              <View style={{ width: 30 }}>
+                <MaterialCommunityIcons
+                  name="email-open-outline"
+                  size={26}
+                  color="black"
+                />
+              </View>
+              <Text style={{ marginLeft: 10 }}>My inbox</Text>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "flex-end",
+                  flexDirection: "row",
+                }}
+              >
+                <View style={{ flex: 1 }}></View>
+                <View
+                  style={{
+                    paddingVertical: 5,
+                    paddingHorizontal: 10,
+                    borderRadius: 30,
+                    backgroundColor: "#0c83ff",
+                  }}
+                >
+                  <Text style={{ color: "white" }}>26</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+            <View
+              style={{
+                height: 1,
+                backgroundColor: "#ddd",
+                marginVertical: 10,
+              }}
+            ></View>
+            <TouchableOpacity style={styles.panelProfileMenuItem}>
+              <View style={{ width: 30 }}>
+                <AntDesign name="setting" size={26} color="black" />
+              </View>
+              <Text style={{ marginLeft: 10 }}>Account settings</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.panelProfileMenuItem}>
+              <View style={{ width: 30 }}>
+                <MaterialIcons name="logout" size={26} color="black" />
+              </View>
+              <Text style={{ marginLeft: 10 }}>Logout</Text>
             </TouchableOpacity>
           </View>
-        </View>
-        <FlatList
-          keyExtractor={(item) => `${item.id}`}
-          renderItem={renderItem}
-          data={messages}
-          showsVerticalScrollIndicator={true}
-          style={styles.panelContentContainer}
-        />
-        <View
-          style={{
-            position: "absolute",
-            backgroundColor: "gray",
-            bottom: 0,
-            left: 0,
-            width: screenWidth - 50,
-            height: 60,
-          }}
-        ></View>
+        )}
       </View>
     );
   }
@@ -202,11 +355,18 @@ const CustomHeader = ({ title }) => {
           <TouchableOpacity style={styles.headerIcon} onPress={toggleSearchBar}>
             <AntDesign name="search1" size={24} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.headerIcon}>
+          <TouchableOpacity
+            style={styles.headerIcon}
+            onPress={toggleMessagePanel}
+          >
             <Feather name="message-square" size={24} color="white" />
             <BadgeView count={5} />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.8} style={styles.headerAvatar}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.headerAvatar}
+            onPress={toggleProfileMenu}
+          >
             <AvatarView
               uri={require("../assets/images/avatars/1.jpg")}
               size={50}
@@ -216,7 +376,7 @@ const CustomHeader = ({ title }) => {
         </View>
       </View>
       {searchField()}
-      {messagePan()}
+      {visibleDropdown && dropdownPanel()}
     </View>
   );
 };
@@ -278,21 +438,28 @@ const styles = StyleSheet.create({
   },
   panelContainer: {
     position: "absolute",
-    bottom: -350,
     left: 25,
     width: screenWidth - 50,
-    height: 350,
     backgroundColor: "white",
-    zIndex: 1000,
+    zIndex: 10,
     borderRadius: 10,
     shadowColor: "#000", // Shadow color for iOS
     shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
     shadowOpacity: 0.8, // Shadow opacity for iOS
     shadowRadius: 5, // Shadow radius for iOS
     elevation: 5, // Elevation for Android,
+    overflow: "hidden",
+  },
+  panelMessage: {
+    bottom: -402,
+    height: 400,
     paddingVertical: 15,
     paddingHorizontal: 20,
-    overflow: "hidden",
+  },
+  panelProfileMenu: {
+    bottom: -327,
+    height: 325,
+    paddingVertical: 15,
   },
   panelTitleContainer: {
     flexDirection: "row",
@@ -300,6 +467,38 @@ const styles = StyleSheet.create({
   },
   panelContentContainer: {
     marginTop: 20,
+    marginBottom: 50,
+  },
+  panelPaginationContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    backgroundColor: "white",
+    bottom: 50,
+    left: 0,
+    width: screenWidth - 50,
+    paddingVertical: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  panelFooterContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: screenWidth - 50,
+    height: 50,
+    backgroundColor: "white",
+    borderTopWidth: 1,
+    borderTopColor: "#ddd",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+  },
+  panelProfileMenuItem: {
+    flexDirection: "row",
+    paddingVertical: 10,
+    alignItems: "center",
+    paddingHorizontal: 30,
   },
 });
 

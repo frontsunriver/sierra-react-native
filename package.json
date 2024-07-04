@@ -40,6 +40,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.2",
+    "react-native-animated-pagination-dot": "^0.4.0",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-otp-entry": "^1.7.0",
     "react-native-paper": "^5.12.3",
