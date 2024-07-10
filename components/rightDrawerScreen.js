@@ -3,6 +3,7 @@ import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Colors, fontFamily } from "../constants/styles";
 import LeftDrawerScreen from "./leftDrawerScreen";
 
 const RightDrawerContext = React.createContext();
@@ -24,7 +25,7 @@ const RightDrawerScreen = () => {
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Demo configuration</Text>
           <TouchableOpacity onPress={() => setRightDrawerOpen(false)}>
-            <EvilIcons name="close" size={24} color="black" />
+            <EvilIcons name="close" size={24} color={Colors.bodyColor} />
           </TouchableOpacity>
         </View>
       </View>
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily: fontFamily.Bold,
+    color: Colors.bodyColor,
   },
 });

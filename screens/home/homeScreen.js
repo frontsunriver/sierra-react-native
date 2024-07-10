@@ -136,6 +136,9 @@ const jobList = [
   },
 ];
 
+const bannerImageSize = screenWidth < 480 ? 430 : 450;
+const bannerProfileImageSize = screenWidth < 480 ? 100 : 120;
+
 const HomeScreen = ({ navigation, setShouldClosePanel }) => {
   const [selectedJobTypeIndex, setselectedJobTypeIndex] = useState(0);
   const [jobData, setjobData] = useState(jobList);
@@ -333,7 +336,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         source={require("../../assets/images/users/profile_banner.jpg")}
         style={{
           width: screenWidth,
-          height: 380,
+          height: bannerImageSize,
           marginBottom: Sizes.fixPadding,
         }}
         resizeMode="cover"
@@ -382,6 +385,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                 marginLeft: 10,
                 fontSize: 14,
                 fontFamily: fontFamily.Medium,
+                opacity: 0.9,
               }}
             >
               Cover image
@@ -401,6 +405,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                 marginLeft: 10,
                 fontSize: 14,
                 fontFamily: fontFamily.Medium,
+                opacity: 0.9,
               }}
             >
               Statistics
@@ -467,6 +472,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                 name="arrow-forward-ios"
                 size={15}
                 color={Colors.bodyColor}
+                style={{ opacity: 0.7 }}
               />
             </Animated.View>
           </Pressable>
@@ -549,7 +555,11 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             <Text
               style={[
                 styles.profileSecondCoverRoute,
-                { color: Colors.bodyColor, fontFamily: fontFamily.Medium },
+                {
+                  color: Colors.bodyColor,
+                  fontFamily: fontFamily.Medium,
+                  opacity: 0.85,
+                },
               ]}
             >
               User pages
@@ -563,6 +573,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                 name="arrow-forward-ios"
                 size={15}
                 color={Colors.bodyColor}
+                style={{ opacity: 0.7 }}
               />
             </Animated.View>
           </Pressable>
@@ -827,9 +838,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   outerRing: {
-    width: 135, // Adjust size as needed
-    height: 135,
-    borderRadius: 70, // Half of the width/height to make it circular
+    width: bannerProfileImageSize + 15, // Adjust size as needed
+    height: bannerProfileImageSize + 15,
+    borderRadius: (bannerProfileImageSize + 15) / 2, // Half of the width/height to make it circular
     backgroundColor: "#f1f4f9", // Color of the ring
     justifyContent: "center",
     alignItems: "center",
@@ -839,27 +850,29 @@ const styles = StyleSheet.create({
     shadowRadius: 5, // Shadow radius for iOS
     elevation: 5, // Elevation for Android
     position: "absolute",
-    top: (screenWidth - 60 - 120) / 2,
-    left: (screenWidth - 120) / 2,
+    top: (bannerImageSize - bannerProfileImageSize) / 2,
+    left: (screenWidth - bannerProfileImageSize) / 2,
   },
   avatar: {
-    width: 120, // Adjust size as needed
-    height: 120,
-    borderRadius: 60, // Half of the width/height to make it circular
+    width: bannerProfileImageSize, // Adjust size as needed
+    height: bannerProfileImageSize,
+    borderRadius: bannerProfileImageSize / 2, // Half of the width/height to make it circular
   },
   role: {
     position: "absolute",
-    top: (screenWidth - 60) / 2 + 90,
+    top: bannerImageSize / 2 + bannerProfileImageSize / 2 + 30,
     width: "100%",
     alignItems: "center",
+    height: 60,
   },
   profileBannerActionContainer: {
     position: "absolute",
-    top: (screenWidth - 60) / 2 + 90 + 70,
+    top: bannerImageSize / 2 + bannerProfileImageSize / 2 + 30 + 75,
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    height: 40,
   },
   profileBannerAction: {
     shadowColor: "#000", // Shadow color for iOS
@@ -922,7 +935,7 @@ const styles = StyleSheet.create({
   profileCoverDropdown: {
     padding: 6,
     borderRadius: 30,
-    backgroundColor: "#ddd",
+    backgroundColor: "#f3f4f6",
     alignItems: "center",
   },
   profileSecondCoverTitleContainer: {
@@ -939,7 +952,7 @@ const styles = StyleSheet.create({
   },
   profileSecondCoverRoute: {
     marginLeft: 7,
-    color: "#5c6c83",
+    color: "#6b7280",
     fontSize: 14,
     fontFamily: fontFamily.Medium,
   },
