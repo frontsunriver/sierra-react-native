@@ -5,6 +5,7 @@ import { Drawer } from "react-native-drawer-layout";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors, fontFamily } from "../constants/styles";
 import LeftDrawerScreen from "./leftDrawerScreen";
+import MyStatusBar from "./myStatusBar";
 
 const RightDrawerContext = React.createContext();
 
@@ -22,10 +23,11 @@ const RightDrawerScreen = () => {
   function RightDrawerContent() {
     return (
       <View style={{ flex: 1 }}>
+        <MyStatusBar />
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Demo configuration</Text>
           <TouchableOpacity onPress={() => setRightDrawerOpen(false)}>
-            <EvilIcons name="close" size={24} color={Colors.bodyColor} />
+            <EvilIcons name="close" size={24} color={Colors.primaryColor} />
           </TouchableOpacity>
         </View>
       </View>
@@ -61,6 +63,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontFamily: fontFamily.Bold,
-    color: Colors.bodyColor,
+    color: Colors.primaryColor,
   },
 });

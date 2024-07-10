@@ -379,7 +379,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         </View>
         <View style={styles.profileBannerActionContainer}>
           <Pressable style={styles.profileBannerAction}>
-            <Ionicons name="image-outline" size={20} color={Colors.bodyColor} style={{ opacity: 0.9 }} />
+            <Ionicons name="image-outline" size={20} color={Colors.primaryColor} style={{ opacity: 0.9 }} />
             <Text
               style={{
                 marginLeft: 10,
@@ -397,7 +397,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             <MaterialCommunityIcons
               name="chart-line"
               size={20}
-              color={Colors.bodyColor}
+              color={Colors.primaryColor}
               style={{ opacity: 0.9 }}
             />
             <Text
@@ -448,7 +448,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text
               style={{
-                color: Colors.bodyColor,
+                color: Colors.primaryColor,
                 fontSize: 20,
                 fontFamily: fontFamily.SemiBold,
               }}
@@ -458,7 +458,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             <Text
               style={{
                 fontSize: 19,
-                color: Colors.bodyColor,
+                color: Colors.primaryColor,
                 fontFamily: fontFamily.Light,
               }}
             >
@@ -470,7 +470,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
               <MaterialIcons
                 name="arrow-forward-ios"
                 size={15}
-                color={Colors.bodyColor}
+                color={Colors.primaryColor}
                 style={{ opacity: 0.7 }}
               />
             </Animated.View>
@@ -493,7 +493,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
               <View style={{ justifyContent: "center", marginLeft: 10 }}>
                 <Text
                   style={{
-                    color: Colors.bodyColor,
+                    color: Colors.primaryColor,
                     opacity: 0.85,
                     fontSize: 12,
                     fontFamily: fontFamily.Light,
@@ -503,7 +503,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                 </Text>
                 <Text
                   style={{
-                    color: Colors.bodyColor,
+                    color: Colors.primaryColor,
                     fontSize: 12,
                     fontFamily: fontFamily.SemiBold,
                   }}
@@ -549,13 +549,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
       <View>
         <View style={styles.profileSecondCoverTitleContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name="home-outline" size={20} color={Colors.bodyColor} />
+            <Ionicons name="home-outline" size={20} color={Colors.primaryColor} />
             <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
             <Text
               style={[
                 styles.profileSecondCoverRoute,
                 {
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontFamily: fontFamily.Medium,
                   opacity: 0.85,
                 },
@@ -571,7 +571,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
               <MaterialIcons
                 name="arrow-forward-ios"
                 size={15}
-                color={Colors.bodyColor}
+                color={Colors.primaryColor}
                 style={{ opacity: 0.7 }}
               />
             </Animated.View>
@@ -592,13 +592,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                   <Feather
                     name="life-buoy"
                     size={20}
-                    color={Colors.bodyColor}
+                    color={Colors.primaryColor}
                     style={{ opacity: 0.85 }}
                   />
                 </View>
                 <Text
                   style={{
-                    color: Colors.bodyColor,
+                    color: Colors.primaryColor,
                     fontSize: 14,
                     fontFamily: fontFamily.Medium,
                     opacity: 0.85
@@ -614,13 +614,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                   <AntDesign
                     name="setting"
                     size={20}
-                    color={Colors.bodyColor}
+                    color={Colors.primaryColor}
                     style={{ opacity: 0.85 }}
                   />
                 </View>
                 <Text
                   style={{
-                    color: Colors.bodyColor,
+                    color: Colors.primaryColor,
                     fontSize: 14,
                     fontFamily: fontFamily.Medium,
                     opacity: 0.85
@@ -675,11 +675,11 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             <Ionicons
               name="calendar-number-outline"
               size={24}
-              color={Colors.bodyColor}
+              color={Colors.primaryColor}
             />
           </Pressable>
           <Pressable style={styles.actionIcon}>
-            <AntDesign name="setting" size={24} color={Colors.bodyColor} />
+            <AntDesign name="setting" size={24} color={Colors.primaryColor} />
           </Pressable>
           <View style={{ flex: 1 }}></View>
           <Pressable style={[styles.actionIcon, actionMenuVisible && styles.activeAction]} onPress={toggleMenu}>
@@ -687,7 +687,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
               <MaterialIcons
                 name="arrow-forward-ios"
                 size={20}
-                color={actionMenuVisible ? activeColor : Colors.bodyColor}
+                color={actionMenuVisible ? activeColor : Colors.primaryColor}
                 style={{ opacity: 0.7 }}
               />
             </Animated.View>
@@ -702,33 +702,33 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         >
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <FontAwesome5 name="sticky-note" size={24} color={Colors.bodyColor} />
+              <FontAwesome5 name="sticky-note" size={24} color={Colors.primaryColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
               Notes
             </Text>
           </Pressable>
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <SimpleLineIcons name="people" size={24} color={Colors.bodyColor} />
+              <SimpleLineIcons name="people" size={24} color={Colors.primaryColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
               Friends
             </Text>
           </Pressable>
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <FontAwesome name="photo" size={24} color={Colors.bodyColor} />
+              <FontAwesome name="photo" size={24} color={Colors.primaryColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
               Photos
             </Text>
           </Pressable>
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <AntDesign name="setting" size={24} color={Colors.bodyColor} />
+              <AntDesign name="setting" size={24} color={Colors.primaryColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
               More
             </Text>
           </Pressable>

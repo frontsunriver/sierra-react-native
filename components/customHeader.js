@@ -174,7 +174,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
             <Text
               style={{
                 fontFamily: fontFamily.SemiBold,
-                color: Colors.bodyColor,
+                color: Colors.primaryColor,
                 fontSize: 14,
               }}
             >
@@ -185,7 +185,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
               style={{
                 lineHeight: 20,
                 marginTop: 5,
-                color: Colors.bodyColor,
+                color: Colors.primaryColor,
                 opacity: 0.7,
                 fontFamily: fontFamily.Medium,
                 fontSize: 13,
@@ -197,7 +197,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
           <Text
             style={{
               fontFamily: fontFamily.Light,
-              color: Colors.bodyColor,
+              color: Colors.primaryColor,
               opacity: 0.8,
               fontSize: 13,
             }}
@@ -223,7 +223,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
               <Text
                 style={{
                   fontSize: 20,
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontFamily: fontFamily.SemiBold,
                 }}
               >
@@ -234,14 +234,14 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   <Ionicons
                     name="add-circle-outline"
                     size={24}
-                    color={Colors.bodyColor}
+                    color={Colors.primaryColor}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ marginLeft: 10 }}>
                   <AntDesign
                     name="search1"
                     size={23}
-                    color={Colors.bodyColor}
+                    color={Colors.primaryColor}
                   />
                 </TouchableOpacity>
               </View>
@@ -261,12 +261,12 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <MaterialIcons
                   name="arrow-back-ios"
                   size={20}
-                  color={currentMsgPage == 0 ? "#ddd" : Colors.bodyColor}
-                  style={{opacity:0.9}}
+                  color={currentMsgPage == 0 ? "#ddd" : Colors.primaryColor}
+                  style={{ opacity: 0.9 }}
                 />
               </TouchableOpacity>
               <PaginationDot
-                activeDotColor={"green"}
+                activeDotColor={Colors.primaryColor}
                 curPage={currentMsgPage}
                 maxPage={pageSize}
               />
@@ -279,9 +279,9 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   name="arrow-forward-ios"
                   size={20}
                   color={
-                    currentMsgPage == pageSize - 1 ? "#ddd" : Colors.bodyColor
+                    currentMsgPage == pageSize - 1 ? "#ddd" : Colors.primaryColor
                   }
-                  style={{opacity:0.9}}
+                  style={{ opacity: 0.9 }}
                 />
               </TouchableOpacity>
             </View>
@@ -292,13 +292,13 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <MaterialCommunityIcons
                   name="check-all"
                   size={24}
-                  color={Colors.bodyColor}
-                  style={{opacity:0.9}}
+                  color={Colors.primaryColor}
+                  style={{ opacity: 0.9 }}
                 />
                 <Text
                   style={{
                     marginLeft: 10,
-                    color: Colors.bodyColor,
+                    color: Colors.primaryColor,
                     fontFamily: fontFamily.Medium,
                   }}
                 >
@@ -310,7 +310,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
               >
                 <Text
                   style={{
-                    color: Colors.bodyColor,
+                    color: Colors.primaryColor,
                     fontFamily: fontFamily.Medium,
                   }}
                 >
@@ -319,8 +319,8 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <Ionicons
                   name="arrow-forward-circle-outline"
                   size={24}
-                  color={Colors.bodyColor}
-                  style={{ marginLeft: 10, opacity:0.9 }}
+                  color={Colors.primaryColor}
+                  style={{ marginLeft: 10, opacity: 0.9 }}
                 />
               </TouchableOpacity>
             </View>
@@ -333,14 +333,14 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <FontAwesome
                   name="user-circle-o"
                   size={26}
-                  color={Colors.bodyColor}
+                  color={Colors.primaryColor}
                 />
               </View>
               <Text
                 style={{
                   marginLeft: 10,
                   fontFamily: fontFamily.Medium,
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontSize: 15,
                 }}
               >
@@ -354,13 +354,13 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   paddingLeft: 5,
                 }}
               >
-                <FontAwesome name="dollar" size={26} color={Colors.bodyColor} />
+                <FontAwesome name="dollar" size={26} color={Colors.primaryColor} />
               </View>
               <Text
                 style={{
                   marginLeft: 10,
                   fontFamily: fontFamily.Medium,
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontSize: 15,
                 }}
               >
@@ -372,14 +372,14 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <AntDesign
                   name="shoppingcart"
                   size={26}
-                  color={Colors.bodyColor}
+                  color={Colors.primaryColor}
                 />
               </View>
               <Text
                 style={{
                   marginLeft: 10,
                   fontFamily: fontFamily.Medium,
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontSize: 15,
                 }}
               >
@@ -391,14 +391,14 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <MaterialCommunityIcons
                   name="email-open-outline"
                   size={26}
-                  color={Colors.bodyColor}
+                  color={Colors.primaryColor}
                 />
               </View>
               <Text
                 style={{
                   marginLeft: 10,
                   fontFamily: fontFamily.Medium,
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontSize: 15,
                 }}
               >
@@ -424,13 +424,13 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
             <View style={styles.panelProfileMenuDevider}></View>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
-                <AntDesign name="setting" size={26} color={Colors.bodyColor} />
+                <AntDesign name="setting" size={26} color={Colors.primaryColor} />
               </View>
               <Text
                 style={{
                   marginLeft: 10,
                   fontFamily: fontFamily.Medium,
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontSize: 15,
                 }}
               >
@@ -442,14 +442,14 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <MaterialIcons
                   name="logout"
                   size={26}
-                  color={Colors.bodyColor}
+                  color={Colors.primaryColor}
                 />
               </View>
               <Text
                 style={{
                   marginLeft: 10,
                   fontFamily: fontFamily.Medium,
-                  color: Colors.bodyColor,
+                  color: Colors.primaryColor,
                   fontSize: 15,
                 }}
               >
@@ -465,7 +465,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
   return (
     <View
       style={{
-        backgroundColor: "#252b36",
+        backgroundColor: Colors.primaryColor,
         paddingBottom: visibleSearchBar ? 10 : 0,
         position: "relative",
       }}
