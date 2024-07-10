@@ -14,13 +14,17 @@ export const Colors = {
   blueColor: "#0047FF",
   greenColor: "#009D23",
   skyColor: "#51bce7",
+  bodyColor: "#1f2937",
 };
 
-const fontFamily = {
-  Regular: "SF-Compact-Display-Regular",
-  Medium: "SF-Compact-Display-Medium",
-  SemiBold: "SF-Compact-Display-SemiBold",
-  Bold: "SF-Compact-Display-Bold",
+export const fontFamily = {
+  Regular: "Inter-Regular",
+  Thin: "Inter-Thin",
+  Light: "Inter-Light",
+  ExtraLight: "Inter-ExtraLight",
+  Medium: "Inter-Medium",
+  SemiBold: "Inter-SemiBold",
+  Bold: "Inter-Bold",
 };
 
 export const Fonts = {

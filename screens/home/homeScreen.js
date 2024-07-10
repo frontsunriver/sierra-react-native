@@ -4,6 +4,7 @@ import {
   FontAwesome,
   FontAwesome5,
   Ionicons,
+  MaterialCommunityIcons,
   MaterialIcons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
@@ -15,17 +16,23 @@ import {
   ImageBackground,
   LayoutAnimation,
   Platform,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   UIManager,
   View,
 } from "react-native";
 import { Snackbar } from "react-native-paper";
 import AvatarView from "../../components/avatarView";
-import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
+import {
+  Colors,
+  Fonts,
+  Sizes,
+  fontFamily,
+  screenWidth,
+} from "../../constants/styles";
 
 // Enable LayoutAnimation on Android
 if (Platform.OS === "android") {
@@ -144,15 +151,14 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, zIndex: 10 }}
-      onStartShouldSetResponder={() => true}
-      onMoveShouldSetResponder={() => true}
-      onResponderStart={handleTouchStart}
-    >
-      <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
-        <View style={{ flex: 1 }}>
-          <ScrollView showsVerticalScrollIndicator={false}>
+    <SafeAreaView style={{ flex: 1, zIndex: 10 }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Pressable
+          style={{ flex: 1, backgroundColor: Colors.whiteColor }}
+          onPress={handleTouchStart}
+          activeOpacity={1}
+        >
+          <View style={{ flex: 1 }}>
             {profileCover()}
             {profileSecondCover()}
             {profileBanner()}
@@ -160,10 +166,10 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             {jobRecommendationTitle()}
             {jobTypesInfo()}
             {jobsAccordingSelection()}
-          </ScrollView>
-        </View>
-        {snackBarInfo()}
-      </View>
+          </View>
+          {snackBarInfo()}
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 
@@ -198,7 +204,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
 
   function jobsAccordingSelection() {
     const renderItem = ({ item }) => (
-      <TouchableOpacity
+      <Pressable
         activeOpacity={0.7}
         onPress={() => {
           navigation.push("JobDetail");
@@ -233,7 +239,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             justifyContent: "space-between",
           }}
         >
-          <TouchableOpacity
+          <Pressable
             onPress={() => {
               updateJobData({ id: item.id });
             }}
@@ -244,13 +250,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
               color={Colors.primaryColor}
               size={24}
             />
-          </TouchableOpacity>
+          </Pressable>
           <Text style={{ ...Fonts.primaryColor16SemiBold }}>
             {`$`}
             {item.amountPerMonth}/Mo
           </Text>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
     return (
       <FlatList
@@ -264,7 +270,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
 
   function jobTypesInfo() {
     const renderItem = ({ item, index }) => (
-      <TouchableOpacity
+      <Pressable
         activeOpacity={0.7}
         onPress={() => setselectedJobTypeIndex(index)}
         style={{
@@ -284,7 +290,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         >
           {item}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     );
     return (
       <View>
@@ -342,9 +348,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
           <Text
             style={{
               textAlign: "center",
-              fontSize: 22,
+              fontSize: 24,
               color: "white",
-              fontWeight: 500,
+              fontWeight: 600,
+              fontFamily: fontFamily.SemiBold,
+              textShadowColor: "#00000080",
+              textShadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+              textShadowRadius: 5, // Shadow radius for iOS
             }}
           >
             Hanna Dorman
@@ -352,30 +362,50 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
           <Text
             style={{
               textAlign: "center",
-              fontSize: 16,
+              fontSize: 14,
               color: "white",
-              fontWeight: 300,
+              fontFamily: fontFamily.Medium,
               marginTop: 3,
+              textShadowColor: "#00000080",
+              textShadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+              textShadowRadius: 5, // Shadow radius for iOS
             }}
           >
             UX/UI designer
           </Text>
         </View>
         <View style={styles.profileBannerActionContainer}>
-          <TouchableOpacity
-            style={styles.profileBannerAction}
-            activeOpacity={0.7}
-          >
-            <FontAwesome name="photo" size={20} color="black" />
-            <Text style={{ marginLeft: 10 }}>Cover image</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          <Pressable style={styles.profileBannerAction}>
+            <FontAwesome name="photo" size={20} color={Colors.bodyColor} />
+            <Text
+              style={{
+                marginLeft: 10,
+                fontSize: 14,
+                fontFamily: fontFamily.Medium,
+              }}
+            >
+              Cover image
+            </Text>
+          </Pressable>
+          <Pressable
             activeOpacity={0.7}
             style={[styles.profileBannerAction, { marginLeft: 20 }]}
           >
-            <FontAwesome name="photo" size={20} color="black" />
-            <Text style={{ marginLeft: 10 }}>Statistics</Text>
-          </TouchableOpacity>
+            <MaterialCommunityIcons
+              name="chart-line"
+              size={20}
+              color={Colors.bodyColor}
+            />
+            <Text
+              style={{
+                marginLeft: 10,
+                fontSize: 14,
+                fontFamily: fontFamily.Medium,
+              }}
+            >
+              Statistics
+            </Text>
+          </Pressable>
         </View>
       </ImageBackground>
     );
@@ -395,14 +425,14 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         setCoverMenuVisible(false);
         Animated.timing(rotateAnim, {
           toValue: 0,
-          duration: 200,
+          duration: 150,
           useNativeDriver: true,
         }).start();
       } else {
         setCoverMenuVisible(true);
         Animated.timing(rotateAnim, {
           toValue: 1,
-          duration: 200,
+          duration: 150,
           useNativeDriver: true,
         }).start();
       }
@@ -412,23 +442,34 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
       <View style={styles.profileCoverContainer}>
         <View style={styles.profileCoverTitleContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+            <Text
+              style={{
+                color: Colors.bodyColor,
+                fontSize: 20,
+                fontFamily: fontFamily.Bold,
+              }}
+            >
               User Pages -{" "}
             </Text>
-            <Text style={{ fontSize: 20, color: "gray" }}>Profile Cover</Text>
+            <Text
+              style={{
+                fontSize: 20,
+                color: Colors.bodyColor,
+                fontFamily: fontFamily.Medium,
+              }}
+            >
+              Profile Cover
+            </Text>
           </View>
-          <TouchableOpacity
-            onPress={toggleMenu}
-            style={styles.profileCoverDropdown}
-          >
+          <Pressable onPress={toggleMenu} style={styles.profileCoverDropdown}>
             <Animated.View style={{ transform: [{ rotate }] }}>
               <MaterialIcons
                 name="arrow-forward-ios"
-                size={18}
-                color="#1f2937"
+                size={15}
+                color={Colors.bodyColor}
               />
             </Animated.View>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <View
           style={{
@@ -439,16 +480,33 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
           }}
         >
           {coverMenuVisible && (
-            <TouchableOpacity style={{ flexDirection: "row" }}>
+            <Pressable style={{ flexDirection: "row" }}>
               <AvatarView
                 uri={require("../../assets/images/icons/tesla.jpg")}
-                size={40}
+                size={35}
               />
               <View style={{ justifyContent: "center", marginLeft: 10 }}>
-                <Text style={{ color: "gray" }}>Customer</Text>
-                <Text style={{ fontWeight: "bold" }}>Tesla Motors Inc</Text>
+                <Text
+                  style={{
+                    color: Colors.bodyColor,
+                    opacity: 0.75,
+                    fontSize: 12,
+                    fontFamily: fontFamily.Light,
+                  }}
+                >
+                  Customer
+                </Text>
+                <Text
+                  style={{
+                    color: Colors.bodyColor,
+                    fontSize: 12,
+                    fontFamily: fontFamily.SemiBold,
+                  }}
+                >
+                  Tesla Motors Inc
+                </Text>
               </View>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
       </View>
@@ -469,14 +527,14 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         setSecondCoverMenuVisible(false);
         Animated.timing(rotateAnim, {
           toValue: 0,
-          duration: 200,
+          duration: 150,
           useNativeDriver: true,
         }).start();
       } else {
         setSecondCoverMenuVisible(true);
         Animated.timing(rotateAnim, {
           toValue: 1,
-          duration: 200,
+          duration: 150,
           useNativeDriver: true,
         }).start();
       }
@@ -486,24 +544,28 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
       <View>
         <View style={styles.profileSecondCoverTitleContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name="home-outline" size={20} color="black" />
+            <Ionicons name="home-outline" size={20} color={Colors.bodyColor} />
             <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
-            <Text style={styles.profileSecondCoverRoute}>User pages</Text>
+            <Text
+              style={[
+                styles.profileSecondCoverRoute,
+                { color: Colors.bodyColor, fontFamily: fontFamily.Medium },
+              ]}
+            >
+              User pages
+            </Text>
             <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
             <Text style={styles.profileSecondCoverRoute}>Profile cover</Text>
           </View>
-          <TouchableOpacity
-            onPress={toggleMenu}
-            style={styles.profileCoverDropdown}
-          >
+          <Pressable onPress={toggleMenu} style={styles.profileCoverDropdown}>
             <Animated.View style={{ transform: [{ rotate }] }}>
               <MaterialIcons
                 name="arrow-forward-ios"
-                size={18}
-                color="#1f2937"
+                size={15}
+                color={Colors.bodyColor}
               />
             </Animated.View>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <View
           style={{
@@ -515,20 +577,44 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         >
           {secondCoverMenuVisible && (
             <View>
-              <TouchableOpacity style={styles.secondCoverMenuItem}>
+              <Pressable style={styles.secondCoverMenuItem}>
                 <View style={{ width: 30 }}>
-                  <Feather name="life-buoy" size={20} color="black" />
+                  <Feather
+                    name="life-buoy"
+                    size={20}
+                    color={Colors.bodyColor}
+                  />
                 </View>
-                <Text>Support</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+                <Text
+                  style={{
+                    color: Colors.bodyColor,
+                    fontSize: 14,
+                    fontFamily: fontFamily.Medium,
+                  }}
+                >
+                  Support
+                </Text>
+              </Pressable>
+              <Pressable
                 style={[styles.secondCoverMenuItem, { marginBottom: 10 }]}
               >
                 <View style={{ width: 30 }}>
-                  <AntDesign name="setting" size={20} color="black" />
+                  <AntDesign
+                    name="setting"
+                    size={20}
+                    color={Colors.bodyColor}
+                  />
                 </View>
-                <Text>Settings</Text>
-              </TouchableOpacity>
+                <Text
+                  style={{
+                    color: Colors.bodyColor,
+                    fontSize: 14,
+                    fontFamily: fontFamily.Medium,
+                  }}
+                >
+                  Settings
+                </Text>
+              </Pressable>
             </View>
           )}
         </View>
@@ -566,21 +652,21 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.actionBar}>
-          <TouchableOpacity style={styles.actionIcon}>
+          <Pressable style={styles.actionIcon}>
             <Feather name="activity" size={24} color="#0c83ff" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionIcon}>
+          </Pressable>
+          <Pressable style={styles.actionIcon}>
             <Ionicons
               name="calendar-number-outline"
               size={24}
               color="#0c83ff"
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionIcon}>
+          </Pressable>
+          <Pressable style={styles.actionIcon}>
             <AntDesign name="setting" size={24} color="#0c83ff" />
-          </TouchableOpacity>
+          </Pressable>
           <View style={{ flex: 1 }}></View>
-          <TouchableOpacity style={styles.actionIcon} onPress={toggleMenu}>
+          <Pressable style={styles.actionIcon} onPress={toggleMenu}>
             <Animated.View style={{ transform: [{ rotate }] }}>
               <MaterialIcons
                 name="arrow-forward-ios"
@@ -588,7 +674,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                 color="#0c83ff"
               />
             </Animated.View>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <View
           style={{
@@ -597,30 +683,38 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             height: actionMenuVisible ? 200 : 0,
           }}
         >
-          <TouchableOpacity style={styles.actionMenuContainer}>
+          <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
               <FontAwesome5 name="sticky-note" size={24} color="black" />
             </View>
-            <Text style={{ marginLeft: 10 }}>Notes</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionMenuContainer}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+              Notes
+            </Text>
+          </Pressable>
+          <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
               <SimpleLineIcons name="people" size={24} color="black" />
             </View>
-            <Text style={{ marginLeft: 10 }}>Friends</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionMenuContainer}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+              Friends
+            </Text>
+          </Pressable>
+          <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
               <FontAwesome name="photo" size={24} color="black" />
             </View>
-            <Text style={{ marginLeft: 10 }}>Photos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionMenuContainer}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+              Photos
+            </Text>
+          </Pressable>
+          <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
               <AntDesign name="setting" size={24} color="black" />
             </View>
-            <Text style={{ marginLeft: 10 }}>More</Text>
-          </TouchableOpacity>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+              More
+            </Text>
+          </Pressable>
         </View>
       </View>
     );
@@ -774,7 +868,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5, // Shadow radius for iOS
     elevation: 5, // Elevation for Android
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: "#f3f4f6",
     borderRadius: 5,
     padding: 8,
   },
@@ -822,11 +916,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingVertical: 20,
     alignItems: "center",
   },
   profileCoverDropdown: {
-    padding: 5,
+    padding: 6,
     borderRadius: 30,
     backgroundColor: "#ddd",
     alignItems: "center",
@@ -839,13 +933,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileSecondCoverRouteDevider: {
-    marginLeft: 5,
+    marginLeft: 7,
     fontSize: 18,
-    color: "#1f2937",
+    color: "#5c6c83",
   },
   profileSecondCoverRoute: {
-    marginLeft: 5,
+    marginLeft: 7,
+    color: "#5c6c83",
     fontSize: 14,
-    color: "#1f2937",
+    fontFamily: fontFamily.Medium,
   },
 });

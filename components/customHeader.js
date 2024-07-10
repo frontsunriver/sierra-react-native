@@ -20,7 +20,13 @@ import {
   View,
 } from "react-native";
 import PaginationDot from "react-native-animated-pagination-dot";
-import { Colors, Fonts, Sizes, screenWidth } from "../constants/styles";
+import {
+  Colors,
+  Fonts,
+  Sizes,
+  fontFamily,
+  screenWidth,
+} from "../constants/styles";
 import AvatarView from "./avatarView";
 
 // Enable LayoutAnimation on Android
@@ -165,15 +171,39 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
             status={item.sender.status}
           />
           <View style={{ marginLeft: 10, flex: 1 }}>
-            <Text style={{ fontWeight: "bold" }}>{item.sender.fullName}</Text>
+            <Text
+              style={{
+                fontFamily: fontFamily.Bold,
+                color: Colors.bodyColor,
+                fontSize: 14,
+              }}
+            >
+              {item.sender.fullName}
+            </Text>
             <Text
               numberOfLines={2}
-              style={{ lineHeight: 20, marginTop: 5, color: "#888e95" }}
+              style={{
+                lineHeight: 20,
+                marginTop: 5,
+                color: Colors.bodyColor,
+                opacity: 0.7,
+                fontFamily: fontFamily.Medium,
+                fontSize: 13,
+              }}
             >
               {item.lastMessage}
             </Text>
           </View>
-          <Text>{item.time}</Text>
+          <Text
+            style={{
+              fontFamily: fontFamily.Light,
+              color: Colors.bodyColor,
+              opacity: 0.8,
+              fontSize: 13,
+            }}
+          >
+            {item.time}
+          </Text>
         </TouchableOpacity>
       );
     }
@@ -190,13 +220,29 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
         {showMessagePan && (
           <>
             <View style={styles.panelTitleContainer}>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Messages</Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: Colors.bodyColor,
+                  fontFamily: fontFamily.Bold,
+                }}
+              >
+                Messages
+              </Text>
               <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity>
-                  <Ionicons name="add-circle-outline" size={24} />
+                  <Ionicons
+                    name="add-circle-outline"
+                    size={24}
+                    color={Colors.bodyColor}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ marginLeft: 10 }}>
-                  <AntDesign name="search1" size={23} />
+                  <AntDesign
+                    name="search1"
+                    size={23}
+                    color={Colors.bodyColor}
+                  />
                 </TouchableOpacity>
               </View>
             </View>
@@ -215,7 +261,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <MaterialIcons
                   name="arrow-back-ios"
                   size={20}
-                  color={currentMsgPage == 0 ? "#ddd" : "#252b36"}
+                  color={currentMsgPage == 0 ? "#ddd" : Colors.bodyColor}
                 />
               </TouchableOpacity>
               <PaginationDot
@@ -231,7 +277,9 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <MaterialIcons
                   name="arrow-forward-ios"
                   size={20}
-                  color={currentMsgPage == pageSize - 1 ? "#ddd" : "#252b36"}
+                  color={
+                    currentMsgPage == pageSize - 1 ? "#ddd" : Colors.bodyColor
+                  }
                 />
               </TouchableOpacity>
             </View>
@@ -242,18 +290,33 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 <MaterialCommunityIcons
                   name="check-all"
                   size={24}
-                  color="gray"
+                  color={Colors.bodyColor}
                 />
-                <Text style={{ marginLeft: 10 }}>Dismiss all</Text>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    color: Colors.bodyColor,
+                    fontFamily: fontFamily.Medium,
+                  }}
+                >
+                  Dismiss all
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{ flexDirection: "row", alignItems: "center" }}
               >
-                <Text>View all</Text>
+                <Text
+                  style={{
+                    color: Colors.bodyColor,
+                    fontFamily: fontFamily.Medium,
+                  }}
+                >
+                  View all
+                </Text>
                 <Ionicons
                   name="arrow-forward-circle-outline"
                   size={24}
-                  color="gray"
+                  color={Colors.bodyColor}
                   style={{ marginLeft: 10 }}
                 />
               </TouchableOpacity>
@@ -264,9 +327,22 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
           <View style={{ flex: 1 }}>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
-                <FontAwesome name="user-circle-o" size={26} color="black" />
+                <FontAwesome
+                  name="user-circle-o"
+                  size={26}
+                  color={Colors.bodyColor}
+                />
               </View>
-              <Text style={{ marginLeft: 10, color: "black" }}>My profile</Text>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: fontFamily.Medium,
+                  color: Colors.bodyColor,
+                  fontSize: 15,
+                }}
+              >
+                My profile
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View
@@ -275,25 +351,56 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   paddingLeft: 5,
                 }}
               >
-                <FontAwesome name="dollar" size={26} color="black" />
+                <FontAwesome name="dollar" size={26} color={Colors.bodyColor} />
               </View>
-              <Text style={{ marginLeft: 10 }}>My subscription</Text>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: fontFamily.Medium,
+                  color: Colors.bodyColor,
+                  fontSize: 15,
+                }}
+              >
+                My subscription
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
-                <AntDesign name="shoppingcart" size={26} color="black" />
+                <AntDesign
+                  name="shoppingcart"
+                  size={26}
+                  color={Colors.bodyColor}
+                />
               </View>
-              <Text style={{ marginLeft: 10 }}>My orders</Text>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: fontFamily.Medium,
+                  color: Colors.bodyColor,
+                  fontSize: 15,
+                }}
+              >
+                My orders
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
                 <MaterialCommunityIcons
                   name="email-open-outline"
                   size={26}
-                  color="black"
+                  color={Colors.bodyColor}
                 />
               </View>
-              <Text style={{ marginLeft: 10 }}>My inbox</Text>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: fontFamily.Medium,
+                  color: Colors.bodyColor,
+                  fontSize: 15,
+                }}
+              >
+                My inbox
+              </Text>
               <View
                 style={{
                   flex: 1,
@@ -303,22 +410,48 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
               >
                 <View style={{ flex: 1 }}></View>
                 <View style={styles.messageBadge}>
-                  <Text style={{ color: "white" }}>26</Text>
+                  <Text
+                    style={{ color: "white", fontFamily: fontFamily.Medium }}
+                  >
+                    26
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
             <View style={styles.panelProfileMenuDevider}></View>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
-                <AntDesign name="setting" size={26} color="black" />
+                <AntDesign name="setting" size={26} color={Colors.bodyColor} />
               </View>
-              <Text style={{ marginLeft: 10 }}>Account settings</Text>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: fontFamily.Medium,
+                  color: Colors.bodyColor,
+                  fontSize: 15,
+                }}
+              >
+                Account settings
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
-                <MaterialIcons name="logout" size={26} color="black" />
+                <MaterialIcons
+                  name="logout"
+                  size={26}
+                  color={Colors.bodyColor}
+                />
               </View>
-              <Text style={{ marginLeft: 10 }}>Logout</Text>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontFamily: fontFamily.Medium,
+                  color: Colors.bodyColor,
+                  fontSize: 15,
+                }}
+              >
+                Logout
+              </Text>
             </TouchableOpacity>
           </View>
         )}

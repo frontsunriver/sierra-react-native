@@ -40,10 +40,13 @@ const Stack = createStackNavigator();
 
 function MyApp() {
   const [fontsLoaded] = useFonts({
-    "SF-Compact-Display-Regular": require("./assets/fonts/SF-Compact-Display-Regular.ttf"),
-    "SF-Compact-Display-Medium": require("./assets/fonts/SF-Compact-Display-Medium.ttf"),
-    "SF-Compact-Display-SemiBold": require("./assets/fonts/SF-Compact-Display-Semibold.ttf"),
-    "SF-Compact-Display-Bold": require("./assets/fonts/SF-Compact-Display-Bold.ttf"),
+    "Inter-Bold": require("./assets/fonts/Inter-Bold.ttf"),
+    "Inter-ExtraLight": require("./assets/fonts/Inter-ExtraLight.ttf"),
+    "Inter-Light": require("./assets/fonts/Inter-Light.ttf"),
+    "Inter-Medium": require("./assets/fonts/Inter-Medium.ttf"),
+    "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
+    "Inter-SemiBold": require("./assets/fonts/Inter-SemiBold.ttf"),
+    "Inter-Thin": require("./assets/fonts/Inter-Thin.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
