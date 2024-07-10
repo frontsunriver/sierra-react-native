@@ -343,7 +343,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
       >
         <View style={styles.outerRing}>
           <Image
-            source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }}
+            source={require("../../assets/images/avatars/1.jpg")}
             style={styles.avatar}
           />
         </View>
@@ -379,13 +379,12 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         </View>
         <View style={styles.profileBannerActionContainer}>
           <Pressable style={styles.profileBannerAction}>
-            <FontAwesome name="photo" size={20} color={Colors.bodyColor} />
+            <Ionicons name="image-outline" size={20} color={Colors.bodyColor} style={{ opacity: 0.9 }} />
             <Text
               style={{
                 marginLeft: 10,
                 fontSize: 14,
-                fontFamily: fontFamily.Medium,
-                opacity: 0.9,
+                fontFamily: fontFamily.Light,
               }}
             >
               Cover image
@@ -399,13 +398,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
               name="chart-line"
               size={20}
               color={Colors.bodyColor}
+              style={{ opacity: 0.9 }}
             />
             <Text
               style={{
                 marginLeft: 10,
                 fontSize: 14,
-                fontFamily: fontFamily.Medium,
-                opacity: 0.9,
+                fontFamily: fontFamily.Light,
               }}
             >
               Statistics
@@ -451,16 +450,16 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
               style={{
                 color: Colors.bodyColor,
                 fontSize: 20,
-                fontFamily: fontFamily.Bold,
+                fontFamily: fontFamily.SemiBold,
               }}
             >
               User Pages -{" "}
             </Text>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 19,
                 color: Colors.bodyColor,
-                fontFamily: fontFamily.Medium,
+                fontFamily: fontFamily.Light,
               }}
             >
               Profile Cover
@@ -495,7 +494,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                 <Text
                   style={{
                     color: Colors.bodyColor,
-                    opacity: 0.75,
+                    opacity: 0.85,
                     fontSize: 12,
                     fontFamily: fontFamily.Light,
                   }}
@@ -594,6 +593,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                     name="life-buoy"
                     size={20}
                     color={Colors.bodyColor}
+                    style={{ opacity: 0.85 }}
                   />
                 </View>
                 <Text
@@ -601,6 +601,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                     color: Colors.bodyColor,
                     fontSize: 14,
                     fontFamily: fontFamily.Medium,
+                    opacity: 0.85
                   }}
                 >
                   Support
@@ -614,6 +615,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                     name="setting"
                     size={20}
                     color={Colors.bodyColor}
+                    style={{ opacity: 0.85 }}
                   />
                 </View>
                 <Text
@@ -621,6 +623,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                     color: Colors.bodyColor,
                     fontSize: 14,
                     fontFamily: fontFamily.Medium,
+                    opacity: 0.85
                   }}
                 >
                   Settings
@@ -660,29 +663,32 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
       }
     };
 
+    const activeColor = '#0c83ff'
+
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.actionBar}>
-          <Pressable style={styles.actionIcon}>
-            <Feather name="activity" size={24} color="#0c83ff" />
+          <Pressable style={[styles.actionIcon, styles.activeAction]}>
+            <Feather name="activity" size={24} color={activeColor} />
           </Pressable>
           <Pressable style={styles.actionIcon}>
             <Ionicons
               name="calendar-number-outline"
               size={24}
-              color="#0c83ff"
+              color={Colors.bodyColor}
             />
           </Pressable>
           <Pressable style={styles.actionIcon}>
-            <AntDesign name="setting" size={24} color="#0c83ff" />
+            <AntDesign name="setting" size={24} color={Colors.bodyColor} />
           </Pressable>
           <View style={{ flex: 1 }}></View>
-          <Pressable style={styles.actionIcon} onPress={toggleMenu}>
+          <Pressable style={[styles.actionIcon, actionMenuVisible && styles.activeAction]} onPress={toggleMenu}>
             <Animated.View style={{ transform: [{ rotate }] }}>
               <MaterialIcons
                 name="arrow-forward-ios"
-                size={24}
-                color="#0c83ff"
+                size={20}
+                color={actionMenuVisible ? activeColor : Colors.bodyColor}
+                style={{ opacity: 0.7 }}
               />
             </Animated.View>
           </Pressable>
@@ -696,33 +702,33 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         >
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <FontAwesome5 name="sticky-note" size={24} color="black" />
+              <FontAwesome5 name="sticky-note" size={24} color={Colors.bodyColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
               Notes
             </Text>
           </Pressable>
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <SimpleLineIcons name="people" size={24} color="black" />
+              <SimpleLineIcons name="people" size={24} color={Colors.bodyColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
               Friends
             </Text>
           </Pressable>
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <FontAwesome name="photo" size={24} color="black" />
+              <FontAwesome name="photo" size={24} color={Colors.bodyColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
               Photos
             </Text>
           </Pressable>
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <AntDesign name="setting" size={24} color="black" />
+              <AntDesign name="setting" size={24} color={Colors.bodyColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium }}>
+            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.bodyColor }}>
               More
             </Text>
           </Pressable>
@@ -838,9 +844,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   outerRing: {
-    width: bannerProfileImageSize + 15, // Adjust size as needed
-    height: bannerProfileImageSize + 15,
-    borderRadius: (bannerProfileImageSize + 15) / 2, // Half of the width/height to make it circular
+    width: bannerProfileImageSize + 10, // Adjust size as needed
+    height: bannerProfileImageSize + 10,
+    borderRadius: (bannerProfileImageSize + 13) / 2, // Half of the width/height to make it circular
     backgroundColor: "#f1f4f9", // Color of the ring
     justifyContent: "center",
     alignItems: "center",
@@ -867,7 +873,7 @@ const styles = StyleSheet.create({
   },
   profileBannerActionContainer: {
     position: "absolute",
-    top: bannerImageSize / 2 + bannerProfileImageSize / 2 + 30 + 75,
+    top: bannerImageSize / 2 + bannerProfileImageSize / 2 + 30 + 70,
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
@@ -883,7 +889,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#f3f4f6",
     borderRadius: 5,
-    padding: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8
   },
   setting: {
     position: "absolute",
@@ -903,10 +910,15 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   actionIcon: {
-    backgroundColor: "#e6f2ff",
-    padding: 10,
+    width: 45,
+    height: 45,
     borderRadius: 10,
     marginHorizontal: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  activeAction: {
+    backgroundColor: "#e6f2ff",
   },
   actionMenuContainer: {
     flex: 1,
@@ -929,7 +941,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 25,
     alignItems: "center",
   },
   profileCoverDropdown: {
@@ -946,12 +958,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileSecondCoverRouteDevider: {
-    marginLeft: 7,
-    fontSize: 18,
+    marginLeft: 8,
+    fontSize: 14,
     color: "#5c6c83",
   },
   profileSecondCoverRoute: {
-    marginLeft: 7,
+    marginLeft: 8,
     color: "#6b7280",
     fontSize: 14,
     fontFamily: fontFamily.Medium,

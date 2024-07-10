@@ -173,7 +173,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
           <View style={{ marginLeft: 10, flex: 1 }}>
             <Text
               style={{
-                fontFamily: fontFamily.Bold,
+                fontFamily: fontFamily.SemiBold,
                 color: Colors.bodyColor,
                 fontSize: 14,
               }}
@@ -224,7 +224,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                 style={{
                   fontSize: 20,
                   color: Colors.bodyColor,
-                  fontFamily: fontFamily.Bold,
+                  fontFamily: fontFamily.SemiBold,
                 }}
               >
                 Messages
@@ -262,6 +262,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   name="arrow-back-ios"
                   size={20}
                   color={currentMsgPage == 0 ? "#ddd" : Colors.bodyColor}
+                  style={{opacity:0.9}}
                 />
               </TouchableOpacity>
               <PaginationDot
@@ -280,6 +281,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   color={
                     currentMsgPage == pageSize - 1 ? "#ddd" : Colors.bodyColor
                   }
+                  style={{opacity:0.9}}
                 />
               </TouchableOpacity>
             </View>
@@ -291,6 +293,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   name="check-all"
                   size={24}
                   color={Colors.bodyColor}
+                  style={{opacity:0.9}}
                 />
                 <Text
                   style={{
@@ -317,7 +320,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   name="arrow-forward-circle-outline"
                   size={24}
                   color={Colors.bodyColor}
-                  style={{ marginLeft: 10 }}
+                  style={{ marginLeft: 10, opacity:0.9 }}
                 />
               </TouchableOpacity>
             </View>
