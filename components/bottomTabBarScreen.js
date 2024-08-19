@@ -15,6 +15,7 @@ import {
   View,
 } from "react-native";
 import { Colors, Fonts, Sizes } from "../constants/styles";
+import BusinessHomeScreen from "../screens/business/home/businessHomeScreen";
 import ChatScreen from "../screens/chat/chatScreen";
 import HomeScreen from "../screens/home/homeScreen";
 import ProfileScreen from "../screens/profile/profileScreen";
@@ -91,6 +92,16 @@ const BottomTabBarScreen = ({
           }}
         >
           {(props) => <HomeScreen {...props} {...defaultScreenProps} />}
+        </Tab.Screen>
+        <Tab.Screen
+          name="BusinessHome"
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="business" size={22} color={color} />
+            ),
+          }}
+        >
+          {(props) => <BusinessHomeScreen {...props} {...defaultScreenProps} />}
         </Tab.Screen>
         <Tab.Screen
           name="Saved"

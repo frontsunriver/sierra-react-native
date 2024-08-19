@@ -7,12 +7,14 @@ import { useFonts } from "expo-font";
 import * as ExpoSplashScreen from "expo-splash-screen";
 import React, { useCallback } from "react";
 import { LogBox } from "react-native";
+import RightDrawerScreen from "./components/rightDrawerScreen";
 import AddSkillsScreen from "./screens/addSkills/addSkillsScreen";
 import AllJobsScreen from "./screens/allJobs/allJobsScreen";
 import AppliedJobsScreen from "./screens/appliedJobs/appliedJobsScreen";
 import LoginScreen from "./screens/auth/loginScreen";
 import RegisterScreen from "./screens/auth/registerScreen";
 import VerificationScreen from "./screens/auth/verificationScreen";
+import JobPostScreen from "./screens/business/jobPost/jobPostScreen";
 import ContactUsScreen from "./screens/contactUs/contactUsScreen";
 import EditAboutScreen from "./screens/editAbout/editAboutScreen";
 import EditContactInfoScreen from "./screens/editContactInfo/editContactInfoScreen";
@@ -28,8 +30,6 @@ import SettingsScreen from "./screens/settings/settingsScreen";
 import SplashScreen from "./screens/splashScreen";
 import TermsAndConditionScreen from "./screens/termsAndCondition/termsAndConditionScreen";
 import UploadSuccessScreen from "./screens/uploadSuccess/uploadSuccessScreen";
-
-import RightDrawerScreen from "./components/rightDrawerScreen";
 import "./styles.css";
 
 ExpoSplashScreen.preventAutoHideAsync();
@@ -103,6 +103,8 @@ function MyApp() {
             name="TermsAndCondition"
             component={TermsAndConditionScreen}
           />
+          {/* Business */}
+          <Stack.Screen name="JobPost" component={JobPostScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );

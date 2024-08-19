@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { ConfirmDialog } from "react-native-simple-dialogs";
 import { Text } from "../../components/commonText";
 import MyStatusBar from "../../components/myStatusBar";
 import {
@@ -28,8 +29,18 @@ const requirementsList = [
   "Lorem ipsum dolor sit amet, consectetur.",
 ];
 
-const JobDetailScreen = ({ navigation }) => {
+const JobDetailScreen = ({ navigation, route }) => {
+  const { isPoster } = route.params;
   const [showUploadDialog, setshowUploadDialog] = useState(false);
+  const [deleteConfirmDlgVisible, setDeleteConfirmDlgVisible] = useState(false);
+
+  const handleConfirm = () => {
+    setDeleteConfirmDlgVisible(false);
+  };
+
+  const handleCancel = () => {
+    setDeleteConfirmDlgVisible(false);
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
@@ -44,9 +55,23 @@ const JobDetailScreen = ({ navigation }) => {
           {divider()}
           {requirementsInfo()}
         </ScrollView>
-        {applyButton()}
+        {isPoster ? updateButton() : applyButton()}
         {uploadResumeDialog()}
       </View>
+      <ConfirmDialog
+        title="Delete Job"
+        message="Are you sure to delete this job?"
+        visible={deleteConfirmDlgVisible}
+        onTouchOutside={() => setDeleteConfirmDlgVisible(false)}
+        positiveButton={{
+          title: "YES",
+          onPress: handleConfirm,
+        }}
+        negativeButton={{
+          title: "NO",
+          onPress: handleCancel,
+        }}
+      />
     </View>
   );
 
@@ -160,6 +185,25 @@ const JobDetailScreen = ({ navigation }) => {
         }}
       >
         <Text style={{ ...Fonts.whiteColor18SemiBold }}>Apply Now</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  function updateButton() {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate("JobPost", {
+            id: 1,
+          });
+        }}
+        style={{
+          ...CommonStyles.buttonStyle,
+          margin: Sizes.fixPadding * 2.0,
+        }}
+      >
+        <Text style={{ ...Fonts.whiteColor18SemiBold }}>Update</Text>
       </TouchableOpacity>
     );
   }
@@ -288,7 +332,15 @@ const JobDetailScreen = ({ navigation }) => {
         >
           Job Details
         </Text>
-        <MaterialIcons name="share" size={22} color={Colors.blackColor} />
+        {isPoster ? (
+          <TouchableOpacity onPress={() => setDeleteConfirmDlgVisible(true)}>
+            <Ionicons name="trash" size={24} color={Colors.grayColor} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity>
+            <MaterialIcons name="share" size={22} color={Colors.blackColor} />
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
