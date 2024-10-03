@@ -5,7 +5,7 @@ import {
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   BackHandler,
   Platform,
@@ -20,16 +20,31 @@ import ChatScreen from "../screens/chat/chatScreen";
 import HomeScreen from "../screens/home/homeScreen";
 import ProfileScreen from "../screens/profile/profileScreen";
 import SavedScreen from "../screens/saved/savedScreen";
+import { UserType } from "../_mockup/_mockup";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabBarScreen = ({
   navigation,
+  route,
   setShouldClosePanel,
   openRightDrawer,
 }) => {
   const defaultScreenProps = {
     setShouldClosePanel,
+  };
+
+  const { type } = route.params;
+
+  const RoleTabs = () => {
+    switch (type) {
+      case UserType.USER:
+        return UserTabs();
+      case UserType.COMPANY:
+        return CompanyTabs();
+      default:
+        return UserTabs();
+    }
   };
 
   const backAction = () => {
@@ -61,11 +76,10 @@ const BottomTabBarScreen = ({
     }, 1000);
   }
 
-  const [backClickCount, setBackClickCount] = useState(0);
-
-  return (
-    <View style={{ flex: 1 }}>
+  function UserTabs() {
+    return (
       <Tab.Navigator
+        initialRouteName={"Home"}
         screenOptions={{
           tabBarActiveTintColor: Colors.primaryColor,
           tabBarInactiveTintColor: Colors.lightGrayColor,
@@ -93,6 +107,57 @@ const BottomTabBarScreen = ({
         >
           {(props) => <HomeScreen {...props} {...defaultScreenProps} />}
         </Tab.Screen>
+        <Tab.Screen
+          name="Saved"
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="bookmark" size={24} color={color} />
+            ),
+          }}
+        >
+          {(props) => <SavedScreen {...props} {...defaultScreenProps} />}
+        </Tab.Screen>
+        <Tab.Screen
+          name="Chat"
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="chatbubble-ellipses" size={22} color={color} />
+            ),
+          }}
+        >
+          {(props) => <ChatScreen {...props} {...defaultScreenProps} />}
+        </Tab.Screen>
+        <Tab.Screen
+          name="Profile"
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account" size={24} color={color} />
+            ),
+          }}
+        >
+          {(props) => <ProfileScreen {...props} {...defaultScreenProps} />}
+        </Tab.Screen>
+      </Tab.Navigator>
+    );
+  }
+
+  function CompanyTabs() {
+    return (
+      <Tab.Navigator
+        initialRouteName={"BusinessHome"}
+        screenOptions={{
+          tabBarActiveTintColor: Colors.primaryColor,
+          tabBarInactiveTintColor: Colors.lightGrayColor,
+          tabBarHideOnKeyboard: true,
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            backgroundColor: Colors.whiteColor,
+            height: 60.0,
+          },
+          tabBarItemStyle: { height: 60 },
+        }}
+      >
         <Tab.Screen
           name="BusinessHome"
           options={{
@@ -134,6 +199,14 @@ const BottomTabBarScreen = ({
           {(props) => <ProfileScreen {...props} {...defaultScreenProps} />}
         </Tab.Screen>
       </Tab.Navigator>
+    );
+  }
+
+  const [backClickCount, setBackClickCount] = useState(0);
+
+  return (
+    <View style={{ flex: 1 }}>
+      {RoleTabs()}
       {setting()}
       {exitInfo()}
     </View>

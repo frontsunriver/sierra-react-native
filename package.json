@@ -50,7 +50,8 @@
     "react-native-screens": "3.31.1",
     "react-native-simple-dialogs": "^2.1.0",
     "react-native-swipe-list-view": "^3.2.9",
-    "react-native-web": "~0.19.10"
+    "react-native-web": "~0.19.10",
+    "sierra-connect": "file:"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

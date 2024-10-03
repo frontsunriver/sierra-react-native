@@ -9,7 +9,7 @@ import MyStatusBar from "./myStatusBar";
 
 const RightDrawerContext = React.createContext();
 
-const RightDrawerScreen = () => {
+const RightDrawerScreen = ({ route }) => {
   const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
 
   const value = React.useMemo(
@@ -43,7 +43,10 @@ const RightDrawerScreen = () => {
       renderDrawerContent={() => <RightDrawerContent />}
     >
       <RightDrawerContext.Provider value={value}>
-        <LeftDrawerScreen rightDrawerContext={RightDrawerContext} />
+        <LeftDrawerScreen
+          route={route}
+          rightDrawerContext={RightDrawerContext}
+        />
       </RightDrawerContext.Provider>
     </Drawer>
   );

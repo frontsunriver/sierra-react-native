@@ -14,8 +14,28 @@ import {
 import { Text } from "../../components/commonText";
 import MyStatusBar from "../../components/myStatusBar";
 import { Colors, CommonStyles, Fonts, Sizes } from "../../constants/styles";
+import { Credentials, UserType } from "../../_mockup/_mockup";
 
 const LoginScreen = ({ navigation }) => {
+  const [backClickCount, setBackClickCount] = useState(0);
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [securePassword, setsecurePassword] = useState(true);
+
+  const _onLogin = () => {
+    if (
+      email == Credentials.USER.email &&
+      password == Credentials.USER.password
+    ) {
+      navigation.navigate("AppRoot", { type: UserType.USER });
+    } else if (
+      email == Credentials.COMPANY.email &&
+      password == Credentials.COMPANY.password
+    ) {
+      navigation.navigate("AppRoot", { type: UserType.COMPANY });
+    }
+  };
+
   const backAction = () => {
     if (Platform.OS === "ios") {
       navigation.addListener("beforeRemove", (e) => {
@@ -44,11 +64,6 @@ const LoginScreen = ({ navigation }) => {
       setBackClickCount(0);
     }, 1000);
   }
-
-  const [backClickCount, setBackClickCount] = useState(0);
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const [securePassword, setsecurePassword] = useState(true);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors.whiteColor }}>
@@ -142,9 +157,7 @@ const LoginScreen = ({ navigation }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => {
-          navigation.push("AppRoot");
-        }}
+        onPress={_onLogin}
         style={{ ...CommonStyles.buttonStyle, margin: Sizes.fixPadding * 2.0 }}
       >
         <Text style={{ ...Fonts.whiteColor18SemiBold }}>Login</Text>

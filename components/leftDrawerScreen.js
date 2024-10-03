@@ -8,7 +8,7 @@ import { View } from "react-native";
 
 const LeftDrawer = createDrawerNavigator();
 
-const LeftDrawerScreen = ({ rightDrawerContext }) => {
+const LeftDrawerScreen = ({ route, rightDrawerContext }) => {
   const { openRightDrawer } = React.useContext(rightDrawerContext);
 
   const [shouldClosePanel, setShouldClosePanel] = useState(false);
@@ -37,6 +37,7 @@ const LeftDrawerScreen = ({ rightDrawerContext }) => {
           {(props) => (
             <BottomTabBarScreen
               {...props}
+              route={route}
               setShouldClosePanel={setShouldClosePanel}
               openRightDrawer={openRightDrawer}
             />
