@@ -123,7 +123,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
   const BadgeView = ({ count }) => {
     return (
       <View style={styles.badgeIndicator}>
-        <Text>{count}</Text>
+        <Text style={{...Fonts.blackColor11Regular}}>{count}</Text>
       </View>
     );
   };
@@ -132,13 +132,13 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
     return (
       <View
         style={{
-          height: visibleSearchBar ? 50 : 0,
+          height: visibleSearchBar ? 30 : 0,
           opacity: visibleSearchBar ? 1 : 0,
         }}
       >
         <View style={styles.searchFieldWrapper}>
           <TouchableOpacity>
-            <AntDesign name="search1" size={24} color="white" />
+            <AntDesign name="search1" size={1} color="white" />
           </TouchableOpacity>
           <TextInput
             placeholder="Search"
@@ -151,7 +151,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
             <MaterialIcons
               name="filter-list"
               color={Colors.whiteColor}
-              size={24}
+              size={15}
             />
           </TouchableOpacity>
         </View>
@@ -475,18 +475,18 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
           style={styles.headerMenu}
           onPress={() => navigation.openDrawer()}
         >
-          <Ionicons name="menu" size={28} color="white" />
+          <Ionicons name="menu" size={20} color="white" />
         </TouchableOpacity>
         <View style={{ flex: 1 }}></View>
         <View style={styles.headerActionContainer}>
           <TouchableOpacity style={styles.headerIcon} onPress={toggleSearchBar}>
-            <AntDesign name="search1" size={24} color="white" />
+            <AntDesign name="search1" size={15} color="white" />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.headerIcon}
             onPress={toggleMessagePanel}
           >
-            <Feather name="message-square" size={24} color="white" />
+            <Feather name="message-square" size={15} color="white" />
             <BadgeView count={5} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -496,7 +496,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
           >
             <AvatarView
               uri={require("../assets/images/avatars/1.jpg")}
-              size={50}
+              size={30}
               status={"online"}
             />
           </TouchableOpacity>
@@ -537,11 +537,11 @@ const styles = StyleSheet.create({
   },
   badgeIndicator: {
     position: "absolute",
-    top: -18,
-    right: -10,
-    width: 24,
-    height: 24,
-    borderRadius: 20,
+    top: -8,
+    right: 0,
+    width: 15,
+    height: 15,
+    borderRadius: 15,
     backgroundColor: "orange",
     textAlign: "center",
     justifyContent: "center",
@@ -558,7 +558,7 @@ const styles = StyleSheet.create({
     marginHorizontal: Sizes.fixPadding * 2.0,
   },
   searchFieldStyle: {
-    ...Fonts.whiteColor16Medium,
+    ...Fonts.whiteColor12Medium,
     flex: 1,
     marginHorizontal: Sizes.fixPadding,
     includeFontPadding: false,

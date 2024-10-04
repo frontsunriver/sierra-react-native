@@ -33,6 +33,12 @@ export const Fonts = {
     fontFamily: fontFamily.Regular,
   },
 
+  whiteColor12Medium: {
+    color: Colors.whiteColor,
+    fontSize: 12.0,
+    fontFamily: fontFamily.Medium,
+  },
+
   whiteColor14Medium: {
     color: Colors.whiteColor,
     fontSize: 14.0,
