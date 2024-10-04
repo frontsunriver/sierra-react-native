@@ -123,7 +123,7 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
   const BadgeView = ({ count }) => {
     return (
       <View style={styles.badgeIndicator}>
-        <Text style={{...Fonts.blackColor11Regular}}>{count}</Text>
+        <Text style={{ ...Fonts.blackColor11Regular }}>{count}</Text>
       </View>
     );
   };
@@ -279,7 +279,9 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   name="arrow-forward-ios"
                   size={20}
                   color={
-                    currentMsgPage == pageSize - 1 ? "#ddd" : Colors.primaryColor
+                    currentMsgPage == pageSize - 1
+                      ? "#ddd"
+                      : Colors.primaryColor
                   }
                   style={{ opacity: 0.9 }}
                 />
@@ -354,7 +356,11 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
                   paddingLeft: 5,
                 }}
               >
-                <FontAwesome name="dollar" size={26} color={Colors.primaryColor} />
+                <FontAwesome
+                  name="dollar"
+                  size={26}
+                  color={Colors.primaryColor}
+                />
               </View>
               <Text
                 style={{
@@ -424,7 +430,11 @@ const CustomHeader = ({ title, shouldClosePanel, setShouldClosePanel }) => {
             <View style={styles.panelProfileMenuDevider}></View>
             <TouchableOpacity style={styles.panelProfileMenuItem}>
               <View style={{ width: 30 }}>
-                <AntDesign name="setting" size={26} color={Colors.primaryColor} />
+                <AntDesign
+                  name="setting"
+                  size={26}
+                  color={Colors.primaryColor}
+                />
               </View>
               <Text
                 style={{
@@ -514,9 +524,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
   },
-  headerMenu: {
-    paddingVertical: 15,
-  },
+  headerMenu: {},
   headerTitle: {
     marginLeft: 10,
     textAlign: "center",
