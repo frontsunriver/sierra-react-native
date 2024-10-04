@@ -69,6 +69,51 @@ export const Fonts = {
     fontFamily: fontFamily.Bold,
   },
 
+  blackColor11Regular: {
+    color: Colors.blackColor,
+    fontSize: 11.0,
+    fontFamily: fontFamily.Regular,
+  },
+
+  blackColor12Regular: {
+    color: Colors.blackColor,
+    fontSize: 12.0,
+    fontFamily: fontFamily.Regular,
+  },
+
+  blackColor13Regular: {
+    color: Colors.blackColor,
+    fontSize: 13.0,
+    fontFamily: fontFamily.Regular,
+  },
+
+  blackColor10Regular: {
+    color: Colors.blackColor,
+    fontSize: 10.0,
+    fontFamily: fontFamily.Regular,
+  },
+
+  blackColor10Bold: {
+    color: Colors.blackColor,
+    fontSize: 10.0,
+    fontFamily: fontFamily.Bold,
+  },
+  blackColor11Bold: {
+    color: Colors.blackColor,
+    fontSize: 11.0,
+    fontFamily: fontFamily.Bold,
+  },
+  blackColor12Bold: {
+    color: Colors.blackColor,
+    fontSize: 12.0,
+    fontFamily: fontFamily.Bold,
+  },
+  blackColor13Bold: {
+    color: Colors.blackColor,
+    fontSize: 13.0,
+    fontFamily: fontFamily.Bold,
+  },
+
   blackColor14Regular: {
     color: Colors.blackColor,
     fontSize: 14.0,
@@ -91,6 +136,12 @@ export const Fonts = {
     color: Colors.blackColor,
     fontSize: 15.0,
     fontFamily: fontFamily.Medium,
+  },
+
+  blackColor15Bold: {
+    color: Colors.blackColor,
+    fontSize: 15.0,
+    fontFamily: fontFamily.Bold,
   },
 
   blackColor16Medium: {
@@ -139,6 +190,18 @@ export const Fonts = {
     color: Colors.blackColor,
     fontSize: 22.0,
     fontFamily: fontFamily.Bold,
+  },
+
+  grayColor11Regular: {
+    color: Colors.grayColor,
+    fontSize: 11.0,
+    fontFamily: fontFamily.Regular,
+  },
+
+  grayColor12Regular: {
+    color: Colors.grayColor,
+    fontSize: 12.0,
+    fontFamily: fontFamily.Regular,
   },
 
   grayColor13Regular: {

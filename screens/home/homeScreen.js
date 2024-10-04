@@ -34,6 +34,12 @@ import {
   screenWidth,
 } from "../../constants/styles";
 
+import {
+  NORMAL_JOB as jobList,
+  ADVERTISEMENTS_JOB as advertisementJob,
+  FEATURED_JOB as featuredJobItem,
+} from "./constant";
+
 // Enable LayoutAnimation on Android
 if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -51,89 +57,6 @@ const jobsTypesList = [
   "Mobile Developer",
   "Automation Tester",
   "Operation Manager",
-];
-
-const jobList = [
-  {
-    id: "1",
-    sourceLogo: require("../../assets/images/jobs/job1.png"),
-    jobType: "Backend Engineer",
-    sourceName: "PIEXEX",
-    city: "Fort worth, USA",
-    jobTime: "Full time",
-    amountPerMonth: 100,
-    inBookmark: true,
-  },
-  {
-    id: "2",
-    sourceLogo: require("../../assets/images/jobs/job2.png"),
-    jobType: "Senior Mobile Engineer",
-    sourceName: "X",
-    city: "California, USA",
-    jobTime: "Part time",
-    amountPerMonth: 200,
-    inBookmark: true,
-  },
-  {
-    id: "3",
-    sourceLogo: require("../../assets/images/jobs/job3.png"),
-    jobType: "Joomla Developer",
-    sourceName: "Microsoft Crop",
-    city: "California, USA",
-    jobTime: "Full time",
-    amountPerMonth: 300,
-    inBookmark: true,
-  },
-  {
-    id: "4",
-    sourceLogo: require("../../assets/images/jobs/job4.png"),
-    jobType: "Operation Manager",
-    sourceName: "Linkedin",
-    city: "California, USA",
-    jobTime: "Full time",
-    amountPerMonth: 400,
-    inBookmark: true,
-  },
-  {
-    id: "5",
-    sourceLogo: require("../../assets/images/jobs/job5.png"),
-    jobType: "UI/UX Designer",
-    sourceName: "Android",
-    city: "California, USA",
-    jobTime: "Full time",
-    amountPerMonth: 500,
-    inBookmark: false,
-  },
-  {
-    id: "6",
-    sourceLogo: require("../../assets/images/jobs/job6.png"),
-    jobType: "Senior Mobile Engineer",
-    sourceName: "Robotflow",
-    city: "California, USA",
-    jobTime: "Part time",
-    amountPerMonth: 600,
-    inBookmark: false,
-  },
-  {
-    id: "7",
-    sourceLogo: require("../../assets/images/jobs/job7.png"),
-    jobType: "Product Manager",
-    sourceName: "Wipro",
-    city: "California, USA",
-    jobTime: "Part time",
-    amountPerMonth: 700,
-    inBookmark: false,
-  },
-  {
-    id: "8",
-    sourceLogo: require("../../assets/images/jobs/job8.png"),
-    jobType: "Java Backend Engineer",
-    sourceName: "BlownUp",
-    city: "California, USA",
-    jobTime: "Part time",
-    amountPerMonth: 800,
-    inBookmark: false,
-  },
 ];
 
 const bannerImageSize = screenWidth < 480 ? 430 : 450;
@@ -155,24 +78,29 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, zIndex: 10 }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Pressable
-          style={{ flex: 1, backgroundColor: Colors.whiteColor }}
-          onPress={handleTouchStart}
-          activeOpacity={1}
-        >
-          <View style={{ flex: 1 }}>
-            {profileCover()}
-            {profileSecondCover()}
-            {profileBanner()}
-            {actionBar()}
-            {jobRecommendationTitle()}
-            {jobTypesInfo()}
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+      <Pressable
+        style={{ flex: 1, backgroundColor: Colors.whiteColor }}
+        onPress={handleTouchStart}
+        activeOpacity={1}
+      >
+        <View style={{ flex: 1 }}>
+          {/* {profileCover()} */}
+          {/* {profileSecondCover()} */}
+          {/* {profileBanner()} */}
+          {advertisement(advertisementJob)}
+          {featuredJob(featuredJobItem)}
+          {/* {actionBar()} */}
+          {/* {jobRecommendationTitle()}
+            {jobTypesInfo()} */}
+          <ScrollView showsVerticalScrollIndicator={false}>
             {jobsAccordingSelection()}
-          </View>
-          {snackBarInfo()}
-        </Pressable>
-      </ScrollView>
+          </ScrollView>
+          {advertisement(advertisementJob)}
+        </View>
+        {snackBarInfo()}
+      </Pressable>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 
@@ -205,6 +133,51 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
     setjobData(updatedDatat);
   }
 
+  function featuredJob(item) {
+    return (
+      <Pressable
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.push("JobDetail");
+        }}
+        style={styles.featuredJobStyle}
+      >
+        <View style={{ flexDirection: "column", flex: 1}}>
+          {item.sourceLogo && (
+            <Image source={item.sourceLogo} style={styles.sourceLogoStyle} />
+          )}
+          <View style={{ marginLeft: Sizes.fixPadding }}>
+            {item.jobDescription && (
+              <Text
+                numberOfLines={3}
+                style={{
+                  ...Fonts.blackColor11Regular,
+                  marginTop: Sizes.fixPadding - 5.0,
+                  marginBottom: Sizes.fixPadding,
+                }}
+              >
+                {item.jobDescription}
+              </Text>
+            )}
+            <Text
+              numberOfLines={1}
+              style={{
+                ...Fonts.blackColor13Bold,
+                marginBottom: Sizes.fixPadding - 8.0,
+              }}
+            >
+              {item.sourceName}
+            </Text>
+            <Text numberOfLines={1} style={{ ...Fonts.grayColor11Regular }}>
+              {item.jobTime} {`$`}
+              {item.amount}/{item.workingType}
+            </Text>
+          </View>
+        </View>
+      </Pressable>
+    );
+  }
+
   function jobsAccordingSelection() {
     const renderItem = ({ item }) => (
       <Pressable
@@ -214,28 +187,40 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         }}
         style={styles.jobWrapStyle}
       >
-        <View style={{ flexDirection: "row", flex: 1 }}>
-          <Image source={item.sourceLogo} style={styles.sourceLogoStyle} />
+        <View style={{ flexDirection: "column", flex: 1 }}>
+          {item.sourceLogo && (
+            <Image source={item.sourceLogo} style={styles.sourceLogoStyle} />
+          )}
           <View style={{ flex: 1, marginLeft: Sizes.fixPadding }}>
-            <Text numberOfLines={1} style={{ ...Fonts.blackColor18SemiBold }}>
-              {item.jobType}
-            </Text>
+            {item.jobDescription && (
+              <Text
+                numberOfLines={4}
+                style={{
+                  ...Fonts.blackColor11Regular,
+                  marginTop: Sizes.fixPadding - 5.0,
+                  marginBottom: Sizes.fixPadding,
+                }}
+              >
+                {item.jobDescription}
+              </Text>
+            )}
             <Text
               numberOfLines={1}
               style={{
-                ...Fonts.blackColor15Regular,
+                ...Fonts.blackColor13Bold,
                 marginBottom: Sizes.fixPadding - 8.0,
                 marginTop: Sizes.fixPadding - 5.0,
               }}
             >
               {item.sourceName}
             </Text>
-            <Text numberOfLines={1} style={{ ...Fonts.grayColor13Regular }}>
-              {item.city} • {item.jobTime}
+            <Text numberOfLines={1} style={{ ...Fonts.grayColor11Regular }}>
+              {item.jobTime} {`$`}
+              {item.amount}/{item.workingType}
             </Text>
           </View>
         </View>
-        <View
+        {/* <View
           style={{
             height: 65.0,
             alignItems: "flex-end",
@@ -256,9 +241,9 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
           </Pressable>
           <Text style={{ ...Fonts.primaryColor16SemiBold }}>
             {`$`}
-            {item.amountPerMonth}/Mo
+            {item.amount}/{item.workingType}
           </Text>
-        </View>
+        </View> */}
       </Pressable>
     );
     return (
@@ -330,88 +315,59 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
     );
   }
 
-  function profileBanner() {
+  function advertisement(item) {
     return (
-      <ImageBackground
-        source={require("../../assets/images/users/profile_banner.jpg")}
+      <View
         style={{
-          width: screenWidth,
-          height: bannerImageSize,
-          marginBottom: Sizes.fixPadding,
+          paddingTop: Sizes.fixPadding,
+          paddingHorizontal: Sizes.fixPadding + 10.0,
+          marginBottom: Sizes.fixPadding - 5.0,
+          flexDirection: "column",
         }}
-        resizeMode="cover"
       >
-        <View style={styles.outerRing}>
-          <Image
-            source={require("../../assets/images/avatars/1.jpg")}
-            style={styles.avatar}
-          />
-        </View>
-        <View style={styles.role}>
+        <ImageBackground
+          source={item.sourceLogo}
+          style={{
+            height: 60.0,
+            marginBottom: 5.0,
+          }}
+          resizeMode="cover"
+        ></ImageBackground>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Text
+            numberOfLines={1}
             style={{
-              textAlign: "center",
-              fontSize: 24,
-              color: "white",
-              fontWeight: 600,
-              fontFamily: fontFamily.SemiBold,
-              textShadowColor: "#00000080",
-              textShadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
-              textShadowRadius: 5, // Shadow radius for iOS
+              ...Fonts.blackColor12Bold,
             }}
           >
-            Hanna Dorman
+            {item.name}
           </Text>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 14,
-              color: "white",
-              fontFamily: fontFamily.Medium,
-              marginTop: 3,
-              textShadowColor: "#00000080",
-              textShadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
-              textShadowRadius: 5, // Shadow radius for iOS
-            }}
-          >
-            UX/UI designer
-          </Text>
-        </View>
-        <View style={styles.profileBannerActionContainer}>
-          <Pressable style={styles.profileBannerAction}>
-            <Ionicons name="image-outline" size={20} color={Colors.primaryColor} style={{ opacity: 0.9 }} />
-            <Text
-              style={{
-                marginLeft: 10,
-                fontSize: 14,
-                fontFamily: fontFamily.Light,
-              }}
-            >
-              Cover image
-            </Text>
-          </Pressable>
           <Pressable
-            activeOpacity={0.7}
-            style={[styles.profileBannerAction, { marginLeft: 20 }]}
+            style={{
+              backgroundColor: "#e2e2e2",
+              paddingHorizontal: Sizes.fixPadding - 7.0,
+              paddingVertical: 3.0,
+              borderRadius: 5.0,
+            }}
           >
-            <MaterialCommunityIcons
-              name="chart-line"
-              size={20}
-              color={Colors.primaryColor}
-              style={{ opacity: 0.9 }}
-            />
             <Text
+              numberOfLines={1}
               style={{
-                marginLeft: 10,
-                fontSize: 14,
-                fontFamily: fontFamily.Light,
+                ...Fonts.blackColor12Bold,
               }}
             >
-              Statistics
+              {"Shop Now"}
             </Text>
           </Pressable>
         </View>
-      </ImageBackground>
+      </View>
     );
   }
 
@@ -549,7 +505,11 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
       <View>
         <View style={styles.profileSecondCoverTitleContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name="home-outline" size={20} color={Colors.primaryColor} />
+            <Ionicons
+              name="home-outline"
+              size={20}
+              color={Colors.primaryColor}
+            />
             <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
             <Text
               style={[
@@ -601,7 +561,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                     color: Colors.primaryColor,
                     fontSize: 14,
                     fontFamily: fontFamily.Medium,
-                    opacity: 0.85
+                    opacity: 0.85,
                   }}
                 >
                   Support
@@ -623,7 +583,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
                     color: Colors.primaryColor,
                     fontSize: 14,
                     fontFamily: fontFamily.Medium,
-                    opacity: 0.85
+                    opacity: 0.85,
                   }}
                 >
                   Settings
@@ -663,7 +623,7 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
       }
     };
 
-    const activeColor = '#0c83ff'
+    const activeColor = "#0c83ff";
 
     return (
       <View style={{ flex: 1 }}>
@@ -682,7 +642,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             <AntDesign name="setting" size={24} color={Colors.primaryColor} />
           </Pressable>
           <View style={{ flex: 1 }}></View>
-          <Pressable style={[styles.actionIcon, actionMenuVisible && styles.activeAction]} onPress={toggleMenu}>
+          <Pressable
+            style={[
+              styles.actionIcon,
+              actionMenuVisible && styles.activeAction,
+            ]}
+            onPress={toggleMenu}
+          >
             <Animated.View style={{ transform: [{ rotate }] }}>
               <MaterialIcons
                 name="arrow-forward-ios"
@@ -702,17 +668,37 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
         >
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <FontAwesome5 name="sticky-note" size={24} color={Colors.primaryColor} />
+              <FontAwesome5
+                name="sticky-note"
+                size={24}
+                color={Colors.primaryColor}
+              />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
+            <Text
+              style={{
+                marginLeft: 10,
+                fontFamily: fontFamily.Medium,
+                color: Colors.primaryColor,
+              }}
+            >
               Notes
             </Text>
           </Pressable>
           <Pressable style={styles.actionMenuContainer}>
             <View style={{ width: 30 }}>
-              <SimpleLineIcons name="people" size={24} color={Colors.primaryColor} />
+              <SimpleLineIcons
+                name="people"
+                size={24}
+                color={Colors.primaryColor}
+              />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
+            <Text
+              style={{
+                marginLeft: 10,
+                fontFamily: fontFamily.Medium,
+                color: Colors.primaryColor,
+              }}
+            >
               Friends
             </Text>
           </Pressable>
@@ -720,7 +706,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             <View style={{ width: 30 }}>
               <FontAwesome name="photo" size={24} color={Colors.primaryColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
+            <Text
+              style={{
+                marginLeft: 10,
+                fontFamily: fontFamily.Medium,
+                color: Colors.primaryColor,
+              }}
+            >
               Photos
             </Text>
           </Pressable>
@@ -728,7 +720,13 @@ const HomeScreen = ({ navigation, setShouldClosePanel }) => {
             <View style={{ width: 30 }}>
               <AntDesign name="setting" size={24} color={Colors.primaryColor} />
             </View>
-            <Text style={{ marginLeft: 10, fontFamily: fontFamily.Medium, color: Colors.primaryColor }}>
+            <Text
+              style={{
+                marginLeft: 10,
+                fontFamily: fontFamily.Medium,
+                color: Colors.primaryColor,
+              }}
+            >
               More
             </Text>
           </Pressable>
@@ -830,15 +828,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: Sizes.fixPadding + 5.0,
-    paddingVertical: Sizes.fixPadding * 2.0,
+    paddingHorizontal: Sizes.fixPadding - 5.0,
+    paddingVertical: Sizes.fixPadding,
     marginHorizontal: Sizes.fixPadding * 2.0,
     borderRadius: Sizes.fixPadding,
-    marginBottom: Sizes.fixPadding * 2.0,
+    marginTop: Sizes.fixPadding,
+  },
+  featuredJobStyle: {
+    backgroundColor: "rgba(105, 105, 105, 0.05)",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: Sizes.fixPadding - 5.0,
+    paddingVertical: Sizes.fixPadding - 5.0,
+    marginHorizontal: Sizes.fixPadding * 2.0,
+    borderRadius: Sizes.fixPadding,
   },
   sourceLogoStyle: {
-    width: screenWidth / 6.0,
-    height: 65.0,
+    width: screenWidth / 8.0,
+    height: 20.0,
     resizeMode: "contain",
     borderRadius: Sizes.fixPadding,
     overflow: "hidden",
@@ -890,7 +898,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f3f4f6",
     borderRadius: 5,
     paddingHorizontal: 10,
-    paddingVertical: 8
+    paddingVertical: 8,
   },
   setting: {
     position: "absolute",
@@ -914,8 +922,8 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 10,
     marginHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   activeAction: {
     backgroundColor: "#e6f2ff",

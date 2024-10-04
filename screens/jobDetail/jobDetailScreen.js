@@ -30,7 +30,8 @@ const requirementsList = [
 ];
 
 const JobDetailScreen = ({ navigation, route }) => {
-  const { isPoster } = route.params;
+  // const { isPoster } = route.params;
+  const isPoster = true;
   const [showUploadDialog, setshowUploadDialog] = useState(false);
   const [deleteConfirmDlgVisible, setDeleteConfirmDlgVisible] = useState(false);
 
