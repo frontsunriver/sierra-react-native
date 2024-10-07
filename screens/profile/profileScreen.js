@@ -1,4 +1,5 @@
 import {
+  AntDesign,
   Feather,
   Ionicons,
   MaterialCommunityIcons,
@@ -6,17 +7,30 @@ import {
 } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
+  Animated,
+  LayoutAnimation,
+  ScrollView,
   FlatList,
   Image,
   ImageBackground,
   Modal,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Pressable,
   View,
 } from "react-native";
 import { Text } from "../../components/commonText";
-import { Colors, Fonts, Sizes, screenWidth } from "../../constants/styles";
+import {
+  Colors,
+  Fonts,
+  Sizes,
+  screenWidth,
+  fontFamily,
+} from "../../constants/styles";
+import AvatarView from "../../components/avatarView";
+
+const bannerImageSize = screenWidth < 480 ? 430 : 450;
+const bannerProfileImageSize = screenWidth < 480 ? 100 : 120;
 
 const profileWebsites = [
   "https://github.com/michaelniemis",
@@ -47,6 +61,8 @@ const workExperiencesList = [
 ];
 
 const ProfileScreen = ({ navigation }) => {
+  const [coverMenuVisible, setCoverMenuVisible] = useState(false);
+  const [secondCoverMenuVisible, setSecondCoverMenuVisible] = useState(false);
   const [readMore, setReadMore] = useState(false);
   const [showProfilePicChangeSheet, setshowProfilePicChangeSheet] =
     useState(false);
@@ -58,7 +74,9 @@ const ProfileScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ flexGrow: 1 }}
         >
-          {profileImage()}
+          {profileCover()}
+          {profileSecondCover()}
+          {profileBanner()}
           {contactInfo()}
           {divider()}
           {aboutInfo()}
@@ -73,6 +91,321 @@ const ProfileScreen = ({ navigation }) => {
       {changeProfilePicSheet()}
     </View>
   );
+
+  function profileCover() {
+    const [rotateAnim] = useState(new Animated.Value(0));
+
+    const rotate = rotateAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "90deg"],
+    });
+
+    const toggleMenu = () => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      if (coverMenuVisible) {
+        setCoverMenuVisible(false);
+        Animated.timing(rotateAnim, {
+          toValue: 0,
+          duration: 150,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        setCoverMenuVisible(true);
+        Animated.timing(rotateAnim, {
+          toValue: 1,
+          duration: 150,
+          useNativeDriver: true,
+        }).start();
+      }
+    };
+
+    return (
+      <View style={styles.profileCoverContainer}>
+        <View style={styles.profileCoverTitleContainer}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text
+              style={{
+                color: Colors.primaryColor,
+                fontSize: 20,
+                fontFamily: fontFamily.SemiBold,
+              }}
+            >
+              User Pages -{" "}
+            </Text>
+            <Text
+              style={{
+                fontSize: 19,
+                color: Colors.primaryColor,
+                fontFamily: fontFamily.Light,
+              }}
+            >
+              Profile Cover
+            </Text>
+          </View>
+          <Pressable onPress={toggleMenu} style={styles.profileCoverDropdown}>
+            <Animated.View style={{ transform: [{ rotate }] }}>
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={15}
+                color={Colors.primaryColor}
+                style={{ opacity: 0.7 }}
+              />
+            </Animated.View>
+          </Pressable>
+        </View>
+        <View
+          style={{
+            height: coverMenuVisible ? 60 : 0,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 20,
+          }}
+        >
+          {coverMenuVisible && (
+            <Pressable style={{ flexDirection: "row" }}>
+              <AvatarView
+                uri={require("../../assets/images/icons/tesla.jpg")}
+                size={35}
+              />
+              <View style={{ justifyContent: "center", marginLeft: 10 }}>
+                <Text
+                  style={{
+                    color: Colors.primaryColor,
+                    opacity: 0.85,
+                    fontSize: 12,
+                    fontFamily: fontFamily.Light,
+                  }}
+                >
+                  Customer
+                </Text>
+                <Text
+                  style={{
+                    color: Colors.primaryColor,
+                    fontSize: 12,
+                    fontFamily: fontFamily.SemiBold,
+                  }}
+                >
+                  Tesla Motors Inc
+                </Text>
+              </View>
+            </Pressable>
+          )}
+        </View>
+      </View>
+    );
+  }
+
+  function profileSecondCover() {
+    const [rotateAnim] = useState(new Animated.Value(0));
+
+    const rotate = rotateAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "90deg"],
+    });
+
+    const toggleMenu = () => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      if (secondCoverMenuVisible) {
+        setSecondCoverMenuVisible(false);
+        Animated.timing(rotateAnim, {
+          toValue: 0,
+          duration: 150,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        setSecondCoverMenuVisible(true);
+        Animated.timing(rotateAnim, {
+          toValue: 1,
+          duration: 150,
+          useNativeDriver: true,
+        }).start();
+      }
+    };
+
+    return (
+      <View>
+        <View style={styles.profileSecondCoverTitleContainer}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Ionicons
+              name="home-outline"
+              size={20}
+              color={Colors.primaryColor}
+            />
+            <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
+            <Text
+              style={[
+                styles.profileSecondCoverRoute,
+                {
+                  color: Colors.primaryColor,
+                  fontFamily: fontFamily.Medium,
+                  opacity: 0.85,
+                },
+              ]}
+            >
+              User pages
+            </Text>
+            <Text style={styles.profileSecondCoverRouteDevider}>/</Text>
+            <Text style={styles.profileSecondCoverRoute}>Profile cover</Text>
+          </View>
+          <Pressable onPress={toggleMenu} style={styles.profileCoverDropdown}>
+            <Animated.View style={{ transform: [{ rotate }] }}>
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={15}
+                color={Colors.primaryColor}
+                style={{ opacity: 0.7 }}
+              />
+            </Animated.View>
+          </Pressable>
+        </View>
+        <View
+          style={{
+            height: secondCoverMenuVisible ? 75 : 0,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 20,
+          }}
+        >
+          {secondCoverMenuVisible && (
+            <View>
+              <Pressable style={styles.secondCoverMenuItem}>
+                <View style={{ width: 30 }}>
+                  <Feather
+                    name="life-buoy"
+                    size={20}
+                    color={Colors.primaryColor}
+                    style={{ opacity: 0.85 }}
+                  />
+                </View>
+                <Text
+                  style={{
+                    color: Colors.primaryColor,
+                    fontSize: 14,
+                    fontFamily: fontFamily.Medium,
+                    opacity: 0.85,
+                  }}
+                >
+                  Support
+                </Text>
+              </Pressable>
+              <Pressable
+                style={[styles.secondCoverMenuItem, { marginBottom: 10 }]}
+              >
+                <View style={{ width: 30 }}>
+                  <AntDesign
+                    name="setting"
+                    size={20}
+                    color={Colors.primaryColor}
+                    style={{ opacity: 0.85 }}
+                  />
+                </View>
+                <Text
+                  style={{
+                    color: Colors.primaryColor,
+                    fontSize: 14,
+                    fontFamily: fontFamily.Medium,
+                    opacity: 0.85,
+                  }}
+                >
+                  Settings
+                </Text>
+              </Pressable>
+            </View>
+          )}
+        </View>
+      </View>
+    );
+  }
+
+  function profileBanner() {
+    return (
+      <ImageBackground
+        source={require("../../assets/images/users/profile_banner.jpg")}
+        style={{
+          width: screenWidth,
+          height: bannerImageSize,
+          marginBottom: Sizes.fixPadding,
+        }}
+        resizeMode="cover"
+      >
+        <View style={styles.outerRing}>
+          <Image
+            source={require("../../assets/images/avatars/1.jpg")}
+            style={styles.avatar}
+          />
+        </View>
+        <View style={styles.role}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 24,
+              color: "white",
+              fontWeight: 600,
+              fontFamily: fontFamily.SemiBold,
+              textShadowColor: "#00000080",
+              textShadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+              textShadowRadius: 5, // Shadow radius for iOS
+            }}
+          >
+            Hanna Dorman
+          </Text>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 14,
+              color: "white",
+              fontFamily: fontFamily.Medium,
+              marginTop: 3,
+              textShadowColor: "#00000080",
+              textShadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+              textShadowRadius: 5, // Shadow radius for iOS
+            }}
+          >
+            UX/UI designer
+          </Text>
+        </View>
+        <View style={styles.profileBannerActionContainer}>
+          <Pressable style={styles.profileBannerAction}>
+            <Ionicons
+              name="image-outline"
+              size={20}
+              color={Colors.primaryColor}
+              style={{ opacity: 0.9 }}
+            />
+            <Text
+              style={{
+                marginLeft: 10,
+                fontSize: 14,
+                fontFamily: fontFamily.Light,
+              }}
+            >
+              Cover image
+            </Text>
+          </Pressable>
+          <Pressable
+            activeOpacity={0.7}
+            style={[styles.profileBannerAction, { marginLeft: 20 }]}
+          >
+            <MaterialCommunityIcons
+              name="chart-line"
+              size={20}
+              color={Colors.primaryColor}
+              style={{ opacity: 0.9 }}
+            />
+            <Text
+              style={{
+                marginLeft: 10,
+                fontSize: 14,
+                fontFamily: fontFamily.Light,
+              }}
+            >
+              Statistics
+            </Text>
+          </Pressable>
+        </View>
+      </ImageBackground>
+    );
+  }
 
   function changeProfilePicSheet() {
     return (
@@ -533,5 +866,94 @@ const styles = StyleSheet.create({
     height: 36.0,
     resizeMode: "contain",
     marginHorizontal: Sizes.fixPadding,
+  },
+  outerRing: {
+    width: bannerProfileImageSize + 10, // Adjust size as needed
+    height: bannerProfileImageSize + 10,
+    borderRadius: (bannerProfileImageSize + 13) / 2, // Half of the width/height to make it circular
+    backgroundColor: "#f1f4f9", // Color of the ring
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000", // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowOpacity: 0.8, // Shadow opacity for iOS
+    shadowRadius: 5, // Shadow radius for iOS
+    elevation: 5, // Elevation for Android
+    position: "absolute",
+    top: (bannerImageSize - bannerProfileImageSize) / 2,
+    left: (screenWidth - bannerProfileImageSize) / 2,
+  },
+  avatar: {
+    width: bannerProfileImageSize, // Adjust size as needed
+    height: bannerProfileImageSize,
+    borderRadius: bannerProfileImageSize / 2, // Half of the width/height to make it circular
+  },
+  role: {
+    position: "absolute",
+    top: bannerImageSize / 2 + bannerProfileImageSize / 2 + 30,
+    width: "100%",
+    alignItems: "center",
+    height: 60,
+  },
+  profileBannerActionContainer: {
+    position: "absolute",
+    top: bannerImageSize / 2 + bannerProfileImageSize / 2 + 30 + 70,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    height: 40,
+  },
+  profileBannerAction: {
+    shadowColor: "#000", // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowOpacity: 0.8, // Shadow opacity for iOS
+    shadowRadius: 5, // Shadow radius for iOS
+    elevation: 5, // Elevation for Android
+    flexDirection: "row",
+    backgroundColor: "#f3f4f6",
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+  secondCoverMenuItem: {
+    flexDirection: "row",
+    paddingVertical: 8,
+    alignItems: "center",
+  },
+  profileCoverContainer: {
+    borderBottomColor: "#ddd",
+    borderBottomWidth: 1,
+  },
+  profileCoverTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 25,
+    alignItems: "center",
+  },
+  profileCoverDropdown: {
+    padding: 6,
+    borderRadius: 30,
+    backgroundColor: "#f3f4f6",
+    alignItems: "center",
+  },
+  profileSecondCoverTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  profileSecondCoverRouteDevider: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: "#5c6c83",
+  },
+  profileSecondCoverRoute: {
+    marginLeft: 8,
+    color: "#6b7280",
+    fontSize: 14,
+    fontFamily: fontFamily.Medium,
   },
 });
